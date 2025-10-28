@@ -1,6 +1,14 @@
 {
   "items": [
     {
+      "title": "First playful post",
+      "slug": "first-playful-post",
+      "date": "2025-10-28T00:00:00.000Z",
+      "summary": "",
+      "tags": [],
+      "path": "/blog/posts/first-playful-post.html"
+    },
+    {
       "title": "Welcome to the Blog",
       "slug": "welcome-to-the-blog",
       "date": "2025-01-15T00:00:00.000Z",
