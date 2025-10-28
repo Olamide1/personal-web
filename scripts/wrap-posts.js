@@ -106,13 +106,17 @@ function markdownToHtml(markdown) {
   if (!markdown) return '';
   
   // First, handle markdown inside existing HTML tags (like <p>##### text</p> or <p>##### <strong>text</strong></p>)
-  // Match the pattern and capture everything inside the paragraph
-  let html = markdown.replace(/<p>(#####|####|###|##|#)\s+([\s\S]*?)<\/p>/g, (match, hashes, text) => {
+  // Need to match everything including HTML tags - use a more specific pattern
+  let html = markdown;
+  html = html.replace(/<p>(#####|####|###|##|#)\s+(.+)<\/p>/g, (match, hashes, text) => {
     const level = hashes.length;
-    // Clean up the text
-    text = text.trim();
-    // Convert to heading - preserve any HTML tags inside (like <strong>)
-    return `<h${level}>${text}</h${level}>`;
+    // Get everything between the hashes and </p>, trim it
+    const fullMatch = match.match(/<p>(#####|####|###|##|#)\s+(.+)<\/p>/);
+    if (fullMatch && fullMatch[2]) {
+      const content = fullMatch[2].trim();
+      return `<h${level}>${content}</h${level}>`;
+    }
+    return match;
   });
   
   html = html
