@@ -37,11 +37,15 @@ async function renderBlogPosts(containerId, limit = null) {
   
   if (postsToShow.length === 0) {
     container.innerHTML = '<p>No blog posts yet. Check back soon!</p>';
+    console.log('No posts found in index.json');
     return;
   }
   
+  console.log(`Loaded ${postsToShow.length} post(s)`);
+  
   container.innerHTML = postsToShow.map(post => {
-    const tags = (post.tags || []).map(tag => 
+    // Filter out empty tags
+    const tags = (post.tags || []).filter(tag => tag && tag.trim() !== '').map(tag => 
       `<span class="tag">${tag}</span>`
     ).join('');
     

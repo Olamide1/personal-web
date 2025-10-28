@@ -66,8 +66,14 @@ function parseHTMLPost(htmlContent, filename) {
   const tags = [];
   const tagMatches = htmlContent.matchAll(/<span class="tag">(.*?)<\/span>/g);
   for (const match of tagMatches) {
-    tags.push(match[1]);
+    const tag = match[1].trim();
+    if (tag && tag !== '') {
+      tags.push(tag);
+    }
   }
+
+  // Clean summary - remove extra text that might have been added
+  const cleanSummary = summary.replace(/about AI, automation, and product management\.?$/, '').trim();
 
   const slug = filename.replace('.html', '');
 
@@ -75,8 +81,8 @@ function parseHTMLPost(htmlContent, filename) {
     title,
     slug,
     date,
-    summary,
-    tags,
+    summary: cleanSummary || summary,
+    tags: tags.length > 0 ? tags : [],
     path: `/blog/posts/${filename}`
   };
 }
@@ -140,12 +146,17 @@ function updateBlogIndex() {
     if (content.startsWith('---')) {
       const parsed = parseFrontmatter(content);
       if (parsed) {
+        // Filter out empty tags
+        const cleanTags = Array.isArray(parsed.metadata.tags) 
+          ? parsed.metadata.tags.filter(tag => tag && tag.trim() !== '')
+          : [];
+        
         postData = {
           title: parsed.metadata.title || 'Untitled',
           slug: file.replace('.html', ''),
           date: formatDateForIndex(parsed.metadata.date || new Date()),
-          summary: parsed.metadata.summary || '',
-          tags: Array.isArray(parsed.metadata.tags) ? parsed.metadata.tags : [],
+          summary: (parsed.metadata.summary || '').trim(),
+          tags: cleanTags,
           path: `/blog/posts/${file}`
         };
       }
