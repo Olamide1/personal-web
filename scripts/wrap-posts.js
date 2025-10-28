@@ -102,6 +102,49 @@ function formatDateForIndex(dateString) {
   return date.toISOString();
 }
 
+function markdownToHtml(markdown) {
+  if (!markdown) return '';
+  
+  let html = markdown
+    // Headings
+    .replace(/^#####\s+(.+)$/gm, '<h5>$1</h5>')
+    .replace(/^####\s+(.+)$/gm, '<h4>$1</h4>')
+    .replace(/^###\s+(.+)$/gm, '<h3>$1</h3>')
+    .replace(/^##\s+(.+)$/gm, '<h2>$1</h2>')
+    .replace(/^#\s+(.+)$/gm, '<h1>$1</h1>')
+    // Bold
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    // Italic
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    // Links - handle both markdown and plain URLs
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+    .replace(/<https?:\/\/[^\s>]+>/g, (match) => {
+      const url = match.slice(1, -1);
+      return `<a href="${url}" target="_blank" rel="noopener">${url}</a>`;
+    })
+    // List items (unordered)
+    .replace(/^\*\s+(.+)$/gm, '<li>$1</li>')
+    // Wrap consecutive list items in <ul>
+    .replace(/(<li>.*<\/li>\n?)+/g, (match) => `<ul>${match}</ul>`)
+    // Code blocks
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    // Line breaks
+    .replace(/\\\s*\\\s*\n/g, '<br><br>')
+    .replace(/\\\s*\n/g, '<br>')
+    // Paragraphs (double newlines)
+    .split(/\n\n+/)
+    .map(para => {
+      para = para.trim();
+      if (!para) return '';
+      // Don't wrap if it's already a block element
+      if (/^<(h[1-6]|ul|li|p)/.test(para)) return para;
+      return `<p>${para}</p>`;
+    })
+    .join('\n');
+  
+  return html;
+}
+
 function wrapPost(metadata, body, slug) {
   const template = fs.readFileSync(templatePath, 'utf8');
   
@@ -109,9 +152,12 @@ function wrapPost(metadata, body, slug) {
     ? metadata.tags.map(tag => `<span class="tag">${tag}</span>`).join('')
     : '';
   
-  const tagsSection = tagsHtml 
-    ? `<div id="post-tags">${tagsHtml}</div>`
-    : '';
+  // Convert markdown to HTML if needed
+  let bodyHtml = body;
+  // Check if body is HTML (contains tags) or markdown
+  if (!/<[a-z][\s\S]*>/i.test(body)) {
+    bodyHtml = markdownToHtml(body);
+  }
   
   // Replace template values
   let html = template
@@ -120,7 +166,7 @@ function wrapPost(metadata, body, slug) {
     .replace(/An introduction to my blog/g, metadata.summary || '')
     .replace(/January 15, 2025/g, formatDate(metadata.date || new Date()))
     .replace(/<span class="tag">announcement<\/span>\s*<span class="tag">blog<\/span>/g, tagsHtml || '')
-    .replace(/<div class="post-content">[\s\S]*?<\/div>/g, `<div class="post-content">\n        ${body.trim()}\n      </div>`);
+    .replace(/<div class="post-content">[\s\S]*?<\/div>/g, `<div class="post-content">\n        ${bodyHtml.trim()}\n      </div>`);
   
   // Update meta tags
   html = html.replace(/<title>.*?<\/title>/, `<title>${metadata.title} — Lamide</title>`);
