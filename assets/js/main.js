@@ -24,10 +24,11 @@ function initLoadingScreen() {
   
   let progress = 0;
   const targetProgress = 100;
-  const duration = 5000; // 5 seconds
-  const interval = 50; // Update every 50ms
+  const duration = 2000; // Reduced to 2 seconds (was 5s)
+  const interval = 100; // Update every 100ms (was 50ms) - less frequent updates
   const increment = (targetProgress / duration) * interval;
   let messageIndex = 0;
+  let rafId = null;
   
   const updateProgress = () => {
     progress += increment;
@@ -52,26 +53,29 @@ function initLoadingScreen() {
     }
     
     if (progress < targetProgress) {
-      setTimeout(updateProgress, interval);
+      // Use requestAnimationFrame for smoother, non-blocking updates
+      rafId = requestAnimationFrame(() => {
+        setTimeout(updateProgress, interval);
+      });
     } else {
-      // Complete - fade out
+      // Complete - fade out immediately
+      cancelAnimationFrame(rafId);
+      loadingScreen.style.opacity = '0';
       setTimeout(() => {
-        loadingScreen.style.opacity = '0';
-        setTimeout(() => {
-          loadingScreen.classList.add('hidden');
-          sessionStorage.setItem('loadingShown', 'true');
-        }, 300);
-      }, 300);
+        loadingScreen.classList.add('hidden');
+        sessionStorage.setItem('loadingShown', 'true');
+      }, 200);
     }
   };
   
-  // Add fade in
+  // Add fade in - use requestAnimationFrame
   loadingScreen.style.opacity = '0';
-  setTimeout(() => {
-    loadingScreen.style.transition = 'opacity 0.3s';
+  requestAnimationFrame(() => {
+    loadingScreen.style.transition = 'opacity 0.2s';
     loadingScreen.style.opacity = '1';
-    updateProgress();
-  }, 50);
+    // Start progress after a short delay
+    setTimeout(updateProgress, 50);
+  });
 }
 
 // Initialize loading screen on page load

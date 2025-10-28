@@ -128,26 +128,34 @@
   </footer>
   <div id="starfield"></div>
 
-  <script src="/assets/js/main.js"></script>
-  <script src="/assets/js/blog-index.js"></script>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/blog-index.js" defer></script>
   <script>
-    // Initialize Netlify Identity (required for CMS)
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
+    // Lazy load Netlify Identity only when needed (CMS/admin pages)
+    if (window.location.pathname.includes('/admin')) {
+      const script = document.createElement('script');
+      script.src = 'https://identity.netlify.com/v1/netlify-identity-widget.js';
+      script.onload = () => {
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.on("init", user => {
+            if (!user) {
+              window.netlifyIdentity.on("login", () => {
+                document.location.href = "/admin/";
+              });
+            }
           });
+          window.netlifyIdentity.init();
         }
-      });
-      window.netlifyIdentity.init();
+      };
+      document.head.appendChild(script);
     }
     
     // Load blog preview on homepage
-    if (document.getElementById('blog-preview')) {
-      loadBlogPreview(3); // Show latest 3 posts
-    }
+    document.addEventListener('DOMContentLoaded', () => {
+      if (document.getElementById('blog-preview')) {
+        loadBlogPreview(3);
+      }
+    });
   </script>
 </body>
 </html>
