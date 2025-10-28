@@ -269,7 +269,7 @@ files.forEach(file => {
       console.log(`✓ Wrapped ${file}`);
       wrappedCount++;
     }
-  } else if (/#####\s+\*\*|##\s+\*\*|^\*\s+/.test(content)) {
+  } else if (/<p>#####|#####\s+\*\*|##\s+\*\*|^\*\s+/.test(content)) {
     // Already wrapped but contains raw markdown - needs conversion
     console.log(`⚠ Found markdown in ${file}, checking if needs conversion...`);
     // Extract body content and convert markdown
