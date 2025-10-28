@@ -1,9 +1,14 @@
 // Blog index loading
 async function loadBlogIndex() {
   try {
+    console.log('Fetching /blog/index.json...');
     const response = await fetch('/blog/index.json');
-    if (!response.ok) throw new Error('Failed to load blog index');
+    if (!response.ok) {
+      console.error(`Failed to load blog index: ${response.status} ${response.statusText}`);
+      throw new Error(`Failed to load blog index: ${response.status}`);
+    }
     const data = await response.json();
+    console.log('Blog index loaded successfully:', data);
     return data.items || [];
   } catch (error) {
     console.error('Error loading blog index:', error);
@@ -29,10 +34,16 @@ function calculateReadingTime(html) {
 }
 
 async function renderBlogPosts(containerId, limit = null) {
+  console.log(`renderBlogPosts called with containerId: ${containerId}`);
   const container = document.getElementById(containerId);
-  if (!container) return;
+  if (!container) {
+    console.error(`Container #${containerId} not found!`);
+    return;
+  }
+  console.log(`Container found, loading posts...`);
   
   const posts = await loadBlogIndex();
+  console.log(`Fetched ${posts.length} posts from index.json`);
   const postsToShow = limit ? posts.slice(0, limit) : posts;
   
   if (postsToShow.length === 0) {
@@ -76,8 +87,21 @@ async function loadBlogPreview(limit = 3) {
 }
 
 // Auto-load on blog.html
-if (window.location.pathname === '/blog.html' || window.location.pathname === '/blog/') {
-  document.addEventListener('DOMContentLoaded', () => {
-    renderBlogPosts('blog-posts');
-  });
-}
+(function() {
+  const path = window.location.pathname;
+  if (path === '/blog.html' || path === '/blog/' || path.endsWith('/blog.html')) {
+    console.log('Blog page detected, loading posts...');
+    
+    function loadPosts() {
+      console.log('Calling renderBlogPosts...');
+      renderBlogPosts('blog-posts');
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadPosts);
+    } else {
+      // DOM already loaded
+      loadPosts();
+    }
+  }
+})();
