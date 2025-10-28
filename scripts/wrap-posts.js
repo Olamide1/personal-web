@@ -275,11 +275,19 @@ files.forEach(file => {
     // Extract body content and convert markdown
     const bodyMatch = content.match(/<div class="post-content">([\s\S]*?)<\/div>/);
     if (bodyMatch && /#####|##\s+|^\*\s+|<https?:/.test(bodyMatch[1])) {
-      const originalBody = bodyMatch[1];
-      const convertedBody = markdownToHtml(originalBody);
+      let originalBody = bodyMatch[1];
+      // Direct replacement of problematic patterns
+      originalBody = originalBody.replace(/<p>(#####|####|###|##|#)\s+(.+)<\/p>/g, (match, hashes, text) => {
+        const level = hashes.length;
+        return `<h${level}>${text.trim()}</h${level}>`;
+      });
+      // If still contains markdown patterns, try full conversion
+      if (/#####|##\s+|^\*\s+/.test(originalBody)) {
+        originalBody = markdownToHtml(originalBody);
+      }
       const updatedContent = content.replace(
         /<div class="post-content">[\s\S]*?<\/div>/,
-        `<div class="post-content">\n        ${convertedBody.trim()}\n      </div>`
+        `<div class="post-content">\n        ${originalBody.trim()}\n      </div>`
       );
       fs.writeFileSync(filePath, updatedContent, 'utf8');
       console.log(`✓ Converted markdown in ${file}`);
