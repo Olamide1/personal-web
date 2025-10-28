@@ -1,0 +1,11 @@
+{
+  "name": "personal-website",
+  "version": "1.0.0",
+  "description": "Personal website with Decap CMS",
+  "scripts": {
+    "build": "node scripts/wrap-posts.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
+
