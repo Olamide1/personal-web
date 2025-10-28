@@ -6,20 +6,172 @@
   <title>Contact — Lamide</title>
   <meta name="description" content="Get in touch with Lamide about collaborations, roles, or just to connect">
   
-  <!-- Open Graph -->
-  <meta property="og:title" content="Contact — Lamide">
-  <meta property="og:description" content="Get in touch about collaborations, roles, or AI automation projects">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://lamide.net/contact.html">
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Contact — Lamide">
-  <meta name="twitter:description" content="Get in touch about collaborations, roles, or AI automation projects">
-  
   <link rel="icon" type="image/jpeg" href="/assets/img/icon.jpg">
   <link rel="apple-touch-icon" href="/assets/img/icon.jpg">
   <link rel="stylesheet" href="/assets/css/base.css">
+  <style>
+    /* Construction theme styles */
+    .construction-page {
+      background: repeating-linear-gradient(
+        45deg,
+        #ffd700,
+        #ffd700 20px,
+        #000000 20px,
+        #000000 40px
+      );
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+    }
+    
+    .construction-content {
+      background: var(--bg);
+      border: 5px solid #000000;
+      padding: 2rem;
+      max-width: 600px;
+      width: 100%;
+      position: relative;
+      font-family: var(--mono);
+    }
+    
+    .construction-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .construction-header h1 {
+      font-family: var(--mono);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .construction-worker {
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 10px;
+      margin: 1rem 0;
+      line-height: 1.2;
+    }
+    
+    .contact-menu {
+      border: 3px solid #000000;
+      padding: 1.5rem;
+      background: #ffffff;
+      margin: 1.5rem 0;
+    }
+    
+    .contact-menu h2 {
+      font-family: var(--mono);
+      font-size: 1rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      border: none;
+      padding: 0;
+    }
+    
+    .contact-option {
+      display: block;
+      padding: 1rem;
+      margin: 0.75rem 0;
+      border: 2px outset #e0e0e0;
+      background: #d0d0d0;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 13px;
+      text-align: left;
+      position: relative;
+      transition: background 0.1s;
+    }
+    
+    .contact-option:hover {
+      background: #c0c0c0;
+    }
+    
+    .contact-option:active {
+      border-style: inset;
+    }
+    
+    .contact-option-number {
+      font-weight: bold;
+      margin-right: 0.5rem;
+      color: #000000;
+    }
+    
+    .contact-option-desc {
+      font-size: 10px;
+      opacity: 0.7;
+      margin-top: 0.25rem;
+    }
+    
+    .countdown {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+    
+    .countdown-timer {
+      font-weight: bold;
+      font-size: 14px;
+      color: var(--accent);
+      animation: blink 1s infinite;
+    }
+    
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 14px;
+      background: var(--ink);
+      animation: cursorBlink 1s infinite;
+      margin-left: 2px;
+    }
+    
+    @keyframes cursorBlink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+    
+    .click-here {
+      font-size: 10px;
+      color: var(--link);
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+      display: block;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      .construction-content {
+        background: #1a1a1a;
+        border-color: #ffffff;
+      }
+      
+      .contact-menu {
+        background: #2a2a2a;
+        border-color: #ffffff;
+      }
+      
+      .contact-option {
+        background: #404040;
+        border-color: #606060;
+        color: #ffffff;
+      }
+      
+      .contact-option:hover {
+        background: #505050;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="browser-bar">
@@ -40,49 +192,58 @@
     <a href="/contact.html" class="active">Contact</a>
   </nav>
 
-  <main id="main-content" class="container">
-    <div style="margin-top: 2rem;">
-      <div class="card">
-        <h1>Contact</h1>
-        <p style="margin-bottom: 2rem;">Interested in collaborations, roles, or just want to chat about AI automation and product work? Get in touch.</p>
+  <main id="main-content">
+    <div class="construction-page">
+      <div class="construction-content">
+        <div class="construction-header">
+          <h1>⚠️ Contact Page</h1>
+          <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">[Under Construction]</div>
+        </div>
         
-        <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/contact.html?success=true" class="form">
-          <input type="hidden" name="form-name" value="contact">
-          <p style="display: none;">
-            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-          </p>
-          
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="topic">Topic</label>
-            <select id="topic" name="topic" required>
-              <option value="">Select a topic...</option>
-              <option value="collaboration">Collaboration</option>
-              <option value="role">Job Opportunity</option>
-              <option value="project">Project Discussion</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" required></textarea>
-          </div>
-          
-          <button type="submit" class="btn">Send Message</button>
-        </form>
+        <div class="construction-worker">
+<pre style="font-size: 8px; line-height: 1; margin: 0; text-align: center;">
+     ___
+    /___\
+    |   |
+    |___|
+   (_____)
+    |   |
+    |___|
+   (_____)
+    |   |
+    |___|
+   (_____)
+   |     |
+   |_____|
+  (_______)
+</pre>
+        </div>
         
-        <div id="form-success" style="display: none; margin-top: 2rem; padding: 1.5rem; background: var(--border); border-radius: var(--radius);">
-          <p><strong>Thanks!</strong> Your message has been sent. I'll get back to you soon.</p>
+        <p style="text-align: center; font-size: 12px; margin: 1rem 0;">
+          This page is still being built...<br>
+          But you can reach me on social media!
+        </p>
+        
+        <div class="contact-menu" id="contact-menu">
+          <h2>HOW DO YOU WANT TO CONNECT?<span class="cursor"></span></h2>
+          
+          <button class="contact-option" data-choice="twitter" id="option-1">
+            <span class="contact-option-number">[1]</span> Twitter DM 💬<br>
+            <span class="contact-option-desc">(Fast & casual)</span>
+          </button>
+          
+          <button class="contact-option" data-choice="linkedin" id="option-2">
+            <span class="contact-option-number">[2]</span> LinkedIn Message 💼<br>
+            <span class="contact-option-desc">(Professional)</span>
+          </button>
+          
+          <div class="click-here">← Click here!</div>
+        </div>
+        
+        <div class="countdown" id="countdown">
+          <div>⏰ Auto-redirecting in</div>
+          <div class="countdown-timer" id="countdown-timer">10</div>
+          <div>seconds... <span style="font-size: 10px;">(Will default to Twitter)</span></div>
         </div>
       </div>
     </div>
@@ -100,18 +261,96 @@
     </div>
     <div>Made by Lamide 2025</div>
   </footer>
-  
 
-  <div id="starfield"></div>
   <script src="/assets/js/main.js" defer></script>
   
   <script>
-    // Handle form submission success
-    if (window.location.search.includes('success=true')) {
-      document.getElementById('form-success').style.display = 'block';
-      document.querySelector('form').style.display = 'none';
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
+    // Contact page redirect logic
+    (function() {
+      const TWITTER_URL = 'https://twitter.com/theakomolafe';
+      const LINKEDIN_URL = 'https://linkedin.com/in/theakomolafe';
+      let redirecting = false;
+      let countdown = 10;
+      
+      const option1 = document.getElementById('option-1');
+      const option2 = document.getElementById('option-2');
+      const countdownTimer = document.getElementById('countdown-timer');
+      const menu = document.getElementById('contact-menu');
+      
+      function redirectTo(choice) {
+        if (redirecting) return;
+        redirecting = true;
+        
+        // Fade out effect
+        document.body.style.transition = 'opacity 0.5s';
+        document.body.style.opacity = '0.5';
+        
+        setTimeout(() => {
+          if (choice === 'linkedin') {
+            window.location.href = LINKEDIN_URL;
+          } else {
+            window.location.href = TWITTER_URL;
+          }
+        }, 300);
+      }
+      
+      // Click handlers
+      option1.addEventListener('click', () => redirectTo('twitter'));
+      option2.addEventListener('click', () => redirectTo('linkedin'));
+      
+      // Keyboard handlers
+      document.addEventListener('keydown', (e) => {
+        if (redirecting) return;
+        
+        if (e.key === '1') {
+          option1.style.borderStyle = 'inset';
+          setTimeout(() => redirectTo('twitter'), 100);
+        } else if (e.key === '2') {
+          option2.style.borderStyle = 'inset';
+          setTimeout(() => redirectTo('linkedin'), 100);
+        }
+      });
+      
+      // Countdown timer
+      const timerInterval = setInterval(() => {
+        countdown--;
+        countdownTimer.textContent = countdown;
+        
+        if (countdown <= 0) {
+          clearInterval(timerInterval);
+          if (!redirecting) {
+            redirectTo('twitter');
+          }
+        }
+      }, 1000);
+      
+      // Sound effect (optional - using Web Audio API for beep)
+      try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const playBeep = () => {
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
+          oscillator.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+          oscillator.frequency.value = 800;
+          oscillator.type = 'sine';
+          gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+          oscillator.start(audioContext.currentTime);
+          oscillator.stop(audioContext.currentTime + 0.1);
+        };
+        
+        // Play beep when menu appears (after a short delay)
+        setTimeout(() => {
+          if (audioContext.state === 'suspended') {
+            audioContext.resume();
+          }
+          playBeep();
+        }, 500);
+      } catch (e) {
+        // Sound not supported, continue without it
+      }
+    })();
   </script>
 </body>
 </html>
