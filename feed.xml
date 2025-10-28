@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lamide's Blog</title>
+    <link>https://lamide.net</link>
+    <description>Product manager building AI agents and automation</description>
+    <language>en-us</language>
+    <atom:link href="https://lamide.net/feed.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Wed, 15 Jan 2025 00:00:00 +0000</lastBuildDate>
+    
+    <item>
+      <title>Welcome to the Blog</title>
+      <link>https://lamide.net/blog/posts/welcome-to-the-blog.html</link>
+      <guid>https://lamide.net/blog/posts/welcome-to-the-blog.html</guid>
+      <pubDate>Wed, 15 Jan 2025 00:00:00 +0000</pubDate>
+      <description>An introduction to my blog about AI, automation, and product management.</description>
+    </item>
+  </channel>
+</rss>

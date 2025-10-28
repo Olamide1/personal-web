@@ -1,0 +1,37 @@
+:root {
+  --bg: #f0e6d2;
+  --ink: #1a1a1a;
+  --accent: #8b0000;
+  --link: #0000ff;
+  --link-visited: #800080;
+  --border: #666666;
+  --border-light: #999999;
+  --mono: "Courier New", Courier, monospace;
+  --serif: "Times New Roman", Times, serif;
+  --sans: Arial, Helvetica, sans-serif;
+  --radius: 0px;
+  --shadow: none;
+  --transition: none;
+  --spacing: 1rem;
+  --spacing-sm: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #2a2a2a;
+    --ink: #d4d4d4;
+    --accent: #cc6666;
+    --link: #4da6ff;
+    --link-visited: #aa66cc;
+    --border: #666666;
+    --border-light: #888888;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

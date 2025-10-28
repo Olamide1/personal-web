@@ -1,0 +1,12 @@
+{
+  "items": [
+    {
+      "title": "Welcome to the Blog",
+      "slug": "welcome-to-the-blog",
+      "date": "2025-01-15T00:00:00Z",
+      "summary": "An introduction to my blog about AI, automation, and product management.",
+      "tags": ["announcement", "blog"],
+      "path": "/blog/posts/welcome-to-the-blog.html"
+    }
+  ]
+}

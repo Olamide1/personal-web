@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Lamide</title>
+  <meta name="description" content="AI-focused projects by Lamide — Schedulely, Akọ̀wé, AI Customer Support, and more">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Projects — Lamide">
+  <meta property="og:description" content="AI-focused projects and automation tools">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lamide.net/projects.html">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Projects — Lamide">
+  <meta name="twitter:description" content="AI-focused projects and automation tools">
+  
+  <link rel="stylesheet" href="/assets/css/base.css">
+</head>
+<body>
+  <div class="browser-bar">
+    <button class="browser-bar__button" onclick="window.history.back()" aria-label="Back">←</button>
+    <button class="browser-bar__button" onclick="window.history.forward()" aria-label="Forward">→</button>
+    <div class="browser-bar__address">
+      <span class="browser-bar__lock">🔒</span>
+      <span>lamide.net/projects</span>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/projects.html" class="active">Projects</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/now.html">Now</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+
+  <main id="main-content" class="container">
+    <div style="margin-top: 2rem;">
+      <h1>Projects</h1>
+      <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.8;">AI-focused work and automation tools I'm building.</p>
+      
+      <!-- Schedulely -->
+      <div class="card" id="schedulely">
+        <h2>Schedulely</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>AI social slideshow generator and manager for creators.</strong></p>
+        <p>Schedulely helps content creators automatically generate, schedule, and manage social media content in slideshow format. Built with AI to understand context and optimize for engagement.</p>
+        <div style="margin-top: 1.5rem;">
+          <span class="tag">AI</span>
+          <span class="tag">Content Creation</span>
+          <span class="tag">Automation</span>
+        </div>
+        <div style="margin-top: 1.5rem;">
+          <a href="https://schedulely.ai" target="_blank" rel="noopener" style="color: var(--link); margin-right: 1rem;">Live Site →</a>
+          <a href="/blog/posts/schedulely-case-study.html" style="color: var(--link);">Case Note →</a>
+        </div>
+      </div>
+
+      <!-- Akọ̀wé -->
+      <div class="card" id="akowe">
+        <h2>Akọ̀wé</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>AI academic writing tool with citations and plagiarism check.</strong></p>
+        <p>Akọ̀wé (Yoruba for "let's write") assists students and researchers in generating high-quality academic content with proper citations, references, and plagiarism checking.</p>
+        <div style="margin-top: 1.5rem;">
+          <span class="tag">AI</span>
+          <span class="tag">Education</span>
+          <span class="tag">Writing</span>
+        </div>
+        <div style="margin-top: 1.5rem;">
+          <a href="https://akowe.ai" target="_blank" rel="noopener" style="color: var(--link); margin-right: 1rem;">Live Site →</a>
+          <a href="/blog/posts/akowe-case-study.html" style="color: var(--link);">Case Note →</a>
+        </div>
+      </div>
+
+      <!-- AI Customer Support -->
+      <div class="card" id="ai-support">
+        <h2>AI Customer Support</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>Human-in-loop AI support agent with suggestions and integrations.</strong></p>
+        <p>An intelligent customer support system that combines AI automation with human oversight. Provides real-time suggestions to support agents, handles routine queries automatically, and integrates with major support platforms.</p>
+        <div style="margin-top: 1.5rem;">
+          <span class="tag">AI Agents</span>
+          <span class="tag">Customer Support</span>
+          <span class="tag">Human-in-Loop</span>
+        </div>
+        <div style="margin-top: 1.5rem;">
+          <a href="https://ai-support.lamide.net" target="_blank" rel="noopener" style="color: var(--link); margin-right: 1rem;">Live Demo →</a>
+          <a href="/blog/posts/ai-support-case-study.html" style="color: var(--link);">Case Note →</a>
+        </div>
+      </div>
+
+      <!-- Agents for PM Research -->
+      <div class="card" id="pm-agents">
+        <h2>Agents for PM Research</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>Internal experiments automating qualitative + quantitative research.</strong></p>
+        <p>AI agents that help product managers conduct user research, analyze feedback, run surveys, and generate insights. Currently in internal testing, exploring ways to automate the research workflow without losing the human touch.</p>
+        <div style="margin-top: 1.5rem;">
+          <span class="tag">AI Agents</span>
+          <span class="tag">Research</span>
+          <span class="tag">Internal Tools</span>
+        </div>
+        <div style="margin-top: 1.5rem;">
+          <span style="opacity: 0.7;">Available on request for selected teams</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__links">
+      <a href="https://github.com/olamide1" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://twitter.com/theakomolafe" target="_blank" rel="noopener">Twitter</a>
+      <a href="https://linkedin.com/in/theakomolafe" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="footer-stats">
+      <span id="guest-counter"></span>
+      <span id="load-time"></span>
+    </div>
+    <div>Made by Lamide 2025</div>
+  </footer>
+  
+
+  <div id="starfield"></div>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Lamide</title>
+  <meta name="description" content="Blog posts about AI, automation, product management, and building">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Blog — Lamide">
+  <meta property="og:description" content="Thoughts on AI, automation, product management, and building">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lamide.net/blog.html">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Blog — Lamide">
+  <meta name="twitter:description" content="Thoughts on AI, automation, product management, and building">
+  
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Lamide's Blog">
+</head>
+<body>
+  <div class="browser-bar">
+    <button class="browser-bar__button" onclick="window.history.back()" aria-label="Back">←</button>
+    <button class="browser-bar__button" onclick="window.history.forward()" aria-label="Forward">→</button>
+    <div class="browser-bar__address">
+      <span class="browser-bar__lock">🔒</span>
+      <span>lamide.net/blog</span>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/projects.html">Projects</a>
+    <a href="/blog.html" class="active">Blog</a>
+    <a href="/now.html">Now</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+
+  <main id="main-content" class="container">
+    <div style="margin-top: 2rem;">
+      <h1>Blog</h1>
+      <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.8;">Thoughts on AI, automation, product management, and building things.</p>
+      
+      <div id="blog-posts">
+        <p>Loading posts...</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__links">
+      <a href="https://github.com/olamide1" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://twitter.com/theakomolafe" target="_blank" rel="noopener">Twitter</a>
+      <a href="https://linkedin.com/in/theakomolafe" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="footer-stats">
+      <span id="guest-counter"></span>
+      <span id="load-time"></span>
+    </div>
+    <div>Made by Lamide 2025</div>
+  </footer>
+  
+
+  <div id="starfield"></div>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/blog-index.js"></script>
+</body>
+</html>

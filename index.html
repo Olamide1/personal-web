@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lamide — Product manager building AI agents and automation</title>
+  <meta name="description" content="Product manager building AI agents and automation. Strong opinions. Flexible with good evidence.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Lamide — Product manager building AI agents and automation">
+  <meta property="og:description" content="Strong opinions. Flexible with good evidence.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lamide.net">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lamide — Product manager building AI agents and automation">
+  <meta name="twitter:description" content="Strong opinions. Flexible with good evidence.">
+  
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Lamide's Blog">
+  <link rel="preload" href="/assets/css/base.css" as="style">
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-content">
+      <div class="loading-title">Loading lamide.net...</div>
+      <div class="loading-bar-container">
+        <div class="loading-bar-bg">[░░░░░░░░░░░░░░░░░░░░]</div>
+        <div class="loading-bar-fill">[</div>
+        <div class="loading-percent">0%</div>
+      </div>
+      <div class="loading-status">Initializing connection...</div>
+    </div>
+  </div>
+  <!-- Browser Bar -->
+  <div class="browser-bar">
+    <button class="browser-bar__button" onclick="window.history.back()" aria-label="Back">←</button>
+    <button class="browser-bar__button" onclick="window.history.forward()" aria-label="Forward">→</button>
+    <div class="browser-bar__address">
+      <span class="browser-bar__lock">🔒</span>
+      <span>lamide.net</span>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="/" class="active">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/projects.html">Projects</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/now.html">Now</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Lamide.</h1>
+    <p>Product manager building AI agents and automation.</p>
+    <p style="font-size: 1rem; margin-top: 0.5rem; opacity: 0.7;">Strong opinions. Flexible with good evidence.</p>
+  </section>
+
+  <!-- Main Content -->
+  <main id="main-content" class="container">
+    <!-- Featured Work -->
+    <div class="ascii-divider ascii-divider--thin"></div>
+    <section class="mt-2 mb-2">
+      <h2><span class="section-num">01</span>Featured Work</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Schedulely</h3>
+          <p>AI social slideshow generator and manager for creators.</p>
+          <a href="/projects.html#schedulely" style="color: var(--link);">Learn more →</a>
+        </div>
+        <div class="card">
+          <h3>Akọ̀wé</h3>
+          <p>AI academic writing tool with citations and plagiarism check.</p>
+          <a href="/projects.html#akowe" style="color: var(--link);">Learn more →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Blog -->
+    <div class="ascii-divider ascii-divider--thin"></div>
+    <section class="mt-2 mb-2">
+      <h2><span class="section-num">02</span>Latest Blog Posts</h2>
+      <div id="blog-preview"></div>
+      <div class="text-center mt-2">
+        <a href="/blog.html" class="btn">View All Posts</a>
+      </div>
+    </section>
+
+    <!-- Now Section Preview -->
+    <div class="ascii-divider ascii-divider--thin"></div>
+    <section class="mt-2 mb-2">
+      <div class="card">
+        <h2>What I'm Doing Now</h2>
+        <p>Check out my <a href="/now.html" style="color: var(--link);">Now page</a> to see my current focus areas, what I'm shipping, exploring, and reading.</p>
+      </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="mt-2 mb-2 text-center">
+      <div class="card">
+        <h2>Let's Connect</h2>
+        <p>Interested in collaborating or discussing AI automation, agents, or product work?</p>
+        <a href="/contact.html" class="btn" style="display: inline-block; margin-top: 1rem;">Get in Touch</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__links">
+      <a href="https://github.com/olamide1" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://twitter.com/theakomolafe" target="_blank" rel="noopener">Twitter</a>
+      <a href="https://linkedin.com/in/theakomolafe" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="footer-stats">
+      <span id="guest-counter"></span>
+      <span id="load-time"></span>
+    </div>
+    <div>Made by Lamide 2025</div>
+  </footer>
+  <div id="starfield"></div>
+
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/blog-index.js"></script>
+  <script>
+    // Load blog preview on homepage
+    if (document.getElementById('blog-preview')) {
+      loadBlogPreview(3); // Show latest 3 posts
+    }
+  </script>
+</body>
+</html>
