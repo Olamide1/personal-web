@@ -130,7 +130,20 @@
 
   <script src="/assets/js/main.js"></script>
   <script src="/assets/js/blog-index.js"></script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
+    // Initialize Netlify Identity (required for CMS)
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+      window.netlifyIdentity.init();
+    }
+    
     // Load blog preview on homepage
     if (document.getElementById('blog-preview')) {
       loadBlogPreview(3); // Show latest 3 posts
