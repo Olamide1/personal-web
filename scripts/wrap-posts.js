@@ -138,6 +138,13 @@ function updateBlogIndex() {
   
   allFiles.forEach(file => {
     const filePath = path.join(postsDir, file);
+    
+    // Check if file exists and is readable
+    if (!fs.existsSync(filePath)) {
+      console.log(`⚠ Skipping ${file} - file not found`);
+      return;
+    }
+    
     const content = fs.readFileSync(filePath, 'utf8');
     
     let postData;
