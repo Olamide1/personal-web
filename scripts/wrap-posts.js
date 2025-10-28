@@ -105,20 +105,28 @@ function formatDateForIndex(dateString) {
 function markdownToHtml(markdown) {
   if (!markdown) return '';
   
-  let html = markdown
+  // First, handle markdown inside existing HTML tags (like <p>##### text</p>)
+  let html = markdown.replace(/<p>(#####|####|###|##|#)\s+(.+?)<\/p>/g, (match, hashes, text) => {
+    const level = hashes.length;
+    return `<h${level}>${text}</h${level}>`;
+  });
+  
+  html = html
     // Clean up line breaks first
     .replace(/\\\s*\\\s*\n/g, '\n\n')
     .replace(/\\\s*\n/g, '\n')
-    // Headings (do before paragraph splitting)
+    // Headings (do before paragraph splitting) - handle standalone
     .replace(/^#####\s+(.+)$/gm, '<h5>$1</h5>')
     .replace(/^####\s+(.+)$/gm, '<h4>$1</h4>')
     .replace(/^###\s+(.+)$/gm, '<h3>$1</h3>')
     .replace(/^##\s+(.+)$/gm, '<h2>$1</h2>')
     .replace(/^#\s+(.+)$/gm, '<h1>$1</h1>')
+    // Remove empty paragraphs that might have been created
+    .replace(/<p>\s*<\/p>/g, '')
     // Bold (do before links)
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    // Italic (only if not part of bold)
-    .replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g, '<em>$1</em>')
+    // Italic (only if not part of bold) - simplified regex
+    .replace(/\*([^*\n]+?)\*/g, '<em>$1</em>')
     // Links - handle both markdown and plain URLs
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
     .replace(/<https?:\/\/[^\s>]+>/g, (match) => {
@@ -130,17 +138,17 @@ function markdownToHtml(markdown) {
     // Wrap consecutive list items in <ul>
     .replace(/(<li>.*<\/li>\n?)+/g, (match) => `<ul>\n${match}</ul>\n`)
     // Code blocks
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    // Split into paragraphs and wrap
-    .split(/\n\n+/)
-    .map(para => {
-      para = para.trim();
-      if (!para) return '';
-      // Don't wrap if it's already a block element
-      if (/^<(h[1-6]|ul|li|p)/.test(para)) return para;
-      return `<p>${para}</p>`;
-    })
-    .join('\n');
+    .replace(/`([^`]+)`/g, '<code>$1</code>');
+  
+  // Split by double newlines, but preserve existing HTML block elements
+  const lines = html.split(/\n\n+/);
+  html = lines.map(line => {
+    line = line.trim();
+    if (!line) return '';
+    // Don't wrap if it's already a block element
+    if (/^<(h[1-6]|ul|li|p)/.test(line)) return line;
+    return `<p>${line}</p>`;
+  }).join('\n');
   
   return html;
 }
