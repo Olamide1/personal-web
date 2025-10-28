@@ -89,7 +89,17 @@ async function loadBlogPreview(limit = 3) {
 // Auto-load on blog.html
 (function() {
   const path = window.location.pathname;
-  if (path === '/blog.html' || path === '/blog/' || path.endsWith('/blog.html')) {
+  console.log('Current pathname:', path);
+  
+  // Check if we're on the blog page
+  const isBlogPage = path === '/blog.html' || 
+                     path === '/blog/' || 
+                     path === '/blog' ||
+                     path.endsWith('/blog.html') ||
+                     path.endsWith('/blog/') ||
+                     path.endsWith('/blog');
+  
+  if (isBlogPage) {
     console.log('Blog page detected, loading posts...');
     
     function loadPosts() {
@@ -103,5 +113,7 @@ async function loadBlogPreview(limit = 3) {
       // DOM already loaded
       loadPosts();
     }
+  } else {
+    console.log('Not on blog page, skipping auto-load');
   }
 })();
