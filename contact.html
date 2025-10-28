@@ -12,13 +12,7 @@
   <style>
     /* Construction theme styles */
     .construction-page {
-      background: repeating-linear-gradient(
-        45deg,
-        #ffd700,
-        #ffd700 20px,
-        #000000 20px,
-        #000000 40px
-      );
+      background: var(--bg);
       min-height: 80vh;
       display: flex;
       align-items: center;
@@ -106,25 +100,6 @@
       font-size: 10px;
       opacity: 0.7;
       margin-top: 0.25rem;
-    }
-    
-    .countdown {
-      text-align: center;
-      margin-top: 1.5rem;
-      font-family: var(--mono);
-      font-size: 12px;
-    }
-    
-    .countdown-timer {
-      font-weight: bold;
-      font-size: 14px;
-      color: var(--accent);
-      animation: blink 1s infinite;
-    }
-    
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
     }
     
     .cursor {
@@ -240,11 +215,6 @@
           <div class="click-here">← Click here!</div>
         </div>
         
-        <div class="countdown" id="countdown">
-          <div>⏰ Auto-redirecting in</div>
-          <div class="countdown-timer" id="countdown-timer">10</div>
-          <div>seconds... <span style="font-size: 10px;">(Will default to Twitter)</span></div>
-        </div>
       </div>
     </div>
   </main>
@@ -270,12 +240,9 @@
       const TWITTER_URL = 'https://twitter.com/theakomolafe';
       const LINKEDIN_URL = 'https://linkedin.com/in/theakomolafe';
       let redirecting = false;
-      let countdown = 10;
       
       const option1 = document.getElementById('option-1');
       const option2 = document.getElementById('option-2');
-      const countdownTimer = document.getElementById('countdown-timer');
-      const menu = document.getElementById('contact-menu');
       
       function redirectTo(choice) {
         if (redirecting) return;
@@ -310,19 +277,6 @@
           setTimeout(() => redirectTo('linkedin'), 100);
         }
       });
-      
-      // Countdown timer
-      const timerInterval = setInterval(() => {
-        countdown--;
-        countdownTimer.textContent = countdown;
-        
-        if (countdown <= 0) {
-          clearInterval(timerInterval);
-          if (!redirecting) {
-            redirectTo('twitter');
-          }
-        }
-      }, 1000);
       
       // Sound effect (optional - using Web Audio API for beep)
       try {
