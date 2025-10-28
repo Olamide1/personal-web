@@ -106,32 +106,32 @@ function markdownToHtml(markdown) {
   if (!markdown) return '';
   
   let html = markdown
-    // Headings
+    // Clean up line breaks first
+    .replace(/\\\s*\\\s*\n/g, '\n\n')
+    .replace(/\\\s*\n/g, '\n')
+    // Headings (do before paragraph splitting)
     .replace(/^#####\s+(.+)$/gm, '<h5>$1</h5>')
     .replace(/^####\s+(.+)$/gm, '<h4>$1</h4>')
     .replace(/^###\s+(.+)$/gm, '<h3>$1</h3>')
     .replace(/^##\s+(.+)$/gm, '<h2>$1</h2>')
     .replace(/^#\s+(.+)$/gm, '<h1>$1</h1>')
-    // Bold
+    // Bold (do before links)
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    // Italic
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    // Italic (only if not part of bold)
+    .replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g, '<em>$1</em>')
     // Links - handle both markdown and plain URLs
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
     .replace(/<https?:\/\/[^\s>]+>/g, (match) => {
       const url = match.slice(1, -1);
       return `<a href="${url}" target="_blank" rel="noopener">${url}</a>`;
     })
-    // List items (unordered)
+    // List items (unordered) - handle before paragraphs
     .replace(/^\*\s+(.+)$/gm, '<li>$1</li>')
     // Wrap consecutive list items in <ul>
-    .replace(/(<li>.*<\/li>\n?)+/g, (match) => `<ul>${match}</ul>`)
+    .replace(/(<li>.*<\/li>\n?)+/g, (match) => `<ul>\n${match}</ul>\n`)
     // Code blocks
     .replace(/`([^`]+)`/g, '<code>$1</code>')
-    // Line breaks
-    .replace(/\\\s*\\\s*\n/g, '<br><br>')
-    .replace(/\\\s*\n/g, '<br>')
-    // Paragraphs (double newlines)
+    // Split into paragraphs and wrap
     .split(/\n\n+/)
     .map(para => {
       para = para.trim();
@@ -243,7 +243,7 @@ files.forEach(file => {
   const filePath = path.join(postsDir, file);
   const content = fs.readFileSync(filePath, 'utf8');
   
-  // Check if it has frontmatter
+  // Check if it has frontmatter (CMS file - not yet wrapped)
   if (content.startsWith('---')) {
     const parsed = parseFrontmatter(content);
     if (parsed) {
@@ -251,6 +251,22 @@ files.forEach(file => {
       const wrapped = wrapPost(parsed.metadata, parsed.body, slug);
       fs.writeFileSync(filePath, wrapped, 'utf8');
       console.log(`✓ Wrapped ${file}`);
+      wrappedCount++;
+    }
+  } else if (/#####\s+\*\*|##\s+\*\*|^\*\s+/.test(content)) {
+    // Already wrapped but contains raw markdown - needs conversion
+    console.log(`⚠ Found markdown in ${file}, checking if needs conversion...`);
+    // Extract body content and convert markdown
+    const bodyMatch = content.match(/<div class="post-content">([\s\S]*?)<\/div>/);
+    if (bodyMatch && /#####|##\s+|^\*\s+|<https?:/.test(bodyMatch[1])) {
+      const originalBody = bodyMatch[1];
+      const convertedBody = markdownToHtml(originalBody);
+      const updatedContent = content.replace(
+        /<div class="post-content">[\s\S]*?<\/div>/,
+        `<div class="post-content">\n        ${convertedBody.trim()}\n      </div>`
+      );
+      fs.writeFileSync(filePath, updatedContent, 'utf8');
+      console.log(`✓ Converted markdown in ${file}`);
       wrappedCount++;
     }
   }
