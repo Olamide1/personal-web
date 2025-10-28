@@ -105,9 +105,13 @@ function formatDateForIndex(dateString) {
 function markdownToHtml(markdown) {
   if (!markdown) return '';
   
-  // First, handle markdown inside existing HTML tags (like <p>##### text</p>)
-  let html = markdown.replace(/<p>(#####|####|###|##|#)\s+(.+?)<\/p>/g, (match, hashes, text) => {
+  // First, handle markdown inside existing HTML tags (like <p>##### text</p> or <p>##### <strong>text</strong></p>)
+  // Match the pattern and capture everything inside the paragraph
+  let html = markdown.replace(/<p>(#####|####|###|##|#)\s+([\s\S]*?)<\/p>/g, (match, hashes, text) => {
     const level = hashes.length;
+    // Clean up the text
+    text = text.trim();
+    // Convert to heading - preserve any HTML tags inside (like <strong>)
     return `<h${level}>${text}</h${level}>`;
   });
   
