@@ -1,6 +1,14 @@
 {
   "items": [
     {
+      "title": "The new year",
+      "slug": "the-new-year",
+      "date": "2026-01-02T00:00:00.000Z",
+      "summary": "",
+      "tags": [],
+      "path": "/blog/posts/the-new-year.html"
+    },
+    {
       "title": "On how The Daily Show have handled succession.",
       "slug": "on-how-the-daily-show-have-handled-succession",
       "date": "2025-12-29T00:00:00.000Z",
