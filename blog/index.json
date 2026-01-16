@@ -1,6 +1,14 @@
 {
   "items": [
     {
+      "title": "The \"thing\" with AI writing.",
+      "slug": "the-thing-with-ai-writing",
+      "date": "2026-01-16T00:00:00.000Z",
+      "summary": "",
+      "tags": [],
+      "path": "/blog/posts/the-thing-with-ai-writing.html"
+    },
+    {
       "title": "The new year",
       "slug": "the-new-year",
       "date": "2026-01-02T00:00:00.000Z",
