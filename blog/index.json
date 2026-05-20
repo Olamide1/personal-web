@@ -1,6 +1,14 @@
 {
   "items": [
     {
+      "title": "Arsenal are champions!",
+      "slug": "arsenal-are-champions",
+      "date": "2026-05-20T00:00:00.000Z",
+      "summary": "",
+      "tags": [],
+      "path": "/blog/posts/arsenal-are-champions.html"
+    },
+    {
       "title": "The \"thing\" with AI writing.",
       "slug": "the-thing-with-ai-writing",
       "date": "2026-01-16T00:00:00.000Z",

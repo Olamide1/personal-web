@@ -1,12 +1,90 @@
----
-title: Arsenal are champions!
-date: 2026-05-20T15:47:00.000+01:00
-summary: Long time Arsenal fan celebrating.
-tags: []
----
-A part of me is tempted to make this a Linkedin-esq styled post celebrating but man no!\
-\
-This is an amazing feeling, and I am incredibly proud of every single staff and football player of the Arsenal football club!  My heart is full, my head is light and my soul is relaxed because the champions league trophy might (will) be coming home.\
-\
-\
-#COYG
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arsenal are champions! — Lamide</title>
+  <meta name="description" content="Long time Arsenal fan celebrating. about AI, automation, and product management.">
+  
+  <link rel="icon" type="image/jpeg" href="/assets/img/icon.jpg">
+  <link rel="apple-touch-icon" href="/assets/img/icon.jpg">
+  <link rel="stylesheet" href="/assets/css/base.css">
+</head>
+<body>
+  <div class="browser-bar">
+    <button class="browser-bar__button" onclick="window.history.back()" aria-label="Back">←</button>
+    <button class="browser-bar__button" onclick="window.history.forward()" aria-label="Forward">→</button>
+    <div class="browser-bar__address">
+      <span class="browser-bar__lock">🔒</span>
+      <span>lamide.net/blog</span>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/projects.html">Projects</a>
+    <a href="/blog.html" class="active">Blog</a>
+    <a href="/now.html">Now</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+
+  <main id="main-content" class="container">
+    <article style="max-width: 700px; margin: 2rem auto;">
+      <div class="post-header">
+        <h1 class="post-title">Arsenal are champions!<span class="new-badge">NEW</span></h1>
+        <div class="post-meta">
+          <span>May 20, 2026</span>
+          <span>•</span>
+          <span id="reading-time">1 min read</span>
+        </div>
+        <div>
+          <span class="tag"></span>
+        </div>
+      </div>
+
+      <div class="post-content">
+        <p>A part of me is tempted to make this a Linkedin-esq styled post celebrating but man no!</p>
+<p>This is an amazing feeling, and I am incredibly proud of every single staff and football player of the Arsenal football club!  My heart is full, my head is light and my soul is relaxed because the champions league trophy might (will) be coming home.</p>
+<p>#COYG</p>
+      </div>
+
+      <div class="post-navigation">
+        <div></div>
+        <a href="/blog.html">← Back to Blog</a>
+      </div>
+      
+      <div style="margin-top: 2rem; padding-top: 1rem; border-top: 2px solid var(--border);">
+        <a href="view-source:https://lamide.net/blog/posts/welcome-to-the-blog.html" class="view-source">View Source</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__links">
+      <a href="https://github.com/olamide1" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://twitter.com/theakomolafe" target="_blank" rel="noopener">Twitter</a>
+      <a href="https://linkedin.com/in/theakomolafe" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="footer-stats">
+      <span id="guest-counter"></span>
+      <span id="load-time"></span>
+    </div>
+    <div>Made by Lamide 2025</div>
+  </footer>
+  
+
+  <div id="starfield"></div>
+  <script src="/assets/js/main.js" defer></script>
+  <script>
+    // Calculate reading time
+    const content = document.querySelector('.post-content');
+    if (content) {
+      const text = content.innerText;
+      const words = text.split(/\s+/).length;
+      const minutes = Math.ceil(words / 200);
+      document.getElementById('reading-time').textContent = `${minutes} min read`;
+    }
+  </script>
+</body>
+</html>
