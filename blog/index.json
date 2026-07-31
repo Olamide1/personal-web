@@ -1,6 +1,14 @@
 {
   "items": [
     {
+      "title": "Chat as an interface to LLMs",
+      "slug": "chat-as-an-interface-to-llms",
+      "date": "2026-07-31T00:00:00.000Z",
+      "summary": "",
+      "tags": [],
+      "path": "/blog/posts/chat-as-an-interface-to-llms.html"
+    },
+    {
       "title": "Arsenal are champions!",
       "slug": "arsenal-are-champions",
       "date": "2026-05-20T00:00:00.000Z",
