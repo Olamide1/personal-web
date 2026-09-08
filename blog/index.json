@@ -1,14 +1,6 @@
 {
   "items": [
     {
-      "title": "On teaching critical thinking",
-      "slug": "on-teaching-critical-thinking",
-      "date": "2026-09-08T00:00:00.000Z",
-      "summary": "",
-      "tags": [],
-      "path": "/blog/posts/on-teaching-critical-thinking.html"
-    },
-    {
       "title": "Chat as an interface to LLMs",
       "slug": "chat-as-an-interface-to-llms",
       "date": "2026-07-31T00:00:00.000Z",
