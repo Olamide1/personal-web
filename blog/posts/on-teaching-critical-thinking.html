@@ -1,10 +1,50 @@
----
-title: On teaching critical thinking.
-date: 2026-09-08T14:28:00.000+01:00
-summary: How to teach critical thinking and problem solving easily.
-tags: []
----
-We are at an age and time where everyone has a favorite LLM to help brainstorm, problem solve and ideate (I am not against AI and think they can, and should be a tool- a means to an end). I believe we have started losing some of our sauces for some layer of critical thinking, and problem solving that will frankly make us better at using LLMs to bring some uniqueness to all of the outputs we generate from said LLMs. \
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>On teaching critical thinking. — Lamide</title>
+  <meta name="description" content="How to teach critical thinking and problem solving easily. about AI, automation, and product management.">
+  
+  <link rel="icon" type="image/jpeg" href="/assets/img/icon.jpg">
+  <link rel="apple-touch-icon" href="/assets/img/icon.jpg">
+  <link rel="stylesheet" href="/assets/css/base.css">
+</head>
+<body>
+  <div class="browser-bar">
+    <button class="browser-bar__button" onclick="window.history.back()" aria-label="Back">←</button>
+    <button class="browser-bar__button" onclick="window.history.forward()" aria-label="Forward">→</button>
+    <div class="browser-bar__address">
+      <span class="browser-bar__lock">🔒</span>
+      <span>lamide.net/blog</span>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/projects.html">Projects</a>
+    <a href="/blog.html" class="active">Blog</a>
+    <a href="/now.html">Now</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+
+  <main id="main-content" class="container">
+    <article style="max-width: 700px; margin: 2rem auto;">
+      <div class="post-header">
+        <h1 class="post-title">On teaching critical thinking.<span class="new-badge">NEW</span></h1>
+        <div class="post-meta">
+          <span>September 8, 2026</span>
+          <span>•</span>
+          <span id="reading-time">1 min read</span>
+        </div>
+        <div>
+          <span class="tag"></span>
+        </div>
+      </div>
+
+      <div class="post-content">
+        We are at an age and time where everyone has a favorite LLM to help brainstorm, problem solve and ideate (I am not against AI and think they can, and should be a tool- a means to an end). I believe we have started losing some of our sauces for some layer of critical thinking, and problem solving that will frankly make us better at using LLMs to bring some uniqueness to all of the outputs we generate from said LLMs. \
 \
 Some of the symptoms of the LLMs usage have led to:\
 
@@ -29,3 +69,44 @@ Some resources on mental models:\
 
 [https://jamesclear.com/feynman-mental-models\
 https://fs.blog/mental-models/](https://jamesclear.com/feynman-mental-models)
+      </div>
+
+      <div class="post-navigation">
+        <div></div>
+        <a href="/blog.html">← Back to Blog</a>
+      </div>
+      
+      <div style="margin-top: 2rem; padding-top: 1rem; border-top: 2px solid var(--border);">
+        <a href="view-source:https://lamide.net/blog/posts/welcome-to-the-blog.html" class="view-source">View Source</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__links">
+      <a href="https://github.com/olamide1" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://twitter.com/theakomolafe" target="_blank" rel="noopener">Twitter</a>
+      <a href="https://linkedin.com/in/theakomolafe" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="footer-stats">
+      <span id="guest-counter"></span>
+      <span id="load-time"></span>
+    </div>
+    <div>Made by Lamide 2025</div>
+  </footer>
+  
+
+  <div id="starfield"></div>
+  <script src="/assets/js/main.js" defer></script>
+  <script>
+    // Calculate reading time
+    const content = document.querySelector('.post-content');
+    if (content) {
+      const text = content.innerText;
+      const words = text.split(/\s+/).length;
+      const minutes = Math.ceil(words / 200);
+      document.getElementById('reading-time').textContent = `${minutes} min read`;
+    }
+  </script>
+</body>
+</html>
