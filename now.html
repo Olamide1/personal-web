@@ -19,37 +19,41 @@
   
   <link rel="icon" type="image/jpeg" href="/assets/img/icon.jpg">
   <link rel="apple-touch-icon" href="/assets/img/icon.jpg">
+  <meta name="theme-color" content="#EBE4D0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/base.css">
 </head>
-<body>
-  <div class="browser-bar">
-    <button class="browser-bar__button" onclick="window.history.back()" aria-label="Back">←</button>
-    <button class="browser-bar__button" onclick="window.history.forward()" aria-label="Forward">→</button>
-    <div class="browser-bar__address">
-      <span class="browser-bar__lock">🔒</span>
-      <span>lamide.net/now</span>
+<body data-pigment="lilac">
+  <header class="top">
+    <div class="wrap">
+      <a class="wordmark" href="/"><span class="emblem rosette" data-rosette="emblem" aria-hidden="true"></span>LAMIDE</a>
+      <nav class="nav" id="siteNav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/now.html" class="active" aria-current="page">Now</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="planSheet"><span class="mb-icon" aria-hidden="true"></span><span class="l-d">Plan</span><span class="l-m">Menu</span></button>
     </div>
-  </div>
-
-  <nav class="nav">
-    <a href="/">Home</a>
-    <a href="/about.html">About</a>
-    <a href="/projects.html">Projects</a>
-    <a href="/blog.html">Blog</a>
-    <a href="/now.html" class="active">Now</a>
-    <a href="/contact.html">Contact</a>
-  </nav>
+    <div class="braid thin hdr-braid" aria-hidden="true"></div>
+  </header>
 
   <main id="main-content" class="container">
-    <div style="margin-top: 2rem;">
+    <div class="art banner is-loading" data-scene="terra" data-animate data-fold style="margin-top: .5rem;"><canvas role="img" aria-label="An engraving of land rising from the waters, after Michelangelo"></canvas></div>
+    <div style="margin-top: 0;">
       <div class="card">
-        <h1>Now</h1>
+        <div class="dial" data-dial></div>
+        <h1 class="engraved">Now</h1>
         <p style="margin-bottom: 1rem; opacity: 0.8;">What I'm focused on right now.</p>
         <div class="last-updated">January 2025</div>
         
         <div class="callout">
           <div class="callout__header">Shipping</div>
-          <ul style="margin-left: 2rem;">
+          <ul>
             <li>Finishing the Extraction Agent MVP — building robust error handling and retry logic</li>
             <li>Redesigning Schedulely's onboarding flow based on user feedback</li>
             <li>Writing case studies for Akọ̀wé and AI Customer Support projects</li>
@@ -58,7 +62,7 @@
         
         <div class="callout">
           <div class="callout__header">Exploring</div>
-          <ul style="margin-left: 2rem;">
+          <ul>
             <li>Agentic coding workflows — how far can we push AI-assisted development?</li>
             <li>Investment testing automation — building agents that can research and backtest strategies</li>
             <li>Human-in-loop patterns for AI agents in customer-facing applications</li>
@@ -67,7 +71,7 @@
         
         <div class="callout">
           <div class="callout__header">Reading</div>
-          <ul style="margin-left: 2rem;">
+          <ul>
             <li><em>The Age of AI</em> by Henry Kissinger, Eric Schmidt, and Daniel Huttenlocher</li>
             <li>Research papers on multi-agent systems and coordination</li>
             <li>YC's latest batch of AI companies for inspiration</li>
@@ -76,7 +80,7 @@
         
         <div class="callout">
           <div class="callout__header">Open To</div>
-          <ul style="margin-left: 2rem;">
+          <ul>
             <li>Conversations about AI agent architecture and product strategy</li>
             <li>Collaborations on automation tools for research and content creation</li>
             <li>Product manager or AI product roles at companies building agentic systems</li>
@@ -85,7 +89,7 @@
         
         <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);">
           <p style="font-size: 0.9rem; opacity: 0.7;">
-            <em>Inspired by <a href="https://nownownow.com" target="_blank" rel="noopener" style="color: var(--link);">nownownow.com</a></em>
+            <em>Inspired by <a href="https://nownownow.com" target="_blank" rel="noopener">nownownow.com</a></em>
           </p>
         </div>
       </div>
@@ -108,5 +112,7 @@
 
   <div id="starfield"></div>
   <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/scenes.js" defer></script>
+  <script src="/assets/js/chrome.js" defer></script>
 </body>
 </html>

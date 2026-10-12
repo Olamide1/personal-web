@@ -19,49 +19,67 @@
   
   <link rel="icon" type="image/jpeg" href="/assets/img/icon.jpg">
   <link rel="apple-touch-icon" href="/assets/img/icon.jpg">
+  <meta name="theme-color" content="#EBE4D0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+  <script>
+    // First visit of a session gets the opening; reduced-motion visitors skip it
+    try { if (!sessionStorage.getItem('introSeen') && !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) document.documentElement.classList.add('intro-on'); } catch (e) {}
+  </script>
   <link rel="stylesheet" href="/assets/css/base.css">
   <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Lamide's Blog">
-  <link rel="preload" href="/assets/css/base.css" as="style">
-  <link rel="dns-prefetch" href="//fonts.googleapis.com">
-</head>
+  </head>
 <body>
-  <!-- Loading Screen -->
-  <div id="loading-screen" class="loading-screen">
-    <div class="loading-content">
-      <div class="loading-title">Loading lamide.net...</div>
-      <div class="loading-bar-container">
-        <div class="loading-bar-bg">[░░░░░░░░░░░░░░░░░░░░]</div>
-        <div class="loading-bar-fill">[</div>
-        <div class="loading-percent">0%</div>
-      </div>
-      <div class="loading-status">Initializing connection...</div>
+  <div id="intro" aria-hidden="false">
+    <div class="intro-art" data-intro-art><canvas></canvas></div>
+    <div class="intro-flash"></div>
+    <div class="intro-edge t micro-wrap"><span class="micro" data-micro></span></div>
+    <div class="intro-edge b micro-wrap"><span class="micro" data-micro></span></div>
+    <button class="intro-skip" type="button">Skip</button>
+    <div class="intro-plate">
+      <span class="intro-word" role="img" aria-label="Lamide"><i style="--i:0">L</i><i style="--i:1">A</i><i style="--i:2">M</i><i style="--i:3">I</i><i style="--i:4">D</i><i style="--i:5">E</i></span>
+      <span class="intro-sub">PRODUCT &middot; AI &middot; AUTOMATION</span>
+      <span class="intro-serial" id="introSerial">No. 000 000</span>
     </div>
   </div>
-  <!-- Browser Bar -->
-  <div class="browser-bar">
-    <button class="browser-bar__button" onclick="window.history.back()" aria-label="Back">←</button>
-    <button class="browser-bar__button" onclick="window.history.forward()" aria-label="Forward">→</button>
-    <div class="browser-bar__address">
-      <span class="browser-bar__lock">🔒</span>
-      <span>lamide.net</span>
+  <header class="top">
+    <div class="wrap">
+      <a class="wordmark" href="/"><span class="emblem rosette" data-rosette="emblem" aria-hidden="true"></span>LAMIDE</a>
+      <nav class="nav" id="siteNav" aria-label="Primary">
+        <a href="/" class="active" aria-current="page">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/now.html">Now</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="planSheet"><span class="mb-icon" aria-hidden="true"></span><span class="l-d">Plan</span><span class="l-m">Menu</span></button>
     </div>
-  </div>
-
-  <!-- Navigation -->
-  <nav class="nav">
-    <a href="/" class="active">Home</a>
-    <a href="/about.html">About</a>
-    <a href="/projects.html">Projects</a>
-    <a href="/blog.html">Blog</a>
-    <a href="/now.html">Now</a>
-    <a href="/contact.html">Contact</a>
-  </nav>
+    <div class="braid thin hdr-braid" aria-hidden="true"></div>
+  </header>
 
   <!-- Hero -->
   <section class="hero">
-    <h1>Lamide.</h1>
-    <p>Product manager building AI agents and automation.</p>
-    <p style="font-size: 1rem; margin-top: 0.5rem; opacity: 0.7;">Strong opinions. Flexible with good evidence.</p>
+    <div class="wrap">
+      <div class="plate" data-corners>
+        <div class="serials" aria-hidden="true">
+          <span class="serial" data-serial></span>
+          <span class="micro-wrap"><span class="micro" data-micro></span></span>
+          <span class="serial" data-serial></span>
+        </div>
+        <div class="frieze" aria-hidden="true"><span class="braid"></span><b>PRODUCT &middot; AI &middot; AUTOMATION</b><span class="braid"></span></div>
+        <h1 class="engraved">Lamide.</h1>
+        <div class="art is-loading" data-hands="hero"><canvas role="img" aria-label="An engraving of two hands reaching toward each other, their fingertips almost touching"></canvas></div>
+        <p>Product manager building AI agents and automation.</p>
+        <p>Strong opinions. Flexible with good evidence.</p>
+        <div class="cta-row">
+          <a class="btn" href="/projects.html">See the projects</a>
+          <a class="btn btn-ghost" href="/contact.html" data-hands-trigger="hero">Get in touch</a>
+        </div>
+        <div class="micro-wrap" aria-hidden="true"><span class="micro" data-micro></span></div>
+      </div>
+    </div>
   </section>
 
   <!-- Main Content -->
@@ -74,12 +92,12 @@
         <div class="card">
           <h3>Schedulely</h3>
           <p>AI social slideshow generator and manager for creators.</p>
-          <a href="/projects.html#schedulely" style="color: var(--link);">Learn more →</a>
+          <a href="/projects.html#schedulely">Learn more →</a>
         </div>
         <div class="card">
           <h3>Akọ̀wé</h3>
           <p>AI academic writing tool with citations and plagiarism check.</p>
-          <a href="/projects.html#akowe" style="color: var(--link);">Learn more →</a>
+          <a href="/projects.html#akowe">Learn more →</a>
         </div>
       </div>
     </section>
@@ -94,24 +112,34 @@
       </div>
     </section>
 
+    <!-- The plan -->
+    <div class="ascii-divider ascii-divider--thin"></div>
+    <section class="mt-2 mb-2">
+      <h2><span class="section-num">03</span>The Plan</h2>
+      <p class="plan-lede">Nine panels run down the middle of Michelangelo's Sistine ceiling. Here they are the nine places on this site, each one engraved in its own colours.</p>
+      <div class="plan-inline" data-plan-inline></div>
+    </section>
+
     <!-- Now Section Preview -->
     <div class="ascii-divider ascii-divider--thin"></div>
     <section class="mt-2 mb-2">
       <div class="card">
         <h2>What I'm Doing Now</h2>
-        <p>Check out my <a href="/now.html" style="color: var(--link);">Now page</a> to see my current focus areas, what I'm shipping, exploring, and reading.</p>
-      </div>
-    </section>
-
-    <!-- Contact CTA -->
-    <section class="mt-2 mb-2 text-center">
-      <div class="card">
-        <h2>Let's Connect</h2>
-        <p>Interested in collaborating or discussing AI automation, agents, or product work?</p>
-        <a href="/contact.html" class="btn" style="display: inline-block; margin-top: 1rem;">Get in Touch</a>
+        <p>Check out my <a href="/now.html">Now page</a> to see my current focus areas, what I'm shipping, exploring, and reading.</p>
       </div>
     </section>
   </main>
+
+  <!-- Finale -->
+  <section class="wall" aria-labelledby="wall-h">
+    <div class="art is-loading" data-hands="wall"><canvas role="img" aria-label="The same two hands, engraved in reverse, now touching"></canvas></div>
+    <div class="inner">
+      <div class="braid" aria-hidden="true"></div>
+      <h2 id="wall-h">Let's connect.</h2>
+      <p>Interested in collaborating, or in talking through AI automation, agents, or product work?</p>
+      <a href="/contact.html" class="btn">Get in touch</a>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer class="footer">
@@ -128,7 +156,11 @@
   </footer>
   <div id="starfield"></div>
 
+  <script src="/assets/js/engrave.js" defer></script>
+  <script src="/assets/js/art.js" defer></script>
   <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/scenes.js" defer></script>
+  <script src="/assets/js/chrome.js" defer></script>
   <script src="/assets/js/blog-index.js" defer></script>
   <script>
     // Lazy load Netlify Identity only when needed (CMS/admin pages)

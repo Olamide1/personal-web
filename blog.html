@@ -19,33 +19,36 @@
   
   <link rel="icon" type="image/jpeg" href="/assets/img/icon.jpg">
   <link rel="apple-touch-icon" href="/assets/img/icon.jpg">
+  <meta name="theme-color" content="#EBE4D0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/base.css">
   <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Lamide's Blog">
 </head>
-<body>
-  <div class="browser-bar">
-    <button class="browser-bar__button" onclick="window.history.back()" aria-label="Back">←</button>
-    <button class="browser-bar__button" onclick="window.history.forward()" aria-label="Forward">→</button>
-    <div class="browser-bar__address">
-      <span class="browser-bar__lock">🔒</span>
-      <span>lamide.net/blog</span>
+<body data-pigment="azure">
+  <header class="top">
+    <div class="wrap">
+      <a class="wordmark" href="/"><span class="emblem rosette" data-rosette="emblem" aria-hidden="true"></span>LAMIDE</a>
+      <nav class="nav" id="siteNav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/blog.html" class="active" aria-current="page">Blog</a>
+        <a href="/now.html">Now</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="planSheet"><span class="mb-icon" aria-hidden="true"></span><span class="l-d">Plan</span><span class="l-m">Menu</span></button>
     </div>
-  </div>
-
-  <nav class="nav">
-    <a href="/">Home</a>
-    <a href="/about.html">About</a>
-    <a href="/projects.html">Projects</a>
-    <a href="/blog.html" class="active">Blog</a>
-    <a href="/now.html">Now</a>
-    <a href="/contact.html">Contact</a>
-  </nav>
+    <div class="braid thin hdr-braid" aria-hidden="true"></div>
+  </header>
 
   <main id="main-content" class="container">
     <div style="margin-top: 2rem;">
-      <h1>Blog</h1>
+      <h1 class="engraved">Blog</h1>
       <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.8;">Thoughts on AI, automation, product management, and building things.</p>
       
+      <div class="art banner is-loading" data-scene="arbor" data-animate data-fold><canvas role="img" aria-label="An engraving of the tree of knowledge with a serpent coiled around it, after Michelangelo"></canvas></div>
       <div id="blog-posts">
         <p>Loading posts...</p>
       </div>
@@ -67,7 +70,11 @@
   
 
   <div id="starfield"></div>
+  <script src="/assets/js/engrave.js" defer></script>
+  <script src="/assets/js/art.js" defer></script>
   <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/scenes.js" defer></script>
+  <script src="/assets/js/chrome.js" defer></script>
   <script src="/assets/js/blog-index.js" defer></script>
 </body>
 </html>

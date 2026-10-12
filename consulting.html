@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Olamide Akomolafe | KYC drop-off teardown for fintechs</title>
+<meta name="description" content="A fixed-scope, five-day teardown of your KYC and onboarding funnel. See where applicants are lost, why, and what each fix is worth.">
+<meta name="theme-color" content="#EBE4D0">
+<link rel="canonical" href="https://olamide.name.ng/consulting">
+<meta property="og:type" content="website">
+<meta property="og:title" content="KYC drop-off teardown for fintechs | Olamide Akomolafe">
+<meta property="og:description" content="Five days, fixed scope. See where applicants are lost in your KYC funnel, why, and what each fix is worth.">
+<meta property="og:url" content="https://olamide.name.ng/consulting">
+<meta property="og:image" content="https://olamide.name.ng/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Olamide Akomolafe: KYC drop-off teardown","description":"A fixed-scope, five-day teardown of a fintech's KYC and onboarding funnel.","url":"https://olamide.name.ng/consulting","founder":{"@type":"Person","name":"Olamide Akomolafe","url":"https://olamide.name.ng","sameAs":["https://github.com/Olamide1","https://huggingface.co/theakomolafe"]}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+<!--
+  BEFORE YOU PUBLISH:
+  0. Canonical, social preview and structured data now point at https://olamide.name.ng/consulting (served via a rewrite in netlify.toml).
+  1. Search for "cal.com/YOUR-HANDLE" (several places) and put in your real Cal.com or Calendly link.
+  2. Search for "theolaakomolafe@gmail.com" and swap in an address on your own domain if you have one.
+
+  HOW THIS PAGE IS MADE (for you, not visitors)
+  - Every picture is generated in the browser. Nothing is an image file.
+  - The hero and closing hands are the real hands of Michelangelo's Creation of Adam, cut out of a public-domain reproduction and then "engraved":
+    horizontal wavy lines whose thickness follows the painting's light, the way banknote portraits are cut. Only a small processed tone map and two masks are embedded. The funnel is 100 engraved lines (10 applicants each) that peel away at each leak.
+  - The rosettes, seal, borders and microprint are guilloche, the pattern printed on banknotes and passports to defeat forgery.
+    That is the same job your service does: verifying that something is real.
+-->
+<style>
+  :root {
+    --paper: #EBE4D0;
+    --paper-2: #E3DBC4;
+    --ink: #1A2F8F;
+    --ink-deep: #0F1C5C;
+    --ink-soft: rgba(26,47,143,.5);
+    --red: #B5322B;
+    --c0: #1A2F8F; --c1: #C98A14; --c2: #C23A2B; --c3: #2F8F78; --c4: #8A46A8;
+    --gold-1: #F6DE95; --gold-2: #D2AA52; --gold-3: #B98F35; --gold-edge: #7C5F1E;
+    --display: "Cardo", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --caps: "Cinzel", "Trajan Pro", "Times New Roman", serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; color: var(--ink-deep);
+    font-family: var(--display); font-size: 1.2rem; line-height: 1.6;
+    background-color: var(--paper);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .30 0 0 0 0 .26 0 0 0 0 .18 0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.26'/></svg>");
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  a { color: var(--ink); text-underline-offset: 3px; }
+  a:hover { color: var(--ink-deep); }
+  :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  .dark :focus-visible { outline-color: var(--gold-1); }
+  .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .skip { position: absolute; left: -999px; top: 8px; background: var(--paper); padding: 8px 14px; border: 1px solid var(--ink); z-index: 99; }
+  .skip:focus { left: 8px; }
+  h1, h2, h3 { text-wrap: balance; margin: 0; }
+  p { text-wrap: pretty; margin: 0 0 14px; }
+
+  /* ---------- security-print furniture ---------- */
+  .micro-wrap { overflow: hidden; height: 7px; }
+  .micro { display: block; font: 500 5.4px/7px var(--caps); letter-spacing: .24em; white-space: nowrap; color: var(--ink); opacity: .75; text-transform: uppercase; -webkit-text-size-adjust: none; }
+  .serial { font: 700 .9rem/1 var(--caps); letter-spacing: .18em; color: var(--red); white-space: nowrap; }
+  .braid {
+    height: 18px; opacity: .85;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='18' viewBox='0 0 60 18'><path d='M0 9C10 0 20 0 30 9S50 18 60 9' fill='none' stroke='%231A2F8F' stroke-width='1.1'/><path d='M0 9C10 18 20 18 30 9S50 0 60 9' fill='none' stroke='%231A2F8F' stroke-width='1.1'/></svg>") repeat-x center / 60px 18px;
+  }
+  .braid.thin { height: 12px; background-size: 40px 12px; }
+  .rosette svg, .rosette canvas { display: block; width: 100%; height: 100%; }
+
+  /* ---------- buttons: gold foil, cut square ---------- */
+  .btn {
+    position: relative; overflow: hidden; display: inline-block;
+    font: 700 1.1rem/1.2 var(--display); padding: 15px 28px; color: var(--ink-deep); text-decoration: none; cursor: pointer;
+    background: linear-gradient(180deg, var(--gold-1), var(--gold-2) 55%, var(--gold-3));
+    border: 1px solid var(--gold-edge); border-radius: 2px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 2px 0 var(--gold-edge), 0 12px 16px -10px rgba(15,28,92,.6);
+    transition: transform .15s ease, filter .15s ease;
+  }
+  .btn::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(124,95,30,.17) 0 1px, transparent 1px 3px); pointer-events: none; }
+  .btn::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent); transform: skewX(-18deg); transition: left .7s ease; pointer-events: none; }
+  .btn:hover { color: var(--ink-deep); filter: brightness(1.05); transform: translateY(-1px); }
+  .btn:hover::after { left: 120%; }
+  .btn:active { transform: translateY(1px); }
+  .btn-ghost { background: transparent; border-color: var(--ink); color: var(--ink-deep); box-shadow: none; }
+  .btn-ghost::before, .btn-ghost::after { display: none; }
+  .btn-ghost:hover { background: var(--ink-deep); color: var(--paper); filter: none; }
+  .dark .btn-ghost { border-color: rgba(246,222,149,.8); color: var(--paper); }
+  .dark .btn-ghost:hover { background: rgba(246,222,149,.12); color: var(--gold-1); }
+
+  /* ---------- header ---------- */
+  .wordmark { display: inline-flex; align-items: center; gap: 12px; font: 700 .98rem/1 var(--caps); letter-spacing: .16em; color: var(--ink-deep); text-decoration: none; }
+  .emblem { width: 30px; height: 30px; flex: none; }
+
+  /* ---------- plate: a printed certificate frame ---------- */
+  .plate {
+    position: relative; background: var(--paper);
+    border: 1px solid var(--ink);
+    box-shadow: inset 0 0 0 6px var(--paper), inset 0 0 0 7px var(--ink);
+    padding: clamp(26px, 3.4vw, 46px) clamp(20px, 3.2vw, 44px) clamp(18px, 2.4vw, 28px);
+  }
+  .plate > .corner { position: absolute; width: 58px; height: 58px; border-radius: 50%; background: var(--paper); z-index: 2; }
+  .corner.tl { top: -29px; left: -29px; } .corner.tr { top: -29px; right: -29px; }
+  .corner.bl { bottom: -29px; left: -29px; } .corner.br { bottom: -29px; right: -29px; }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 38px 0 84px; }
+  .serials { display: flex; align-items: center; gap: 18px; margin-bottom: 18px; }
+  .serials .micro-wrap { flex: 1; }
+  .frieze { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 22px; color: var(--ink); }
+  .frieze .braid { flex: 1; max-width: 190px; height: 12px; background-size: 40px 12px; }
+  .frieze b { font: 500 .78rem/1 var(--caps); letter-spacing: .5em; padding-left: .5em; white-space: nowrap; }
+  .frieze i { font-size: .95rem; opacity: .8; white-space: nowrap; }
+  .hero h1 {
+    max-width: 17em; margin: 0 auto 20px; text-align: center;
+    font-weight: 700; font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.08; letter-spacing: -.008em;
+  }
+  .lede { max-width: 36em; margin: 0 auto 28px; text-align: center; font-size: 1.28rem; color: #2A3678; }
+  .cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+  .art { position: relative; margin: 38px 0 20px; height: clamp(280px, 33vw, 390px); background: var(--paper); box-shadow: 0 0 0 1px var(--ink), 0 0 0 4px var(--paper), 0 0 0 5px var(--ink); }
+  .art canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .art .overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+  .art .overlay line { stroke: var(--ink-deep); stroke-width: 1; }
+  .art .overlay circle { fill: var(--paper); stroke: var(--ink-deep); stroke-width: 1.2; }
+  .tag { position: absolute; transform: translate(-50%, -100%); background: var(--paper); border: 1px solid var(--ink-deep); padding: 3px 12px 5px; font-style: italic; font-size: 1.02rem; line-height: 1.2; white-space: nowrap; color: var(--ink-deep); box-shadow: 0 0 0 3px var(--paper); }
+
+  /* ---------- sections ---------- */
+  section.block { padding: 84px 0; position: relative; }
+  .head { max-width: 40rem; margin: 0 auto 44px; text-align: center; }
+  .head h2 { font-size: clamp(1.8rem, 3.6vw, 2.7rem); line-height: 1.12; margin-bottom: 14px; }
+  .head p { color: #2A3678; margin: 0 auto; }
+  .head .fineprint { font-style: italic; font-size: 1rem; margin-top: 10px; color: #4A5490; }
+
+  /* ---------- funnel: 100 engraved lines ---------- */
+  .funnel-plate { padding-bottom: 26px; }
+  svg.funnel { display: block; width: 100%; height: auto; clip-path: inset(0 100% 0 0); }
+  svg.funnel.drawn { clip-path: inset(0 0 0 0); transition: clip-path 2.4s cubic-bezier(.55,.1,.25,1); }
+  .funnel .ln { fill: none; stroke: var(--ink); stroke-width: 1.15px; vector-effect: non-scaling-stroke; stroke-linecap: round; }
+  .funnel .leak { stroke-width: 1.45px; transition: opacity .25s, stroke-width .25s; }
+  .funnel .leak.c1 { stroke: var(--c1); } .funnel .leak.c2 { stroke: var(--c2); } .funnel .leak.c3 { stroke: var(--c3); } .funnel .leak.c4 { stroke: var(--c4); }
+  .funnel .tint { opacity: .5; transition: opacity .3s; }
+  .funnel .guide { stroke: var(--ink-soft); stroke-width: 1px; stroke-dasharray: 2 5; vector-effect: non-scaling-stroke; }
+  .funnel text { font-family: var(--caps); fill: var(--ink-deep); }
+  .funnel .leak { opacity: .8; }
+  .funnel[data-sel] .leak, .funnel[data-hov] .leak { opacity: .3; }
+  .funnel[data-sel="1"] .leak.c1, .funnel[data-sel="2"] .leak.c2, .funnel[data-sel="3"] .leak.c3, .funnel[data-sel="4"] .leak.c4,
+  .funnel[data-hov="1"] .leak.c1, .funnel[data-hov="2"] .leak.c2, .funnel[data-hov="3"] .leak.c3, .funnel[data-hov="4"] .leak.c4 { opacity: 1; stroke-width: 2.4px; }
+  .funnel[data-sel="1"] .leak.c1, .funnel[data-sel="2"] .leak.c2, .funnel[data-sel="3"] .leak.c3, .funnel[data-sel="4"] .leak.c4 { animation: pulseLine .7s ease-out; }
+  @keyframes pulseLine { 0% { stroke-width: 6px; } 100% { stroke-width: 2.4px; } }
+  .funnel[data-sel="1"] .tint.t1, .funnel[data-sel="2"] .tint.t2, .funnel[data-sel="3"] .tint.t3, .funnel[data-sel="4"] .tint.t4,
+  .funnel[data-hov="1"] .tint.t1, .funnel[data-hov="2"] .tint.t2, .funnel[data-hov="3"] .tint.t3, .funnel[data-hov="4"] .tint.t4 { opacity: .95; }
+  .steps { display: grid; grid-template-columns: repeat(5, 17%); margin: 6px 0 0 3%; }
+  .step {
+    appearance: none; background: none; border: 0; border-top: 2px solid transparent; border-left: 1px solid var(--ink-soft);
+    padding: 12px 12px 10px; text-align: left; cursor: pointer; font: inherit; color: inherit;
+  }
+  .step:first-child { border-left-color: var(--ink-soft); }
+  .step .nm { display: block; font-weight: 700; font-size: 1.05rem; line-height: 1.2; }
+  .step .ct { display: block; font-size: .98rem; color: #3A4690; font-variant-numeric: tabular-nums; }
+  .step { --sc: var(--c0); --tb: rgba(184,198,238,.35); position: relative; overflow: hidden; transition: background .25s, transform .2s; }
+  .step[data-i="1"] { --sc: var(--c1); --tb: rgba(244,218,155,.5); } .step[data-i="2"] { --sc: var(--c2); --tb: rgba(243,179,166,.45); }
+  .step[data-i="3"] { --sc: var(--c3); --tb: rgba(181,220,203,.55); } .step[data-i="4"] { --sc: var(--c4); --tb: rgba(213,192,232,.55); }
+  .step .nm::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 8px; background: var(--sc); box-shadow: 0 0 0 1px rgba(15,28,92,.35); vertical-align: 1px; }
+  .step .ls { display: inline-block; margin-top: 4px; font: 700 .85rem/1 var(--caps); color: var(--sc); letter-spacing: .04em; }
+  .step:hover { transform: translateY(-2px); background: var(--tb); }
+  .step[aria-pressed="true"] { border-top-color: var(--sc); background: var(--tb); }
+  .step:hover .nm { text-decoration: underline; text-underline-offset: 3px; }
+  .detail { margin: 20px 3% 0; padding: 14px 20px; background: var(--paper-2); border-left: 4px solid var(--c2); min-height: 100px; font-size: 1.08rem; transition: background .3s, border-color .3s; }
+  .detail strong { display: block; margin-bottom: 3px; }
+
+  /* ---------- the five days: guilloche rosettes ---------- */
+  .days { position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 44px 0; margin: 0; padding: 0; list-style: none; }
+  .day:not(:last-child)::after { content: ""; position: absolute; top: 88px; left: calc(50% + 92px); width: 36px; border-top: 1px dashed var(--ink-soft); }
+  .day { position: relative; z-index: 1; flex: 0 1 220px; padding: 0 14px; text-align: center; }
+  .day .rosette { position: relative; width: 176px; height: 176px; margin: 0 auto 20px; border-radius: 50%; }
+  .day .rosette i { position: absolute; inset: 33%; border-radius: 50%; background: var(--paper); box-shadow: 0 0 0 1px var(--ink), 0 0 0 4px var(--paper), 0 0 0 5px var(--ink); }
+  .day .rosette b { position: absolute; inset: 0; display: grid; place-items: center; font: 700 1.35rem/1 var(--caps); letter-spacing: .03em; color: var(--ink-deep); padding-left: .03em; }
+  .day h3 { font-size: 1.35rem; margin-bottom: 6px; }
+  .day p { font-size: 1.06rem; line-height: 1.5; color: #2A3678; margin: 0; }
+
+  /* the fee, printed like a note */
+  .fee-wrap { display: flex; justify-content: center; margin-top: 70px; }
+  .note {
+    position: relative; width: min(100%, 640px); text-align: center; padding: 40px 46px 38px;
+    background: var(--paper); border: 1px solid var(--ink);
+    box-shadow: inset 0 0 0 6px var(--paper), inset 0 0 0 7px var(--ink), 0 24px 30px -22px rgba(15,28,92,.55);
+  }
+  .note .den { position: absolute; font: 700 .78rem/1 var(--caps); letter-spacing: .12em; color: var(--ink); }
+  .note .den.a { top: 17px; left: 20px; } .note .den.b { top: 17px; right: 20px; } .note .den.c { bottom: 17px; left: 20px; } .note .den.d { bottom: 17px; right: 20px; }
+  .note .etext { display: block; width: min(100%, 460px); height: auto; margin: 0 auto 6px; }
+  .note p { margin: 0 0 22px; color: #2A3678; }
+  .note .tag-fee { font: 500 .78rem/1 var(--caps); letter-spacing: .4em; padding-left: .4em; color: var(--red); display: block; margin-bottom: 8px; }
+  .note ul.keep { text-align: left; max-width: 30rem; margin: 6px auto 18px; }
+  .note ul.keep li { margin-bottom: 12px; color: #2A3678; font-size: 1.08rem; line-height: 1.45; }
+  .note ul.keep li strong { color: var(--ink-deep); }
+  .note .pledge { font-style: italic; font-size: 1.12rem; color: var(--ink-deep); margin: 0 0 22px; }
+  .team-note { max-width: 36rem; margin: 34px auto 0; text-align: center; color: #3A4690; font-size: 1.08rem; }
+
+  /* ---------- two plates ---------- */
+  .pair { display: grid; gap: 72px 64px; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); }
+  .pair .plate { padding: 38px 36px 30px; }
+  .pair h2 { font-size: clamp(1.5rem, 2.8vw, 2rem); margin-bottom: 14px; }
+  .pair .corner { width: 40px; height: 40px; }
+  .pair .corner.tl { top: -20px; left: -20px; } .pair .corner.tr { top: -20px; right: -20px; } .pair .corner.bl { bottom: -20px; left: -20px; } .pair .corner.br { bottom: -20px; right: -20px; }
+  ul.dots { list-style: none; padding: 0; margin: 0 0 14px; }
+  ul.dots li { position: relative; padding-left: 28px; margin-bottom: 10px; }
+  ul.dots li::before { content: ""; position: absolute; left: 0; top: .5em; width: 15px; height: 15px; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--ink); background: radial-gradient(circle, var(--ink) 0 2px, transparent 2.5px), repeating-radial-gradient(circle, transparent 0 2px, var(--ink-soft) 2px 2.6px); }
+
+  /* ---------- sprint ---------- */
+  .sprint { display: grid; gap: 34px; grid-template-columns: 1fr; align-items: center; padding: 42px clamp(24px, 4vw, 52px); }
+  @media (min-width: 900px) { .sprint { grid-template-columns: 1fr 250px; } }
+  .sprint h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 14px; }
+  .sprint p { max-width: 42em; }
+  .denom { position: relative; text-align: center; padding: 32px 14px; border: 1px solid var(--ink); box-shadow: inset 0 0 0 4px var(--paper), inset 0 0 0 5px var(--ink); background: var(--paper-2); }
+  .denom small { display: block; font-style: italic; font-size: 1rem; color: #3A4690; }
+  .denom b { display: block; font: 700 2.1rem/1.15 var(--display); }
+  .denom .den { position: absolute; font: 700 .62rem/1 var(--caps); letter-spacing: .1em; color: var(--ink); }
+  .denom .den.a { top: 12px; left: 14px; } .denom .den.b { top: 12px; right: 14px; } .denom .den.c { bottom: 12px; left: 14px; } .denom .den.d { bottom: 12px; right: 14px; }
+
+  /* ---------- about: the seal ---------- */
+  .about { display: grid; gap: 48px; grid-template-columns: 1fr; align-items: center; justify-items: center; }
+  @media (min-width: 860px) { .about { grid-template-columns: 240px 1fr; justify-items: start; } }
+  .seal { width: 236px; height: 236px; }
+  .seal svg { width: 100%; height: 100%; display: block; }
+  .about h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); margin-bottom: 14px; }
+  .about p { max-width: 38em; color: #2A3678; }
+
+  /* ---------- finale: the same hands, reversed, touching ---------- */
+  .wall { position: relative; background: var(--ink-deep); color: var(--paper); margin-top: 40px; }
+  .wall .art { margin: 0; height: clamp(250px, 30vw, 400px); background: var(--ink-deep); box-shadow: none; }
+  .wall .art::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(180deg, transparent, var(--ink-deep)); pointer-events: none; }
+  .wall .inner { padding: 8px 0 92px; text-align: center; position: relative; }
+  .wall h2 { max-width: 19em; margin: 0 auto 14px; font-size: clamp(1.9rem, 4vw, 2.9rem); line-height: 1.12; color: var(--paper); }
+  .wall p { max-width: 30em; margin: 0 auto 30px; color: #CBD0E8; }
+  .wall a.mail { color: var(--gold-1); }
+  .wall .braid { filter: invert(1) sepia(.4) saturate(1.2); opacity: .5; margin-bottom: 36px; }
+
+  footer { padding: 26px 0 44px; text-align: center; font-size: .98rem; color: #3A4690; }
+  footer .micro-wrap { margin-bottom: 18px; }
+
+
+  /* ---------- navigation: the ceiling plan ---------- */
+  header.top { position: sticky; top: 0; z-index: 50; padding: 14px 0 0; background: rgba(235,228,208,.94); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+  .hdr-braid { margin-top: 12px; }
+  [id] { scroll-margin-top: 96px; }
+  .nav { display: flex; gap: 28px; }
+  .nav a { position: relative; padding: 8px 0 12px; font: 500 .74rem/1 var(--caps); letter-spacing: .17em; text-transform: uppercase; color: var(--ink-deep); text-decoration: none; }
+  .nav a::after { content: ""; position: absolute; left: 0; bottom: 0; height: 8px; width: 0; transition: width .4s ease;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='8' viewBox='0 0 24 8'><path d='M0 4C4 0 8 0 12 4S20 8 24 4' fill='none' stroke='%231A2F8F' stroke-width='1'/><path d='M0 4C4 8 8 8 12 4S20 0 24 4' fill='none' stroke='%231A2F8F' stroke-width='1'/></svg>") repeat-x left center / 24px 8px; }
+  .nav a:hover::after, .nav a.on::after { width: 100%; }
+  .hdr-actions { display: flex; align-items: center; gap: 12px; }
+  .btn-sm { padding: 9px 18px; font-size: .98rem; }
+  .menu-btn { display: none; position: relative; overflow: hidden; align-items: center; gap: 10px; font: 700 .95rem/1 var(--display); color: var(--ink-deep); background: transparent; border: 1px solid var(--ink); border-radius: 2px; padding: 9px 14px 9px 12px; cursor: pointer; }
+  .mb-icon { width: 14px; height: 18px; background: linear-gradient(var(--ink), var(--ink)) 0 0 / 14px 4px no-repeat, linear-gradient(var(--ink), var(--ink)) 2px 7px / 10px 3px no-repeat, linear-gradient(var(--ink), var(--ink)) 0 13px / 14px 4px no-repeat; }
+  @media (max-width: 959px) { .nav { display: none; } .menu-btn { display: inline-flex; } }
+  @media (max-width: 520px) { .hdr-actions .btn-sm { display: none; } }
+
+  /* the spine: nine scenes, alternating large and small, like the ceiling's centre line */
+  .spine { position: fixed; right: 16px; top: 50%; transform: translateY(-50%); z-index: 40; display: none; }
+  @media (min-width: 1240px) { .spine { display: block; } }
+  .spine ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
+  .spine li { position: relative; display: flex; flex-direction: column; align-items: center; margin: 0; }
+  .spine li + li::before { content: ""; width: 5px; height: 5px; margin: 5px 0; border-radius: 50%; background: radial-gradient(circle at 35% 30%, var(--gold-1), var(--gold-2) 60%, var(--gold-edge)); box-shadow: 0 0 0 1px rgba(124,95,30,.6); }
+  .spine .p { position: relative; display: block; background: var(--paper); border: 1px solid var(--ink); box-shadow: inset 0 0 0 2px var(--paper), inset 0 0 0 3px var(--ink-soft); transition: background .25s, border-color .25s, transform .2s; }
+  .spine .p.lg { width: 18px; height: 30px; } .spine .p.sm { width: 12px; height: 19px; }
+  .spine .p:hover { transform: scale(1.18); }
+  .spine .p.on { background: var(--ink-deep); border-color: var(--gold-2); box-shadow: inset 0 0 0 2px var(--ink-deep), inset 0 0 0 3px var(--gold-2); }
+  .spine .tip { position: absolute; right: calc(100% + 14px); top: 50%; transform: translateY(-50%) translateX(6px); white-space: nowrap; background: var(--paper); border: 1px solid var(--ink); padding: 5px 12px 6px; font: 500 .72rem/1 var(--caps); letter-spacing: .12em; color: var(--ink-deep); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; box-shadow: 0 0 0 3px var(--paper); }
+  .spine .tip b { color: var(--red); margin-right: 6px; }
+  .spine .p:hover .tip, .spine .p:focus-visible .tip { opacity: 1; transform: translateY(-50%); }
+  .spine.on-dark .p { background: var(--ink-deep); border-color: rgba(239,230,210,.75); box-shadow: inset 0 0 0 2px var(--ink-deep), inset 0 0 0 3px rgba(239,230,210,.35); }
+  .spine.on-dark .p.on { background: var(--gold-1); border-color: var(--gold-1); box-shadow: inset 0 0 0 2px var(--ink-deep), inset 0 0 0 3px var(--gold-1); }
+
+  /* contents sheet for small screens */
+  .plan { position: fixed; inset: 0; z-index: 100; background: var(--paper); overflow-y: auto; display: flex; justify-content: center; }
+  .plan[hidden] { display: none; }
+  .plan-inner { position: relative; width: min(100%, 520px); padding: 30px 22px 44px; }
+  .plan h2 { text-align: center; font-size: 1.5rem; margin: 52px 0 22px; }
+  .plan-close { position: absolute; right: 20px; top: 20px; overflow: hidden; font: 700 .95rem/1 var(--display); color: var(--ink-deep); background: transparent; border: 1px solid var(--ink); border-radius: 2px; padding: 8px 14px; cursor: pointer; }
+  .plan-list { list-style: none; margin: 0; padding: 0; }
+  .plan-list li { margin: 0 auto 8px; } .plan-list li.sm { width: 84%; }
+  .plan-list a { display: flex; align-items: center; gap: 14px; padding: 12px 16px; text-decoration: none; color: var(--ink-deep); background: var(--paper-2); border: 1px solid var(--ink); box-shadow: inset 0 0 0 3px var(--paper-2), inset 0 0 0 4px var(--ink-soft); font-weight: 700; font-size: 1.12rem; }
+  .plan-list .num { flex: none; width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; font: 700 .8rem/1 var(--caps); color: var(--gold-1); background: radial-gradient(circle at 50% 25%, #2E44A0, var(--ink-deep) 78%); box-shadow: 0 0 0 2px var(--gold-2); }
+
+  /* ---------- delight: a glint that follows the pointer, a little magnetism, guilloche ripples ---------- */
+  .btn { background: radial-gradient(130px circle at var(--mx, 50%) var(--my, 50%), rgb(255 255 255 / calc(var(--g, 0) * .6)), transparent 62%), linear-gradient(180deg, var(--gold-1), var(--gold-2) 55%, var(--gold-3)); transform: translate(var(--tx, 0px), var(--ty, 0px)); }
+  .btn:hover { transform: translate(var(--tx, 0px), calc(var(--ty, 0px) - 1px)); }
+  .btn:active { transform: translate(var(--tx, 0px), calc(var(--ty, 0px) + 1px)) scale(.985); }
+  .btn.btn-ghost, .btn.btn-ghost:hover { background: transparent; }
+  .btn.btn-ghost:hover { background: var(--ink-deep); }
+  .dark .btn.btn-ghost:hover { background: rgba(246,222,149,.12); }
+  .rip { position: absolute; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; pointer-events: none; border: 1px solid var(--rc, var(--ink-deep)); animation: rip .85s ease-out forwards; }
+  .rip::before, .rip::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 1px solid var(--rc, var(--ink-deep)); opacity: .6; }
+  .rip::after { inset: -10px; opacity: .35; }
+  @keyframes rip { to { transform: scale(16); opacity: 0; } }
+
+  /* ---------- small screens ---------- */
+  @media (max-width: 860px) {
+    .steps { grid-template-columns: 1fr; margin-left: 0; }
+    .step { border-left: 0; border-top: 1px solid var(--ink-soft); display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: baseline; }
+    .step[aria-pressed="true"] { border-top: 2px solid var(--red); }
+    .step .ct, .step .ls { margin: 0; }
+    .detail { margin-left: 0; margin-right: 0; }
+    .day::after { display: none; }
+  }
+  @media (max-width: 640px) {
+    body { font-size: 1.12rem; }
+    .wordmark { font-size: .78rem; letter-spacing: .1em; gap: 9px; } .emblem { width: 26px; height: 26px; }
+    section.block { padding: 60px 0; }
+    .plate > .corner { width: 44px; height: 44px; }
+    .corner.tl { top: -22px; left: -22px; } .corner.tr { top: -22px; right: -22px; } .corner.bl { bottom: -22px; left: -22px; } .corner.br { bottom: -22px; right: -22px; }
+    .frieze i { display: none; } .frieze b { letter-spacing: .3em; font-size: .7rem; }
+    .serials .micro-wrap { display: none; } .serials { justify-content: space-between; }
+    .note { padding: 40px 22px 34px; }
+    .wall .inner { padding-bottom: 72px; }
+    .nav a { padding-bottom: 10px; }
+    .day .rosette { width: 150px; height: 150px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    svg.funnel, svg.funnel.drawn { clip-path: none; transition: none; }
+    .btn, .btn::after { transition: none; }
+    .rip { display: none; }
+    .funnel[data-sel] .leak { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- shared pattern for engraved lettering -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="waveLines" width="46" height="3.4" patternUnits="userSpaceOnUse">
+      <path d="M0 1.7C11 0.2 35 3.2 46 1.7" fill="none" stroke="#1A2F8F" stroke-width="1.55"/>
+    </pattern>
+  </defs>
+</svg>
+
+<header class="top" id="siteHeader">
+  <div class="wrap">
+    <a class="wordmark" href="#top"><span class="emblem rosette" data-rosette="emblem" aria-hidden="true"></span>OLAMIDE AKOMOLAFE</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#leaks">The funnel</a><a href="#teardown">Five days</a><a href="#deliverables">What you keep</a><a href="#who">Who it's for</a><a href="#about">About</a>
+    </nav>
+    <div class="hdr-actions">
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="plan"><span class="mb-icon" aria-hidden="true"></span>Contents</button>
+      <a class="btn btn-sm" href="https://cal.com/YOUR-HANDLE/20min">Book a call</a>
+    </div>
+  </div>
+  <div class="braid thin hdr-braid" aria-hidden="true"></div>
+</header>
+
+<nav class="spine" id="spine" aria-label="Page plan"><ol></ol></nav>
+
+<div class="plan" id="plan" role="dialog" aria-modal="true" aria-label="Contents" hidden>
+  <div class="plan-inner">
+    <button class="plan-close" id="planClose" type="button">Close</button>
+    <h2>The plan of the work</h2>
+    <ol class="plan-list" id="planList"></ol>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div class="plate">
+        <span class="corner tl rosette" data-rosette="corner" aria-hidden="true"></span>
+        <span class="corner tr rosette" data-rosette="corner" aria-hidden="true"></span>
+        <span class="corner bl rosette" data-rosette="corner" aria-hidden="true"></span>
+        <span class="corner br rosette" data-rosette="corner" aria-hidden="true"></span>
+
+        <div class="serials" aria-hidden="true">
+          <span class="serial" data-serial></span>
+          <span class="micro-wrap"><span class="micro" data-micro></span></span>
+          <span class="serial" data-serial></span>
+        </div>
+
+        <div class="frieze"><span class="braid" aria-hidden="true"></span><b>NE QUIS ABEAT</b><i>let no one leave</i><span class="braid" aria-hidden="true"></span></div>
+
+        <h1>Find where your applicants disappear during KYC, and what fixing each leak is worth.</h1>
+        <p class="lede">A fixed-scope, five-day teardown of your onboarding funnel for fintechs, run by a product manager who has owned onboarding and KYC at a digital bank.</p>
+        <div class="cta-row">
+          <a class="btn js-close" href="https://cal.com/YOUR-HANDLE/20min">Book a 20-minute call</a>
+          <a class="btn btn-ghost" href="#teardown">See what the teardown covers</a>
+        </div>
+
+        <div class="art" id="heroArt">
+          <canvas role="img" aria-label="An engraving of two hands reaching toward each other, their fingertips almost touching"></canvas>
+          <svg class="overlay" aria-hidden="true"><line id="hl1" x1="0" y1="0" x2="0" y2="0"/><circle id="hc1" r="3.2"/><line id="hl2" x1="0" y1="0" x2="0" y2="0"/><circle id="hc2" r="3.2"/></svg>
+          <span class="tag" id="tagA">Applicant</span>
+          <span class="tag" id="tagB">Verified customer</span>
+        </div>
+        <div class="micro-wrap" aria-hidden="true"><span class="micro" data-micro></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FUNNEL ===== -->
+  <section class="block" id="leaks" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <h2>Every funnel leaks at specific steps.</h2>
+        <p>Each engraved line below stands for a slice of your applicants. Watch where they peel away. The completion rate tells you how much you lose, not where, or why. That's what I find.</p>
+        <p class="fineprint">Illustrative funnel of 1,000 applicants, not client data. Select a step.</p>
+      </div>
+      <div class="plate funnel-plate">
+        <span class="corner tl rosette" data-rosette="corner" aria-hidden="true"></span>
+        <span class="corner tr rosette" data-rosette="corner" aria-hidden="true"></span>
+        <span class="corner bl rosette" data-rosette="corner" aria-hidden="true"></span>
+        <span class="corner br rosette" data-rosette="corner" aria-hidden="true"></span>
+        <svg class="funnel" id="funnel" viewBox="0 0 1000 440" role="img" aria-label="Engraved lines, each standing for a slice of the applicants. Lines peel away in red at the phone code, ID document, selfie and approval steps; just over half reach the end."></svg>
+        <div class="steps" id="steps"></div>
+        <div class="detail" id="detail" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="braid" aria-hidden="true"></div></div>
+
+  <!-- ===== THE FIVE DAYS ===== -->
+  <section class="block" id="teardown">
+    <div class="wrap">
+      <div class="head">
+        <h2>Five days, one finished piece each day</h2>
+        <p>A fresco painter finishes one patch of wet plaster a day, a giornata, and never leaves it half done. The teardown works the same way. Each rosette below gains a band, as the work does.</p>
+      </div>
+
+      <ol class="days">
+        <li class="day"><div class="rosette" data-rosette="day" data-day="1"><i></i><b>I</b></div>
+          <h3><span class="sr-only">Day 1: </span>Data in</h3>
+          <p>You send step-level funnel events and your verification vendor's result codes. No personal data and no customer documents.</p></li>
+        <li class="day"><div class="rosette" data-rosette="day" data-day="2"><i></i><b>II</b></div>
+          <h3><span class="sr-only">Day 2: </span>The map</h3>
+          <p>I measure completion and first-attempt success at every step, by device, country and document type.</p></li>
+        <li class="day"><div class="rosette" data-rosette="day" data-day="3"><i></i><b>III</b></div>
+          <h3><span class="sr-only">Day 3: </span>The causes</h3>
+          <p>I trace the biggest losses to delivery failures, capture problems, rejection reasons, unclear copy, support tickets and public app reviews.</p></li>
+        <li class="day"><div class="rosette" data-rosette="day" data-day="4"><i></i><b>IV</b></div>
+          <h3><span class="sr-only">Day 4: </span>What each fix is worth</h3>
+          <p>Every fix gets an estimate in verified customers and in acquisition cost recovered.</p></li>
+        <li class="day"><div class="rosette" data-rosette="day" data-day="5"><i></i><b>V</b></div>
+          <h3><span class="sr-only">Day 5: </span>The readout</h3>
+          <p>A 60-minute walkthrough and a 30-day fix plan your team can run.</p></li>
+      </ol>
+
+      <div class="fee-wrap" id="deliverables">
+        <div class="note">
+          <span class="den a" aria-hidden="true">V</span><span class="den b" aria-hidden="true">V</span><span class="den c" aria-hidden="true">V</span><span class="den d" aria-hidden="true">V</span>
+          <span class="tag-fee">WHAT YOU KEEP</span>
+          <svg class="etext" viewBox="0 0 560 104" role="img" aria-label="Where, why, and what it is worth"><text x="280" y="78" text-anchor="middle" font-family="Cardo, Georgia, serif" font-weight="700" font-size="56" textLength="520" lengthAdjust="spacingAndGlyphs" fill="url(#waveLines)" stroke="#1A2F8F" stroke-width="1.1" paint-order="stroke">Where, why, worth</text></svg>
+          <ul class="dots keep">
+            <li><strong>A funnel map.</strong> Every step measured by device, country and document type, so you see exactly where applicants leave.</li>
+            <li><strong>Ranked causes.</strong> The three to five fixable reasons behind the biggest losses, each backed by your own data.</li>
+            <li><strong>Every fix sized in outcomes.</strong> Verified customers gained and acquisition cost recovered, so your team knows what to build first.</li>
+            <li><strong>A 30-day plan.</strong> Run by your team, walked through with you in a 60-minute readout.</li>
+          </ul>
+          <p class="pledge">Three fixable causes, or you don't pay.</p>
+          <a class="btn js-close" href="https://cal.com/YOUR-HANDLE/20min">Book a 20-minute call</a>
+        </div>
+      </div>
+      <p class="team-note">If your product team is already working on this, I work with them. I bring the time to go through the logs, and an outside view from a flow I have owned.</p>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="braid" aria-hidden="true"></div></div>
+
+  <!-- ===== WHO / WHAT ===== -->
+  <section class="block">
+    <div class="wrap pair">
+      <div class="plate" id="who">
+        <span class="corner tl rosette" data-rosette="mini" aria-hidden="true"></span><span class="corner tr rosette" data-rosette="mini" aria-hidden="true"></span>
+        <span class="corner bl rosette" data-rosette="mini" aria-hidden="true"></span><span class="corner br rosette" data-rosette="mini" aria-hidden="true"></span>
+        <h2>Who this is for</h2>
+        <p>Fintechs, wallets, lenders, crypto on-ramps and insurtechs with a live onboarding flow and a verification vendor such as Veriff, Sumsub, Onfido or Persona.</p>
+        <p style="margin-bottom:0">It works best when you know the drop-off number but not the cause.</p>
+      </div>
+      <div class="plate" id="need">
+        <span class="corner tl rosette" data-rosette="mini" aria-hidden="true"></span><span class="corner tr rosette" data-rosette="mini" aria-hidden="true"></span>
+        <span class="corner bl rosette" data-rosette="mini" aria-hidden="true"></span><span class="corner br rosette" data-rosette="mini" aria-hidden="true"></span>
+        <h2>What I need from you</h2>
+        <ul class="dots">
+          <li>Aggregated funnel events by step, with device and country.</li>
+          <li>Your vendor's rejection and retry codes.</li>
+          <li>A 30-minute call at the start and the readout at the end.</li>
+        </ul>
+        <p style="margin-bottom:0">I sign an NDA first. I never need access to customer identities.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AGENT SPRINT ===== -->
+  <section class="block" style="padding-top:0">
+    <div class="wrap">
+      <div class="plate sprint" id="sprint">
+        <span class="corner tl rosette" data-rosette="mini" aria-hidden="true"></span><span class="corner tr rosette" data-rosette="mini" aria-hidden="true"></span>
+        <span class="corner bl rosette" data-rosette="mini" aria-hidden="true"></span><span class="corner br rosette" data-rosette="mini" aria-hidden="true"></span>
+        <div>
+          <h2>Also: agent evaluation sprint</h2>
+          <p>Your AI agent works in the demo and you can't tell when to trust it. In two weeks I build an evaluation set from your real cases, set thresholds for accept, review and reject, design the human review queue, and give you a go or no-go with numbers.</p>
+          <p>Proof of method: I published an open benchmark and a small model for auditing AI agent payments, <a href="https://huggingface.co/theakomolafe/eleri-1.5b">eleri-1.5b on Hugging Face</a>.</p>
+          <a class="btn btn-ghost" href="https://cal.com/YOUR-HANDLE/20min">Ask about the sprint</a>
+        </div>
+        <div class="denom"><span class="den a" aria-hidden="true">II</span><span class="den b" aria-hidden="true">II</span><span class="den c" aria-hidden="true">II</span><span class="den d" aria-hidden="true">II</span><small>in</small><b>Two weeks</b><small>a go or no-go, with numbers</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="block" style="padding-top:0">
+    <div class="wrap about" id="about">
+      <div class="seal" id="seal" role="img" aria-label="Seal: Olamide Akomolafe, product, KYC, onboarding"></div>
+      <div>
+        <h2>Who you'd be working with</h2>
+        <p>I'm a senior product manager with more than eight years across fintech, SaaS and health tech, based in Lisbon and working with teams in Europe, the UK and Africa.</p>
+        <p>At Carbon, a digital bank in Nigeria, I was the product manager for onboarding and KYC. Two of the biggest losses in the funnel, OTP delivery and selfie capture, only showed up when I went through the logs myself. Before that I worked on activation at Landbot, and on product at EdenLife and EligiusHealth.</p>
+        <p><a href="https://olamide.name.ng/?utm_source=consulting&amp;utm_medium=about">More of my work and writing</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== FINALE ===== -->
+<section class="wall dark" id="book">
+  <div class="art" id="finalArt"><canvas role="img" aria-label="The same two hands, engraved in reverse, now touching"></canvas></div>
+  <div class="wrap inner">
+    <div class="braid" aria-hidden="true"></div>
+    <h2>Tell me your funnel's biggest drop. I'll tell you where I'd look first.</h2>
+    <p>Twenty minutes, no slides. If it isn't a fit, I'll say so.</p>
+    <a class="btn js-close-final" href="https://cal.com/YOUR-HANDLE/20min">Book a 20-minute call</a>
+    <p style="margin:26px auto 0;font-size:1.02rem">Prefer email? <a class="mail" href="mailto:theolaakomolafe@gmail.com">theolaakomolafe@gmail.com</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="micro-wrap" aria-hidden="true"><span class="micro" data-micro></span></div>
+    <p style="margin:0 0 10px"><a href="https://olamide.name.ng/?utm_source=consulting&amp;utm_medium=footer">Portfolio</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Olamide1">GitHub</a> &nbsp;&middot;&nbsp; <a href="https://huggingface.co/theakomolafe/eleri-1.5b">Eleri on Hugging Face</a></p>
+    Independent practice. Work and views here are my own and unrelated to any employer. This site sets no cookies and runs no tracking. The hands are engraved from Michelangelo's Creation of Adam (c. 1512, public domain).
+  </div>
+</footer>
+
+<script src="/assets/js/engrave.js"></script>
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var INK = "#1A2F8F", RED = "#B5322B";
+
+  /* ================= guilloche rosettes (drawn once to canvas, reused) ================= */
+  var bmpCache = {};
+  function drawLayers(ctx, size, layers) {
+    var R = size / 2; ctx.lineJoin = "round";
+    layers.forEach(function (L) {
+      ctx.beginPath();
+      for (var m = 0; m < L.M; m++) {
+        var rm = L.r0 + (L.span || 0) * ((m / (L.M - 1)) - 0.5), ph = m * (L.dph || 0);
+        for (var i = 0; i <= L.N; i++) {
+          var th = i / L.N * 2 * Math.PI, rho = (rm + L.a * Math.sin(L.k * th + ph)) * R;
+          var x = R + rho * Math.cos(th), y = R + rho * Math.sin(th);
+          if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y);
+        }
+        ctx.closePath();
+      }
+      ctx.strokeStyle = L.c || INK; ctx.globalAlpha = L.o || 0.9; ctx.lineWidth = Math.max(0.5, L.w || 0.5); ctx.stroke();
+    });
+    ctx.globalAlpha = 1;
+  }
+  function blank(size) {
+    var dpr = Math.min(2, window.devicePixelRatio || 1), cv = document.createElement("canvas");
+    cv.width = cv.height = Math.round(size * dpr); var ctx = cv.getContext("2d"); ctx.scale(dpr, dpr); return { cv: cv, ctx: ctx, dpr: dpr };
+  }
+  function bitmap(key, size, layers) {
+    if (bmpCache[key]) return bmpCache[key];
+    var b = blank(size); drawLayers(b.ctx, size, layers); return (bmpCache[key] = b.cv);
+  }
+  function dayBitmap(n) {                       // each day = the previous day + one new band
+    var key = "day" + n; if (bmpCache[key]) return bmpCache[key];
+    var b = blank(176);
+    if (n > 1) { b.ctx.save(); b.ctx.setTransform(1, 0, 0, 1, 0, 0); b.ctx.drawImage(dayBitmap(n - 1), 0, 0); b.ctx.restore(); }
+    drawLayers(b.ctx, 176, DAY_BANDS[n - 1]);
+    return (bmpCache[key] = b.cv);
+  }
+  function stamp(el, key, size, layers) {
+    var src = key.indexOf("day") === 0 ? dayBitmap(parseInt(key.slice(3), 10)) : bitmap(key, size, layers), cv = document.createElement("canvas");
+    cv.width = src.width; cv.height = src.height; cv.setAttribute("aria-hidden", "true");
+    cv.getContext("2d").drawImage(src, 0, 0); el.insertBefore(cv, el.firstChild);
+  }
+  /* a woven band = the same wave drifting one way, then the other */
+  function band(k, r0, span, a, dph, M, N, c, w) {
+    return [{ k: k, r0: r0, span: span, a: a, dph: dph, M: M, N: N, c: c, w: w }, { k: k, r0: r0, span: span, a: a, dph: -dph, M: M, N: N, c: c, w: w }];
+  }
+  var DAY_BANDS = [
+    band(12, .64, .18, .09, .22, 26, 168, INK, .5),
+    band(10, .86, .10, .05, .30, 20, 140, INK, .5),
+    band(6,  .50, .12, .07, .45, 18, 140, RED, .55),
+    band(20, .93, .04, .025, .40, 12, 280, RED, .5),
+    band(5,  .76, .08, .05, .50, 14, 140, INK, .5)
+  ];
+  function dayLayers(n) { var out = []; for (var i = 0; i < n; i++) out = out.concat(DAY_BANDS[i]); return out; }
+  function fillRosettes() {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-rosette]"), function (el) {
+      var kind = el.getAttribute("data-rosette");
+      if (kind === "day") { var n = parseInt(el.getAttribute("data-day"), 10); stamp(el, "day" + n, 176, null); }
+      else if (kind === "emblem") stamp(el, "emblem", 60, band(6, .6, .2, .12, .5, 10, 110, INK, .8));
+      else if (kind === "corner") stamp(el, "corner", 116, band(8, .62, .22, .12, .4, 16, 160, INK, .6).concat(band(5, .34, .1, .08, .5, 10, 120, RED, .6)));
+      else stamp(el, "mini", 80, band(8, .62, .22, .12, .4, 12, 130, INK, .65).concat(band(5, .32, .1, .07, .5, 8, 100, RED, .65)));
+    });
+  }
+
+  /* ================= seal ================= */
+  function buildSeal() {
+    var host = document.getElementById("seal"); if (!host) return;
+    var ring = "OLAMIDE AKOMOLAFE \u00B7 PRODUCT \u00B7 KYC \u00B7 ONBOARDING \u00B7 LISBON \u00B7 ";
+    var img = bitmap("seal", 220, band(10, .56, .16, .08, .26, 24, 160, INK, .5).concat(band(7, .42, .08, .05, .4, 14, 140, RED, .55))).toDataURL("image/png");
+    host.innerHTML =
+      '<svg viewBox="0 0 220 220" aria-hidden="true"><defs><path id="sealPath" d="M110,110 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0"/></defs>' +
+      '<circle cx="110" cy="110" r="108" fill="none" stroke="' + INK + '" stroke-width="1"/>' +
+      '<circle cx="110" cy="110" r="104" fill="none" stroke="' + INK + '" stroke-width=".6"/>' +
+      '<circle cx="110" cy="110" r="80" fill="none" stroke="' + INK + '" stroke-width=".8"/>' +
+      '<text font-family="Cinzel, serif" font-weight="700" font-size="10.5" letter-spacing="2.6" fill="' + INK + '"><textPath href="#sealPath">' + ring + ring + '</textPath></text>' +
+      '<image href="' + img + '" x="0" y="0" width="220" height="220"/>' +
+      '<circle cx="110" cy="110" r="29" fill="#EBE4D0" stroke="' + INK + '" stroke-width="1"/><circle cx="110" cy="110" r="25" fill="none" stroke="' + INK + '" stroke-width=".6"/>' +
+      '<text x="110" y="118" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="21" fill="#0F1C5C">OA</text></svg>';
+  }
+
+  /* ================= microprint + serials ================= */
+  function fillMicro() {
+    var s = "NE QUIS ABEAT \u00B7 KYC \u00B7 ONBOARDING \u00B7 VERIFIED \u00B7 ";
+    Array.prototype.forEach.call(document.querySelectorAll("[data-micro]"), function (el) {
+      var t = ""; for (var i = 0; i < 40; i++) t += s; el.textContent = t;
+    });
+    var serial = "No. " + (100000 + Math.floor(Math.random() * 899999)).toString().replace(/(\d{3})(\d{3})/, "$1 $2");
+    Array.prototype.forEach.call(document.querySelectorAll("[data-serial]"), function (el) { el.textContent = serial; });
+  }
+
+  /* ================= hands: hero + finale ================= */
+  var hands = null;
+  var timers = new WeakMap();
+  function Art(root, cfg) {
+    var canvas = root.querySelector("canvas"), s = { l: cfg.start[0], r: cfg.start[1], g: cfg.start[2] }, raf = 0;
+    var tagA = root.querySelector("#tagA"), tagB = root.querySelector("#tagB");
+    var ov = cfg.labels ? { l1: root.querySelector("#hl1"), c1: root.querySelector("#hc1"), l2: root.querySelector("#hl2"), c2: root.querySelector("#hc2") } : null;
+    function draw() {
+      Engrave.render(canvas, hands, { focusY: cfg.focusY, focusX: cfg.focusX, zoom: cfg.zoom, ink: cfg.ink, paper: cfg.paper, inverse: cfg.inverse, hair: cfg.hair, spacing: cfg.spacing, dxL: s.l, dxR: s.r, glow: s.g });
+      if (ov) place();
+    }
+    function place() {
+      var cw = canvas.clientWidth, ch = canvas.clientHeight, mp = Engrave.map(cw, ch, cfg.focusY, cfg.focusX, cfg.zoom), sc = mp.sc, ox = mp.ox, oy = mp.oy;
+      var ax = ox + (Engrave.TIP_A[0] + s.l) * sc, ay = oy + Engrave.TIP_A[1] * sc, gx = ox + (Engrave.TIP_G[0] + s.r) * sc, gy = oy + Engrave.TIP_G[1] * sc;
+      var narrow = cw < 560;
+      var lx = Math.max(64, ax - (narrow ? 60 : 44)), ly = Math.max(34, ay - (narrow ? 118 : 150));
+      var rx = Math.min(cw - 70, gx + (narrow ? 60 : 52)), ry = Math.max(34, gy - (narrow ? 92 : 128));
+      tagA.style.left = lx + "px"; tagA.style.top = ly + "px"; tagB.style.left = rx + "px"; tagB.style.top = ry + "px";
+      ov.l1.setAttribute("x1", lx); ov.l1.setAttribute("y1", ly); ov.l1.setAttribute("x2", ax); ov.l1.setAttribute("y2", ay);
+      ov.c1.setAttribute("cx", ax); ov.c1.setAttribute("cy", ay);
+      ov.l2.setAttribute("x1", rx); ov.l2.setAttribute("y1", ry); ov.l2.setAttribute("x2", gx); ov.l2.setAttribute("y2", gy);
+      ov.c2.setAttribute("cx", gx); ov.c2.setAttribute("cy", gy);
+    }
+    function to(t, dur) {
+      if (reduce || !dur) { s.l = t[0]; s.r = t[1]; s.g = t[2]; draw(); return; }
+      cancelAnimationFrame(raf);
+      var f = { l: s.l, r: s.r, g: s.g }, t0 = performance.now();
+      (function tick(now) {
+        var k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        s.l = f.l + (t[0] - f.l) * e; s.r = f.r + (t[1] - f.r) * e; s.g = f.g + (t[2] - f.g) * e;
+        draw(); if (k < 1) raf = requestAnimationFrame(tick);
+      })(t0);
+    }
+    var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(draw, 120); });
+    draw();
+    return { to: to, draw: draw };
+  }
+
+  /* ================= funnel: 100 engraved lines ================= */
+  var STEPS = [
+    { name: "Sign-up",     n: 1000, loss: 0,   text: "1,000 applicants start. Everything after this is the verification funnel." },
+    { name: "Phone OTP",   n: 900,  loss: 100, text: "Codes that arrive late or never arrive. I check delivery receipts, resend rates and drop-off by carrier and country." },
+    { name: "ID document", n: 740,  loss: 160, text: "Glare, bad cropping, unsupported document types and unclear instructions. I check first-attempt success by document type and device." },
+    { name: "Selfie",      n: 590,  loss: 150, text: "Camera permissions, low light and older phones. I check liveness failures by device and OS version." },
+    { name: "Approved",    n: 520,  loss: 70,  text: "Rejections after submission: mismatches, expired documents and manual-review waits. I read the vendor's result codes." }
+  ];
+  function smooth(u) { u = Math.min(1, Math.max(0, u)); return u * u * (3 - 2 * u); }
+  function buildFunnel() {
+    var svg = document.getElementById("funnel"); if (!svg) return;
+    var small = svg.parentNode.clientWidth < 640;                 // phones: fewer, coarser lines so they stay lines
+    var N = small ? 40 : 100, H = small ? 620 : 440, xs = [30, 200, 370, 540, 710, 880], cy = small ? 320 : 238, sp = small ? 8.6 : 2.95;
+    var lossLines = small ? [0, 4, 6, 6, 3] : [0, 10, 16, 15, 7], A = small ? 3.6 : 1.7, LAM = small ? 64 : 46, pk = small ? 1.7 : 1;
+    svg.setAttribute("viewBox", "0 0 1000 " + H);
+    var cur = []; for (var i = 0; i < N; i++) cur.push(i);
+    var cols = [];
+    for (var c = 0; c < 5; c++) {
+      var rank = {}; cur.forEach(function (id, r) { rank[id] = r; });
+      var next = cur.slice(), lost = [], tp = 0, bt = 0;
+      for (var q = 0; q < lossLines[c]; q++) {
+        var top = (q % 2 === 0), id = top ? next.shift() : next.pop();
+        lost.push({ id: id, top: top, ord: top ? tp++ : bt++ });
+      }
+      var nr = {}; next.forEach(function (id, r) { nr[id] = r; });
+      cols.push({ rank: rank, count: cur.length, nr: nr, ncount: next.length, lost: lost });
+      cur = next;
+    }
+    function yAt(r, count) { return cy + (r - (count - 1) / 2) * sp; }
+    var lostMap = {}; cols.forEach(function (col, ci) { col.lost.forEach(function (L) { lostMap[L.id] = { col: ci, top: L.top, ord: L.ord }; }); });
+    var blue = "", red = "";
+    for (var id = 0; id < N; id++) {
+      var info = lostMap[id], last = info ? info.col : 4, ph = id * 0.07, d = "", dr = "";
+      for (var ci = 0; ci <= last; ci++) {
+        var col = cols[ci], x0 = xs[ci], x1 = xs[ci + 1], y0 = yAt(col.rank[id], col.count);
+        var y1 = (info && info.col === ci) ? null : yAt(col.nr[id], col.ncount);
+        for (var x = x0; x <= x1; x += 3) {
+          var u = (x - x0) / (x1 - x0), y;
+          if (y1 === null) { var dir = info.top ? -1 : 1, dist = (22 + info.ord * 6.5) * pk; y = y0 + dir * dist * smooth((u - 0.3) / 0.7); }
+          else y = y0 + (y1 - y0) * smooth(u);
+          y += A * Math.sin(2 * Math.PI * x / LAM + ph);
+          var pt = x.toFixed(1) + " " + y.toFixed(1);
+          if (info && info.col === ci) { dr += (dr ? "L" : "M") + pt; }
+          else d += (d ? "L" : "M") + pt;
+        }
+        if (info && info.col === ci && ci > 0) { /* join red to the end of the blue run so the line is continuous */ }
+      }
+      if (info) {
+        // continuous: close the blue run into the red segment
+        var ciL = info.col; var xj = xs[ciL];
+        var yj = yAt(cols[ciL].rank[id], cols[ciL].count) + A * Math.sin(2 * Math.PI * xj / LAM + ph);
+        dr = "M" + xj.toFixed(1) + " " + yj.toFixed(1) + dr.replace(/^M[^L]*/, "");
+        red += '<path class="ln leak c' + ciL + '" d="' + dr + '"/>';
+      }
+      if (d) blue += '<path class="ln" d="' + d + '"/>';
+    }
+    var TINT = ["#B8C6EE", "#F4DA9B", "#F3B3A6", "#B5DCCB", "#D5C0E8"], TINT2 = ["#E0E6F8", "#FBEFCF", "#FADBD3", "#E0F0E8", "#EDE3F5"], rects = "", defs = "<defs>";
+    for (var q2 = 0; q2 < 5; q2++) {
+      defs += '<linearGradient id="tg' + q2 + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + TINT[q2] + '"/><stop offset="1" stop-color="' + TINT2[q2] + '"/></linearGradient>';
+      rects += '<rect class="tint t' + q2 + '" x="' + xs[q2] + '" y="34" width="' + (xs[q2 + 1] - xs[q2]) + '" height="' + (H - 58) + '" fill="url(#tg' + q2 + ')"/>';
+    }
+    defs += "</defs>";
+    var guides = "";
+    for (var g = 0; g < xs.length; g++) guides += '<line class="guide" x1="' + xs[g] + '" y1="40" x2="' + xs[g] + '" y2="' + (H - 10) + '"/>';
+    svg.innerHTML = defs + rects + guides + '<g>' + blue + '</g><g>' + red + '</g>' +
+      '<text x="936" y="' + (cy + 12) + '" text-anchor="middle" font-size="46" font-weight="700">52%</text>' +
+      '<text x="936" y="' + (cy + 40) + '" text-anchor="middle" font-size="12" letter-spacing="2.5" opacity=".8">COMPLETE</text>';
+
+    // steps
+    var host = document.getElementById("steps"), detail = document.getElementById("detail"), btns = [];
+    var COLS = ["#1A2F8F", "#C98A14", "#C23A2B", "#2F8F78", "#8A46A8"], TBG = ["#E3E8F7", "#F8EDCB", "#F8DDD6", "#DCEEE4", "#E9DFF3"];
+    function countTo(el, pre, n, post) {
+      if (reduce) { el.textContent = pre + n + post; return; }
+      var t0 = performance.now();
+      (function tick(now) { var k = Math.min(1, (now - t0) / 520), e = 1 - Math.pow(1 - k, 3); el.textContent = pre + Math.round(n * e) + post; if (k < 1) requestAnimationFrame(tick); })(t0);
+    }
+    function sel(i) {
+      btns.forEach(function (b, k) { b.setAttribute("aria-pressed", k === i ? "true" : "false"); });
+      if (i === 0) svg.removeAttribute("data-sel"); else svg.setAttribute("data-sel", i);
+      var st = STEPS[i];
+      detail.style.borderLeftColor = COLS[i]; detail.style.background = TBG[i];
+      detail.innerHTML = "<strong></strong><span></span>";
+      var strong = detail.firstChild;
+      if (i === 0) strong.textContent = st.name + ": where everyone starts";
+      else { strong.innerHTML = '<span class="sr-only"></span><span aria-hidden="true"></span>'; strong.firstChild.textContent = st.name + ": " + st.loss + " applicants lost"; countTo(strong.lastChild, st.name + ": ", st.loss, " applicants lost"); }
+      detail.lastChild.textContent = st.text;
+    }
+    STEPS.forEach(function (st, i) {
+      var b = document.createElement("button"); b.type = "button"; b.className = "step";
+      b.setAttribute("data-i", i);
+      b.innerHTML = '<span class="nm"></span><span class="ct"></span><span class="ls"></span>';
+      b.querySelector(".nm").textContent = st.name;
+      b.querySelector(".ct").textContent = st.n.toLocaleString("en-GB");
+      b.querySelector(".ls").textContent = st.loss ? "\u2212" + st.loss : "";
+      b.addEventListener("click", function () { sel(i); });
+      b.addEventListener("mouseenter", function () { if (i) svg.setAttribute("data-hov", i); });
+      b.addEventListener("mouseleave", function () { svg.removeAttribute("data-hov"); });
+      b.addEventListener("keydown", function (ev) {
+        var d = (ev.key === "ArrowRight" || ev.key === "ArrowDown") ? 1 : (ev.key === "ArrowLeft" || ev.key === "ArrowUp") ? -1 : 0;
+        if (d) { ev.preventDefault(); var n = (i + d + STEPS.length) % STEPS.length; sel(n); btns[n].focus(); }
+      });
+      host.appendChild(b); btns.push(b);
+    });
+    sel(2);
+    if (reduce || !("IntersectionObserver" in window)) svg.classList.add("drawn");
+    else {
+      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { svg.classList.add("drawn"); io.disconnect(); } }); }, { threshold: 0.25 });
+      io.observe(svg.parentNode);
+    }
+  }
+
+  /* ================= navigation: spine, nav links, contents sheet ================= */
+  var SCENES = [["top", "Opening"], ["leaks", "Where applicants leave"], ["teardown", "Five days"], ["deliverables", "What you keep"], ["who", "Who it's for"], ["need", "What I need"], ["sprint", "Agent sprint"], ["about", "About"], ["book", "Book a call"]];
+  var ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
+  var NAVMAP = { leaks: [1], teardown: [2], deliverables: [3], who: [4, 5, 6], about: [7] };
+  function buildNav() {
+    var list = document.querySelector("#spine ol"), plan = document.getElementById("planList"), spine = document.getElementById("spine");
+    var pLinks = [], planLinks = [];
+    SCENES.forEach(function (sc, i) {
+      var li = document.createElement("li"), a = document.createElement("a");
+      a.href = "#" + sc[0]; a.className = "p " + (i % 2 === 0 ? "lg" : "sm"); a.setAttribute("aria-label", ROMAN[i] + ". " + sc[1]);
+      a.innerHTML = '<span class="tip"><b>' + ROMAN[i] + "</b></span>"; a.querySelector(".tip").appendChild(document.createTextNode(sc[1]));
+      li.appendChild(a); list.appendChild(li); pLinks.push(a);
+      var pl = document.createElement("li"); pl.className = i % 2 === 0 ? "lg" : "sm";
+      pl.innerHTML = '<a href="#' + sc[0] + '"><span class="num">' + ROMAN[i] + '</span><span class="ttl"></span></a>'; pl.querySelector(".ttl").textContent = sc[1];
+      plan.appendChild(pl); planLinks.push(pl.firstChild);
+    });
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav a")), targets = SCENES.map(function (sc) { return document.getElementById(sc[0]); }), cur = -1, tick = false;
+    function mark(i) {
+      pLinks.forEach(function (a, k) { a.classList.toggle("on", k === i); if (k === i) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
+      navLinks.forEach(function (a) { var id = a.getAttribute("href").slice(1); a.classList.toggle("on", (NAVMAP[id] || []).indexOf(i) > -1); });
+      spine.classList.toggle("on-dark", i === 8);
+    }
+    function spy() {
+      var y = window.innerHeight * 0.38, idx = 0;
+      targets.forEach(function (t, i) { if (t && t.getBoundingClientRect().top <= y) idx = i; });
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) idx = 8;
+      if (idx !== cur) { cur = idx; mark(idx); }
+    }
+    window.addEventListener("scroll", function () { if (!tick) { tick = true; requestAnimationFrame(function () { tick = false; spy(); }); } }, { passive: true });
+    window.addEventListener("resize", spy); spy();
+
+    var sheet = document.getElementById("plan"), mb = document.getElementById("menuBtn"), cl = document.getElementById("planClose");
+    function openPlan() { sheet.hidden = false; document.body.style.overflow = "hidden"; mb.setAttribute("aria-expanded", "true"); cl.focus(); }
+    function closePlan(back) { sheet.hidden = true; document.body.style.overflow = ""; mb.setAttribute("aria-expanded", "false"); if (back) mb.focus(); }
+    mb.addEventListener("click", openPlan); cl.addEventListener("click", function () { closePlan(true); });
+    planLinks.forEach(function (a) { a.addEventListener("click", function () { closePlan(false); }); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !sheet.hidden) closePlan(true); });
+  }
+
+  /* ================= delight: guilloche ripples, pointer glint, magnetism ================= */
+  function enhanceButtons() {
+    if (reduce) return;
+    var sel = ".btn, .step, .menu-btn, .plan-close";
+    document.addEventListener("pointerdown", function (e) {
+      var el = e.target.closest && e.target.closest(sel); if (!el) return;
+      var r = el.getBoundingClientRect(), sp = document.createElement("span"); sp.className = "rip";
+      sp.style.left = (e.clientX - r.left) + "px"; sp.style.top = (e.clientY - r.top) + "px";
+      var c = el.classList.contains("step") ? getComputedStyle(el).getPropertyValue("--sc").trim() : (el.classList.contains("btn") && !el.classList.contains("btn-ghost") ? "#7C5F1E" : "");
+      if (c) sp.style.setProperty("--rc", c);
+      if (el.classList.contains("btn-ghost") && el.closest(".dark")) sp.style.setProperty("--rc", "#F6DE95");
+      el.appendChild(sp); setTimeout(function () { sp.remove(); }, 900);
+    });
+    document.addEventListener("pointermove", function (e) {
+      var el = e.target.closest && e.target.closest(".btn"); if (!el) return;
+      var r = el.getBoundingClientRect();
+      el.style.setProperty("--mx", (e.clientX - r.left) + "px"); el.style.setProperty("--my", (e.clientY - r.top) + "px"); el.style.setProperty("--g", "1");
+      if (!el.classList.contains("btn-ghost")) {
+        el.style.setProperty("--tx", (((e.clientX - (r.left + r.width / 2)) / r.width) * 7).toFixed(1) + "px");
+        el.style.setProperty("--ty", (((e.clientY - (r.top + r.height / 2)) / r.height) * 5).toFixed(1) + "px");
+      }
+    });
+    document.addEventListener("pointerout", function (e) {
+      var el = e.target.closest && e.target.closest(".btn");
+      if (el && !el.contains(e.relatedTarget)) { el.style.setProperty("--g", "0"); el.style.setProperty("--tx", "0px"); el.style.setProperty("--ty", "0px"); }
+    });
+  }
+
+  /* ================= boot ================= */
+  fillMicro(); buildFunnel(); buildNav(); enhanceButtons();
+
+  /* the two hands load from the embedded fresco layers, then both pieces of art draw */
+  Engrave.load(function (h) {
+    if (!h) return;
+    hands = h;
+    var hero = Art(document.getElementById("heroArt"), { ink: INK, paper: "#EBE4D0", start: [-300, 300, 0], labels: true, focusY: 215, focusX: 500, zoom: "fit", hair: 0.38, spacing: 3.2 });
+    function heroRest() { hero.to([-24, 24, 0.8], 700); }
+    hero.to([-24, 24, 0.8], 2200);
+    Array.prototype.forEach.call(document.querySelectorAll(".js-close"), function (el) {
+      ["mouseenter", "focus"].forEach(function (ev) { el.addEventListener(ev, function () { hero.to([-8, 8, 1], 650); }); });
+      ["mouseleave", "blur"].forEach(function (ev) { el.addEventListener(ev, heroRest); });
+    });
+
+    var fin = Art(document.getElementById("finalArt"), { ink: "#EFE6D2", paper: "#0F1C5C", inverse: true, start: [-16, 16, 0.5], labels: false, focusY: 215, focusX: 500, zoom: "fit", hair: 0.3, spacing: 3.8 });
+    if ("IntersectionObserver" in window) {
+      var fio = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { fin.to([14, -14, 1], 2800); fio.disconnect(); } }); }, { threshold: 0.35 });
+      fio.observe(document.getElementById("finalArt"));
+    } else { fin.to([14, -14, 1], 0); }
+  });
+  setTimeout(function () { fillRosettes(); buildSeal(); }, 40);
+})();
+</script>
+</body>
+</html>

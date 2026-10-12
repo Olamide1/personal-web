@@ -8,215 +8,63 @@
   
   <link rel="icon" type="image/jpeg" href="/assets/img/icon.jpg">
   <link rel="apple-touch-icon" href="/assets/img/icon.jpg">
+  <meta name="theme-color" content="#EBE4D0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/base.css">
-  <style>
-    /* Construction theme styles */
-    .construction-page {
-      background: var(--bg);
-      min-height: 80vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      position: relative;
-    }
-    
-    .construction-content {
-      background: var(--bg);
-      border: 5px solid #000000;
-      padding: 2rem;
-      max-width: 600px;
-      width: 100%;
-      position: relative;
-      font-family: var(--mono);
-    }
-    
-    .construction-header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    
-    .construction-header h1 {
-      font-family: var(--mono);
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-    
-    .construction-worker {
-      text-align: center;
-      font-family: var(--mono);
-      font-size: 10px;
-      margin: 1rem 0;
-      line-height: 1.2;
-    }
-    
-    .contact-menu {
-      border: 3px solid #000000;
-      padding: 1.5rem;
-      background: #ffffff;
-      margin: 1.5rem 0;
-    }
-    
-    .contact-menu h2 {
-      font-family: var(--mono);
-      font-size: 1rem;
-      text-align: center;
-      margin-bottom: 1rem;
-      border: none;
-      padding: 0;
-    }
-    
-    .contact-option {
-      display: block;
-      padding: 1rem;
-      margin: 0.75rem 0;
-      border: 2px outset #e0e0e0;
-      background: #d0d0d0;
-      cursor: pointer;
-      font-family: var(--mono);
-      font-size: 13px;
-      text-align: left;
-      position: relative;
-      transition: background 0.1s;
-    }
-    
-    .contact-option:hover {
-      background: #c0c0c0;
-    }
-    
-    .contact-option:active {
-      border-style: inset;
-    }
-    
-    .contact-option-number {
-      font-weight: bold;
-      margin-right: 0.5rem;
-      color: #000000;
-    }
-    
-    .contact-option-desc {
-      font-size: 10px;
-      opacity: 0.7;
-      margin-top: 0.25rem;
-    }
-    
-    .cursor {
-      display: inline-block;
-      width: 8px;
-      height: 14px;
-      background: var(--ink);
-      animation: cursorBlink 1s infinite;
-      margin-left: 2px;
-    }
-    
-    @keyframes cursorBlink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
-    
-    .click-here {
-      font-size: 10px;
-      color: var(--link);
-      font-weight: bold;
-      text-transform: uppercase;
-      margin-top: 0.5rem;
-      display: block;
-    }
-    
-    @media (prefers-color-scheme: dark) {
-      .construction-content {
-        background: #1a1a1a;
-        border-color: #ffffff;
-      }
-      
-      .contact-menu {
-        background: #2a2a2a;
-        border-color: #ffffff;
-      }
-      
-      .contact-option {
-        background: #404040;
-        border-color: #606060;
-        color: #ffffff;
-      }
-      
-      .contact-option:hover {
-        background: #505050;
-      }
-    }
-  </style>
 </head>
-<body>
-  <div class="browser-bar">
-    <button class="browser-bar__button" onclick="window.history.back()" aria-label="Back">←</button>
-    <button class="browser-bar__button" onclick="window.history.forward()" aria-label="Forward">→</button>
-    <div class="browser-bar__address">
-      <span class="browser-bar__lock">🔒</span>
-      <span>lamide.net/contact</span>
+<body data-pigment="rose">
+  <header class="top">
+    <div class="wrap">
+      <a class="wordmark" href="/"><span class="emblem rosette" data-rosette="emblem" aria-hidden="true"></span>LAMIDE</a>
+      <nav class="nav" id="siteNav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/now.html">Now</a>
+        <a href="/contact.html" class="active" aria-current="page">Contact</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="planSheet"><span class="mb-icon" aria-hidden="true"></span><span class="l-d">Plan</span><span class="l-m">Menu</span></button>
     </div>
-  </div>
-
-  <nav class="nav">
-    <a href="/">Home</a>
-    <a href="/about.html">About</a>
-    <a href="/projects.html">Projects</a>
-    <a href="/blog.html">Blog</a>
-    <a href="/now.html">Now</a>
-    <a href="/contact.html" class="active">Contact</a>
-  </nav>
+    <div class="braid thin hdr-braid" aria-hidden="true"></div>
+  </header>
 
   <main id="main-content">
-    <div class="construction-page">
-      <div class="construction-content">
-        <div class="construction-header">
-          <h1>⚠️ Contact Page</h1>
-          <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">[Under Construction]</div>
+    <section class="contact-page">
+      <div class="wrap">
+        <div class="plate" data-corners>
+          <div class="serials" aria-hidden="true">
+            <span class="serial" data-serial></span>
+            <span class="micro-wrap"><span class="micro" data-micro></span></span>
+            <span class="serial" data-serial></span>
+          </div>
+          <div class="frieze" aria-hidden="true"><span class="braid"></span><b>CORRESPONDENCE</b><span class="braid"></span></div>
+          <h1 class="engraved">Get in touch</h1>
+          <p class="lede">Collaborations, roles, or a conversation about AI agents and product. Pick the channel you prefer.</p>
+
+          <div class="art compact is-loading" data-hands="contact"><canvas role="img" aria-label="An engraving of two hands reaching toward each other"></canvas></div>
+
+          <div class="contact-options" id="contact-menu">
+            <button class="contact-option" type="button" data-hands-trigger="contact" data-choice="twitter" id="option-1">
+              <span class="contact-option-number">I</span>
+              <span class="contact-option-title">Twitter DM</span>
+              <span class="contact-option-go" aria-hidden="true">&rarr;</span>
+              <span class="contact-option-desc">Fast and casual</span>
+            </button>
+            <button class="contact-option" type="button" data-hands-trigger="contact" data-choice="linkedin" id="option-2">
+              <span class="contact-option-number">II</span>
+              <span class="contact-option-title">LinkedIn message</span>
+              <span class="contact-option-go" aria-hidden="true">&rarr;</span>
+              <span class="contact-option-desc">Professional</span>
+            </button>
+          </div>
+          <p class="key-hint">Press 1 or 2 on your keyboard</p>
+          <div class="micro-wrap" aria-hidden="true"><span class="micro" data-micro></span></div>
         </div>
-        
-        <div class="construction-worker">
-<pre style="font-size: 8px; line-height: 1; margin: 0; text-align: center;">
-     ___
-    /___\
-    |   |
-    |___|
-   (_____)
-    |   |
-    |___|
-   (_____)
-    |   |
-    |___|
-   (_____)
-   |     |
-   |_____|
-  (_______)
-</pre>
-        </div>
-        
-        <p style="text-align: center; font-size: 12px; margin: 1rem 0;">
-          This page is still being built...<br>
-          But you can reach me on social media!
-        </p>
-        
-        <div class="contact-menu" id="contact-menu">
-          <h2>HOW DO YOU WANT TO CONNECT?<span class="cursor"></span></h2>
-          
-          <button class="contact-option" data-choice="twitter" id="option-1">
-            <span class="contact-option-number">[1]</span> Twitter DM 💬<br>
-            <span class="contact-option-desc">(Fast & casual)</span>
-          </button>
-          
-          <button class="contact-option" data-choice="linkedin" id="option-2">
-            <span class="contact-option-number">[2]</span> LinkedIn Message 💼<br>
-            <span class="contact-option-desc">(Professional)</span>
-          </button>
-          
-          <div class="click-here">← Click here!</div>
-        </div>
-        
       </div>
-    </div>
+    </section>
   </main>
 
   <footer class="footer">
@@ -232,78 +80,46 @@
     <div>Made by Lamide 2025</div>
   </footer>
 
+  <script src="/assets/js/engrave.js" defer></script>
+  <script src="/assets/js/art.js" defer></script>
   <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/scenes.js" defer></script>
+  <script src="/assets/js/chrome.js" defer></script>
   
   <script>
-    // Contact page redirect logic
-    (function() {
-      const TWITTER_URL = 'https://twitter.com/theakomolafe';
-      const LINKEDIN_URL = 'https://linkedin.com/in/theakomolafe';
-      let redirecting = false;
-      
-      const option1 = document.getElementById('option-1');
-      const option2 = document.getElementById('option-2');
-      
-      function redirectTo(choice) {
-        if (redirecting) return;
-        redirecting = true;
-        
-        // Fade out effect
-        document.body.style.transition = 'opacity 0.5s';
-        document.body.style.opacity = '0.5';
-        
-        setTimeout(() => {
-          if (choice === 'linkedin') {
-            window.location.href = LINKEDIN_URL;
-          } else {
-            window.location.href = TWITTER_URL;
-          }
-        }, 300);
+    // Contact page: choose a channel (click, or press 1 / 2)
+    (function () {
+      var URLS = {
+        twitter: 'https://twitter.com/theakomolafe',
+        linkedin: 'https://linkedin.com/in/theakomolafe'
+      };
+      var leaving = false;
+
+      function go(choice) {
+        if (leaving) return;
+        leaving = true;
+        // the fingers touch first, then we go
+        var art = window.HandsArts && window.HandsArts.contact;
+        if (art) art.to(art.pose.touch, 450, null, art.spark);
+        document.body.style.transition = 'opacity 0.4s ease 0.55s';
+        document.body.style.opacity = '0.4';
+        setTimeout(function () { window.location.href = URLS[choice]; }, art ? 1000 : 250);
       }
-      
-      // Click handlers
-      option1.addEventListener('click', () => redirectTo('twitter'));
-      option2.addEventListener('click', () => redirectTo('linkedin'));
-      
-      // Keyboard handlers
-      document.addEventListener('keydown', (e) => {
-        if (redirecting) return;
-        
-        if (e.key === '1') {
-          option1.style.borderStyle = 'inset';
-          setTimeout(() => redirectTo('twitter'), 100);
-        } else if (e.key === '2') {
-          option2.style.borderStyle = 'inset';
-          setTimeout(() => redirectTo('linkedin'), 100);
-        }
+
+      document.getElementById('option-1').addEventListener('click', function () { go('twitter'); });
+      document.getElementById('option-2').addEventListener('click', function () { go('linkedin'); });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+        if (e.key === '1') go('twitter');
+        else if (e.key === '2') go('linkedin');
       });
-      
-      // Sound effect (optional - using Web Audio API for beep)
-      try {
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const playBeep = () => {
-          const oscillator = audioContext.createOscillator();
-          const gainNode = audioContext.createGain();
-          oscillator.connect(gainNode);
-          gainNode.connect(audioContext.destination);
-          oscillator.frequency.value = 800;
-          oscillator.type = 'sine';
-          gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-          oscillator.start(audioContext.currentTime);
-          oscillator.stop(audioContext.currentTime + 0.1);
-        };
-        
-        // Play beep when menu appears (after a short delay)
-        setTimeout(() => {
-          if (audioContext.state === 'suspended') {
-            audioContext.resume();
-          }
-          playBeep();
-        }, 500);
-      } catch (e) {
-        // Sound not supported, continue without it
-      }
+
+      // Coming back via the back button restores the page from cache: undo the fade
+      window.addEventListener('pageshow', function () {
+        leaving = false;
+        document.body.style.opacity = '';
+      });
     })();
   </script>
 </body>

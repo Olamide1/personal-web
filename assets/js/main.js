@@ -1,85 +1,184 @@
-// Loading Screen Animation
-const loadingMessages = [
-  'Initializing connection...',
-  'Negotiating protocol...',
-  'Establishing session...',
-  'Loading assets...',
-  'Rendering content...',
-  'Almost there...'
-];
+// Guilloche rosettes (emblem + plate corners), drawn once to canvas.
+// Same technique as consulting.html: wavy rings that drift one way, then the other.
+(function () {
+  var INK = '#1A2F8F', RED = '#B5322B', GREEN = '#2F8F78', OCHRE = '#C98A14', LILAC = '#8A46A8', cache = {};
 
-function initLoadingScreen() {
-  const loadingScreen = document.getElementById('loading-screen');
-  const loadingBarFill = document.querySelector('.loading-bar-fill');
-  const loadingPercent = document.querySelector('.loading-percent');
-  const loadingStatus = document.querySelector('.loading-status');
-  
-  if (!loadingScreen) return;
-  
-  // Check if already shown in this session
-  if (sessionStorage.getItem('loadingShown') === 'true') {
-    loadingScreen.classList.add('hidden');
-    return;
+  // each page prints its rosettes with its own pigment (set by body[data-pigment] in the CSS)
+  var PG = ((getComputedStyle(document.body).getPropertyValue('--pg')) || '').trim();
+  if (!/^#[0-9a-f]{6}$/i.test(PG)) PG = RED;
+
+  function band(k, r0, span, a, dph, M, N, c, w) {
+    return [{ k: k, r0: r0, span: span, a: a, dph: dph, M: M, N: N, c: c, w: w },
+            { k: k, r0: r0, span: span, a: a, dph: -dph, M: M, N: N, c: c, w: w }];
   }
-  
-  let progress = 0;
-  const targetProgress = 100;
-  const duration = 2000; // Reduced to 2 seconds (was 5s)
-  const interval = 100; // Update every 100ms (was 50ms) - less frequent updates
-  const increment = (targetProgress / duration) * interval;
-  let messageIndex = 0;
-  let rafId = null;
-  
-  const updateProgress = () => {
-    progress += increment;
-    
-    if (progress > targetProgress) {
-      progress = targetProgress;
-    }
-    
-    // Calculate filled blocks (20 total blocks)
-    const filledBlocks = Math.floor((progress / 100) * 20);
-    const fillBar = '█'.repeat(filledBlocks);
-    const emptyBar = '░'.repeat(20 - filledBlocks);
-    
-    loadingBarFill.textContent = `[${fillBar}${emptyBar}]`;
-    loadingPercent.textContent = `${Math.round(progress)}%`;
-    
-    // Update status message
-    const newMessageIndex = Math.floor((progress / 100) * loadingMessages.length);
-    if (newMessageIndex !== messageIndex && newMessageIndex < loadingMessages.length) {
-      messageIndex = newMessageIndex;
-      loadingStatus.textContent = loadingMessages[messageIndex];
-    }
-    
-    if (progress < targetProgress) {
-      // Use requestAnimationFrame for smoother, non-blocking updates
-      rafId = requestAnimationFrame(() => {
-        setTimeout(updateProgress, interval);
-      });
-    } else {
-      // Complete - fade out immediately
-      cancelAnimationFrame(rafId);
-      loadingScreen.style.opacity = '0';
-      setTimeout(() => {
-        loadingScreen.classList.add('hidden');
-        sessionStorage.setItem('loadingShown', 'true');
-      }, 200);
-    }
+  var KINDS = {
+    emblem: { size: 60, layers: band(6, .6, .2, .12, .5, 10, 110, INK, .8).concat(band(4, .34, .1, .08, .5, 6, 80, PG, .8)) },
+    corner: { size: 116, layers: band(8, .62, .22, .12, .4, 16, 160, INK, .6).concat(band(5, .34, .1, .08, .5, 10, 120, PG, .6)) },
+    // one medallion per project, each a different weave
+    medal1: { size: 120, layers: band(12, .64, .18, .09, .22, 26, 168, INK, .5).concat(band(6, .5, .12, .07, .45, 18, 140, RED, .55)) },
+    medal2: { size: 120, layers: band(10, .86, .1, .05, .3, 20, 140, GREEN, .55).concat(band(5, .76, .08, .05, .5, 14, 140, INK, .5)).concat(band(14, .5, .1, .06, .35, 14, 140, GREEN, .5)) },
+    medal3: { size: 120, layers: band(6, .62, .2, .1, .45, 20, 140, OCHRE, .6).concat(band(20, .93, .04, .025, .4, 12, 280, RED, .5)).concat(band(9, .4, .1, .06, .3, 14, 120, OCHRE, .55)) },
+    medal4: { size: 120, layers: band(8, .7, .22, .12, .4, 22, 160, LILAC, .55).concat(band(18, .9, .06, .03, .4, 12, 240, GREEN, .5)).concat(band(4, .46, .12, .08, .5, 12, 120, LILAC, .55)) },
+    seal:   { size: 220, layers: band(10, .56, .16, .08, .26, 24, 160, INK, .5).concat(band(7, .42, .08, .05, .4, 14, 140, RED, .55)) },
+    dial:   { size: 120, layers: band(9, .62, .24, .1, .3, 22, 150, INK, .5).concat(band(6, .36, .1, .07, .45, 12, 120, RED, .55)) }
   };
-  
-  // Add fade in - use requestAnimationFrame
-  loadingScreen.style.opacity = '0';
-  requestAnimationFrame(() => {
-    loadingScreen.style.transition = 'opacity 0.2s';
-    loadingScreen.style.opacity = '1';
-    // Start progress after a short delay
-    setTimeout(updateProgress, 50);
-  });
-}
 
-// Initialize loading screen on page load
-document.addEventListener('DOMContentLoaded', initLoadingScreen);
+  function draw(kind) {
+    if (cache[kind]) return cache[kind];
+    var cfg = KINDS[kind], size = cfg.size, R = size / 2;
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    var cv = document.createElement('canvas');
+    cv.width = cv.height = Math.round(size * dpr);
+    var ctx = cv.getContext('2d');
+    ctx.scale(dpr, dpr);
+    ctx.lineJoin = 'round';
+    cfg.layers.forEach(function (L) {
+      ctx.beginPath();
+      for (var m = 0; m < L.M; m++) {
+        var rm = L.r0 + (L.span || 0) * ((m / (L.M - 1)) - 0.5), ph = m * (L.dph || 0);
+        for (var i = 0; i <= L.N; i++) {
+          var th = i / L.N * 2 * Math.PI;
+          var rho = (rm + L.a * Math.sin(L.k * th + ph)) * R;
+          var x = R + rho * Math.cos(th), y = R + rho * Math.sin(th);
+          if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y);
+        }
+        ctx.closePath();
+      }
+      ctx.strokeStyle = L.c; ctx.globalAlpha = 0.9; ctx.lineWidth = Math.max(0.5, L.w); ctx.stroke();
+    });
+    return (cache[kind] = cv);
+  }
+
+  function fill() {
+    // Give every hero/contact/404 plate its four corner rosettes
+    document.querySelectorAll('.plate[data-corners]').forEach(function (plate) {
+      ['tl', 'tr', 'bl', 'br'].forEach(function (pos) {
+        var span = document.createElement('span');
+        span.className = 'corner ' + pos + ' rosette';
+        span.setAttribute('data-rosette', 'corner');
+        span.setAttribute('aria-hidden', 'true');
+        plate.insertBefore(span, plate.firstChild);
+      });
+    });
+    document.querySelectorAll('[data-rosette]').forEach(function (el) {
+      var kind = el.getAttribute('data-rosette');
+      if (!KINDS[kind] || el.querySelector('canvas')) return;
+      var src = draw(kind), cv = document.createElement('canvas');
+      cv.width = src.width; cv.height = src.height;
+      cv.setAttribute('aria-hidden', 'true');
+      cv.getContext('2d').drawImage(src, 0, 0);
+      el.insertBefore(cv, el.firstChild);
+    });
+
+    // Microprint lines and a serial number, like the ones on banknotes
+    var s = 'LAMIDE AKOMOLAFE \u00B7 PRODUCT \u00B7 AI \u00B7 AUTOMATION \u00B7 ';
+    document.querySelectorAll('[data-micro]').forEach(function (el) {
+      var t = ''; for (var i = 0; i < 40; i++) t += s; el.textContent = t;
+    });
+    var serial = 'No. ' + (100000 + Math.floor(Math.random() * 899999)).toString().replace(/(\d{3})(\d{3})/, '$1 $2');
+    document.querySelectorAll('[data-serial]').forEach(function (el) { el.textContent = serial; });
+  }
+
+  // Seal: a guilloche rosette ringed with lettering, like the stamp on a certificate
+  function seal() {
+    var host = document.querySelector('[data-seal]');
+    if (!host) return;
+    var ring = 'LAMIDE AKOMOLAFE \u00B7 PRODUCT \u00B7 AI AGENTS \u00B7 AUTOMATION \u00B7 ';
+    var img = draw('seal').toDataURL('image/png');
+    host.innerHTML =
+      '<svg viewBox="0 0 220 220" aria-hidden="true"><defs><path id="sealPath" d="M110,110 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0"/></defs>' +
+      '<circle cx="110" cy="110" r="108" fill="none" stroke="' + INK + '" stroke-width="1"/>' +
+      '<circle cx="110" cy="110" r="104" fill="none" stroke="' + INK + '" stroke-width=".6"/>' +
+      '<circle cx="110" cy="110" r="80" fill="none" stroke="' + INK + '" stroke-width=".8"/>' +
+      '<g class="seal-ring"><text font-family="Cinzel, serif" font-weight="700" font-size="10.5" letter-spacing="2.6" fill="' + INK + '"><textPath href="#sealPath">' + ring + ring + '</textPath></text></g>' +
+      '<image href="' + img + '" x="0" y="0" width="220" height="220"/>' +
+      '<circle cx="110" cy="110" r="29" fill="#EBE4D0" stroke="' + INK + '" stroke-width="1"/><circle cx="110" cy="110" r="25" fill="none" stroke="' + INK + '" stroke-width=".6"/>' +
+      '<text x="110" y="118" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="21" fill="#0F1C5C">LA</text></svg>';
+  }
+
+  // Dial: the Now page shows the actual time, engraved
+  function dial() {
+    var host = document.querySelector('[data-dial]');
+    if (!host) return;
+    var img = draw('dial').toDataURL('image/png'), ticks = '', nums = '';
+    var roman = ['XII', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
+    for (var i = 0; i < 60; i++) {
+      var a = i * Math.PI / 30, big = i % 5 === 0, r1 = big ? 90 : 93, r2 = 97;
+      ticks += '<line x1="' + (100 + r1 * Math.sin(a)).toFixed(2) + '" y1="' + (100 - r1 * Math.cos(a)).toFixed(2) + '" x2="' + (100 + r2 * Math.sin(a)).toFixed(2) + '" y2="' + (100 - r2 * Math.cos(a)).toFixed(2) + '" stroke="' + INK + '" stroke-width="' + (big ? 1.4 : .6) + '"/>';
+    }
+    for (var h = 0; h < 12; h++) {
+      var b = h * Math.PI / 6;
+      nums += '<text x="' + (100 + 78 * Math.sin(b)).toFixed(2) + '" y="' + (100 - 78 * Math.cos(b) + 3).toFixed(2) + '" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="8" fill="#0F1C5C">' + roman[h] + '</text>';
+    }
+    host.innerHTML =
+      '<svg viewBox="0 0 200 200" role="img" aria-label="An engraved clock showing the current time">' +
+      '<circle cx="100" cy="100" r="99" fill="#EBE4D0" stroke="' + INK + '" stroke-width="1"/><circle cx="100" cy="100" r="95" fill="none" stroke="' + INK + '" stroke-width=".5"/>' + ticks +
+      '<image href="' + img + '" x="40" y="40" width="120" height="120" opacity=".85"/>' + nums +
+      '<g id="dH"><line x1="100" y1="106" x2="100" y2="56" stroke="#0F1C5C" stroke-width="3.2" stroke-linecap="round"/></g>' +
+      '<g id="dM"><line x1="100" y1="108" x2="100" y2="34" stroke="#0F1C5C" stroke-width="2" stroke-linecap="round"/></g>' +
+      '<g id="dS"><line x1="100" y1="114" x2="100" y2="30" stroke="' + RED + '" stroke-width="1"/></g>' +
+      '<circle cx="100" cy="100" r="5" fill="#EBE4D0" stroke="' + INK + '" stroke-width="1.2"/><circle cx="100" cy="100" r="1.6" fill="' + RED + '"/></svg>';
+    var gH = host.querySelector('#dH'), gM = host.querySelector('#dM'), gS = host.querySelector('#dS');
+    function tick() {
+      var d = new Date(), sec = d.getSeconds() + d.getMilliseconds() / 1000, min = d.getMinutes() + sec / 60, hr = (d.getHours() % 12) + min / 60;
+      gH.setAttribute('transform', 'rotate(' + (hr * 30) + ' 100 100)');
+      gM.setAttribute('transform', 'rotate(' + (min * 6) + ' 100 100)');
+      gS.setAttribute('transform', 'rotate(' + (Math.floor(sec) * 6) + ' 100 100)');
+    }
+    tick(); setInterval(tick, 1000);
+  }
+
+  // Fresco: cards and callouts are laid down like patches of wet plaster as they scroll in
+  // (anything already on screen is left alone; the classes are removed afterwards so nothing stays clipped)
+  function reveal() {
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var n = 0;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target; io.unobserve(el); el.classList.add('in');
+        var clean = function (ev) { if (ev && ev.propertyName && ev.propertyName !== 'clip-path') return; el.classList.remove('reveal', 'reveal-b', 'in'); el.removeEventListener('transitionend', clean); };
+        el.addEventListener('transitionend', clean); setTimeout(clean, 2400);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.card, .callout, .wall .inner, .post-content > *').forEach(function (el) {
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.92) return;
+      el.classList.add('reveal'); if (n++ % 2) el.classList.add('reveal-b'); io.observe(el);
+    });
+  }
+
+  // Reading progress: a gold line grows along the header's braid
+  function progress() {
+    var post = document.querySelector('.post-content'), head = document.querySelector('header.top');
+    if (!post || !head) return;
+    var bar = document.createElement('div'); bar.className = 'read-progress'; bar.setAttribute('aria-hidden', 'true');
+    head.appendChild(bar);
+    var pend = false;
+    function upd() {
+      pend = false;
+      var r = post.getBoundingClientRect(), total = r.height - window.innerHeight * 0.6;
+      bar.style.setProperty('--p', Math.max(0, Math.min(1, total > 0 ? -r.top / total : 1)).toFixed(4));
+    }
+    window.addEventListener('scroll', function () { if (!pend) { pend = true; requestAnimationFrame(upd); } }, { passive: true });
+    upd();
+  }
+
+  // Mobile menu
+  function menu() {
+    var btn = document.getElementById('menuBtn'), nav = document.getElementById('siteNav');
+    if (!btn || !nav) return;
+    function set(open) {
+      nav.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    btn.addEventListener('click', function () { set(!nav.classList.contains('open')); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+    window.addEventListener('resize', function () { if (window.innerWidth > 859) set(false); });
+  }
+
+  function init() { fill(); seal(); dial(); reveal(); progress(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
 
 // Guest Counter
 function initGuestCounter() {
@@ -106,7 +205,11 @@ function initLoadTime() {
   const loadTimeEl = document.getElementById('load-time');
   if (!loadTimeEl) return;
   
-  // Calculate load time
+  // loadEventEnd is 0 until the load event has finished, so wait for it
+  if (!performance.timing.loadEventEnd) {
+    window.addEventListener('load', () => setTimeout(initLoadTime, 0), { once: true });
+    return;
+  }
   const loadTime = (performance.timing.loadEventEnd - performance.timing.navigationStart) / 1000;
   const formattedTime = loadTime.toFixed(2);
   loadTimeEl.textContent = `Page loaded in ${formattedTime}s`;
@@ -204,22 +307,6 @@ document.addEventListener('DOMContentLoaded', () => {
   skipLink.href = '#main-content';
   skipLink.textContent = 'Skip to main content';
   skipLink.className = 'skip-link';
-  skipLink.style.cssText = `
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: var(--accent);
-    color: #fff;
-    padding: 8px;
-    text-decoration: none;
-    z-index: 1000;
-  `;
-  skipLink.addEventListener('focus', () => {
-    skipLink.style.top = '0';
-  });
-  skipLink.addEventListener('blur', () => {
-    skipLink.style.top = '-40px';
-  });
   document.body.insertBefore(skipLink, document.body.firstChild);
   
   // Add main content ID if not present

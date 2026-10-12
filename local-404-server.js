@@ -33,6 +33,11 @@ const server = http.createServer((req, res) => {
     filePath = path.join(ROOT, 'index.html');
   }
   
+  // Clean URLs, like Netlify: /consulting -> consulting.html
+  if (!path.extname(filePath) && filePath !== ROOT && fs.existsSync(filePath + '.html')) {
+    filePath += '.html';
+  }
+
   // Check if file exists
   fs.access(filePath, fs.constants.F_OK, (err) => {
     if (err) {

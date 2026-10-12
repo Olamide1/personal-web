@@ -2,6 +2,12 @@
   command = "npm run build"
   publish = "."
 
+# Clean URL: /consulting serves consulting.html
+[[redirects]]
+  from = "/consulting"
+  to = "/consulting.html"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]

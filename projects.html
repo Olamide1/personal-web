@@ -19,34 +19,38 @@
   
   <link rel="icon" type="image/jpeg" href="/assets/img/icon.jpg">
   <link rel="apple-touch-icon" href="/assets/img/icon.jpg">
+  <meta name="theme-color" content="#EBE4D0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/base.css">
 </head>
-<body>
-  <div class="browser-bar">
-    <button class="browser-bar__button" onclick="window.history.back()" aria-label="Back">←</button>
-    <button class="browser-bar__button" onclick="window.history.forward()" aria-label="Forward">→</button>
-    <div class="browser-bar__address">
-      <span class="browser-bar__lock">🔒</span>
-      <span>lamide.net/projects</span>
+<body data-pigment="ochre">
+  <header class="top">
+    <div class="wrap">
+      <a class="wordmark" href="/"><span class="emblem rosette" data-rosette="emblem" aria-hidden="true"></span>LAMIDE</a>
+      <nav class="nav" id="siteNav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/projects.html" class="active" aria-current="page">Projects</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/now.html">Now</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="planSheet"><span class="mb-icon" aria-hidden="true"></span><span class="l-d">Plan</span><span class="l-m">Menu</span></button>
     </div>
-  </div>
-
-  <nav class="nav">
-    <a href="/">Home</a>
-    <a href="/about.html">About</a>
-    <a href="/projects.html" class="active">Projects</a>
-    <a href="/blog.html">Blog</a>
-    <a href="/now.html">Now</a>
-    <a href="/contact.html">Contact</a>
-  </nav>
+    <div class="braid thin hdr-braid" aria-hidden="true"></div>
+  </header>
 
   <main id="main-content" class="container">
     <div style="margin-top: 2rem;">
-      <h1>Projects</h1>
+      <h1 class="engraved">Projects</h1>
       <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.8;">AI-focused work and automation tools I'm building.</p>
       
+      <div class="art banner is-loading" data-scene="sol" data-animate data-fold><canvas role="img" aria-label="An engraving of the sun, the moon and young plants, after Michelangelo"></canvas></div>
       <!-- Schedulely -->
-      <div class="card" id="schedulely">
+      <div class="card project" id="schedulely">
+        <div class="medal" data-rosette="medal1" aria-hidden="true"><i></i><b>I</b></div>
         <h2>Schedulely</h2>
         <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>AI social slideshow generator and manager for creators.</strong></p>
         <p>Schedulely helps content creators automatically generate, schedule, and manage social media content in slideshow format. Built with AI to understand context and optimize for engagement.</p>
@@ -56,13 +60,14 @@
           <span class="tag">Automation</span>
         </div>
         <div style="margin-top: 1.5rem;">
-          <a href="https://www.schedulely.app" target="_blank" rel="noopener" style="color: var(--link); margin-right: 1rem;">Live Site →</a>
-          <a href="/blog/posts/schedulely-case-study.html" style="color: var(--link);">Case Note →</a>
+          <a href="https://www.schedulely.app" target="_blank" rel="noopener" class="link-gap">Live Site →</a>
+          <a href="/blog/posts/schedulely-case-study.html">Case Note →</a>
         </div>
       </div>
 
       <!-- Akọ̀wé -->
-      <div class="card" id="akowe">
+      <div class="card project" id="akowe">
+        <div class="medal" data-rosette="medal2" aria-hidden="true"><i></i><b>II</b></div>
         <h2>Akọ̀wé</h2>
         <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>AI academic writing tool with citations and plagiarism check.</strong></p>
         <p>Akọ̀wé (Yoruba for "let's write") assists students and researchers in generating high-quality academic content with proper citations, references, and plagiarism checking.</p>
@@ -72,13 +77,14 @@
           <span class="tag">Writing</span>
         </div>
         <div style="margin-top: 1.5rem;">
-          <a href="https://useakowe.com/" target="_blank" rel="noopener" style="color: var(--link); margin-right: 1rem;">Live Site →</a>
-          <a href="/blog/posts/akowe-case-study.html" style="color: var(--link);">Case Note →</a>
+          <a href="https://useakowe.com/" target="_blank" rel="noopener" class="link-gap">Live Site →</a>
+          <a href="/blog/posts/akowe-case-study.html">Case Note →</a>
         </div>
       </div>
 
       <!-- AI Customer Support -->
-      <div class="card" id="ai-support">
+      <div class="card project" id="ai-support">
+        <div class="medal" data-rosette="medal3" aria-hidden="true"><i></i><b>III</b></div>
         <h2>AI Customer Support</h2>
         <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>Human-in-loop AI support agent with suggestions and integrations.</strong></p>
         <p>An intelligent customer support system that combines AI automation with human oversight. Provides real-time suggestions to support agents, handles routine queries automatically, and integrates with major support platforms.</p>
@@ -88,13 +94,14 @@
           <span class="tag">Human-in-Loop</span>
         </div>
         <div style="margin-top: 1.5rem;">
-          <a href="https://ai-customer-support-eosin.vercel.app/" target="_blank" rel="noopener" style="color: var(--link); margin-right: 1rem;">Live Demo →</a>
-          <a href="/blog/posts/ai-support-case-study.html" style="color: var(--link);">Case Note →</a>
+          <a href="https://ai-customer-support-eosin.vercel.app/" target="_blank" rel="noopener" class="link-gap">Live Demo →</a>
+          <a href="/blog/posts/ai-support-case-study.html">Case Note →</a>
         </div>
       </div>
 
       <!-- Agents for PM Research -->
-      <div class="card" id="pm-agents">
+      <div class="card project" id="pm-agents">
+        <div class="medal" data-rosette="medal4" aria-hidden="true"><i></i><b>IV</b></div>
         <h2>Agents for PM Research</h2>
         <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>Internal experiments automating qualitative + quantitative research.</strong></p>
         <p>AI agents that help product managers conduct user research, analyze feedback, run surveys, and generate insights. Currently in internal testing, exploring ways to automate the research workflow without losing the human touch.</p>
@@ -126,5 +133,7 @@
 
   <div id="starfield"></div>
   <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/scenes.js" defer></script>
+  <script src="/assets/js/chrome.js" defer></script>
 </body>
 </html>
