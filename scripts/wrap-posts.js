@@ -145,16 +145,28 @@ function markdownToHtml(markdown) {
     .replace(/^\*\s+(.+)$/gm, '<li>$1</li>')
     // Wrap consecutive list items in <ul>
     .replace(/(<li>.*<\/li>\n?)+/g, (match) => `<ul>\n${match}</ul>\n`)
+    // List items (ordered), e.g. "1. text" - convert whole runs to <ol>
+    .replace(/(^\d+\.\s+.+$\n?)+/gm, (block) => {
+      const items = block.trim().split('\n')
+        .map(line => line.replace(/^\d+\.\s+(.+)$/, '<li>$1</li>'))
+        .join('\n');
+      return `<ol>\n${items}\n</ol>\n`;
+    })
     // Code blocks
     .replace(/`([^`]+)`/g, '<code>$1</code>');
-  
+
+  // Isolate block elements onto their own chunk, even if they were glued to
+  // surrounding text with no blank line (e.g. "intro text:\n1. item\n2. item"),
+  // so the paragraph-wrapping step below never nests a block tag inside a <p>.
+  html = html.replace(/(<(?:h[1-6]|ul|ol)(?:\s[^>]*)?>[\s\S]*?<\/(?:h[1-6]|ul|ol)>)/g, '\n\n$1\n\n');
+
   // Split by double newlines, but preserve existing HTML block elements
   const lines = html.split(/\n\n+/);
   html = lines.map(line => {
     line = line.trim();
     if (!line) return '';
     // Don't wrap if it's already a block element
-    if (/^<(h[1-6]|ul|li|p)/.test(line)) return line;
+    if (/^<(h[1-6]|ul|ol|li|p)/.test(line)) return line;
     return `<p>${line}</p>`;
   }).join('\n');
   
@@ -170,8 +182,10 @@ function wrapPost(metadata, body, slug) {
   
   // Convert markdown to HTML if needed
   let bodyHtml = body;
-  // Check if body is HTML (contains tags) or markdown
-  if (!/<[a-z][\s\S]*>/i.test(body)) {
+  // Check if body is already-wrapped HTML (has real block tags), as opposed to
+  // markdown that merely contains a `<https://...>` autolink or similar, which
+  // would otherwise false-positive against a generic "<letter...>" tag check.
+  if (!/<(p|div|h[1-6]|ul|ol|li|blockquote|pre|table|img|br)\b/i.test(body)) {
     bodyHtml = markdownToHtml(body);
   }
   
@@ -269,20 +283,24 @@ files.forEach(file => {
       console.log(`✓ Wrapped ${file}`);
       wrappedCount++;
     }
-  } else if (/<p>#####|#####\s+\*\*|##\s+\*\*|^\*\s+/.test(content)) {
+  } else if (/<p>#####|#####\s+\*\*|##\s+\*\*|^\*\s+|^\d+\.\s+|<https?:\/\//m.test(content)) {
     // Already wrapped but contains raw markdown - needs conversion
     console.log(`⚠ Found markdown in ${file}, checking if needs conversion...`);
     // Extract body content and convert markdown
     const bodyMatch = content.match(/<div class="post-content">([\s\S]*?)<\/div>/);
-    if (bodyMatch && /#####|##\s+|^\*\s+|<https?:/.test(bodyMatch[1])) {
+    if (bodyMatch && /#####|##\s+|^\*\s+|^\d+\.\s+|<https?:/m.test(bodyMatch[1])) {
       let originalBody = bodyMatch[1];
       // Direct replacement of problematic patterns
       originalBody = originalBody.replace(/<p>(#####|####|###|##|#)\s+(.+)<\/p>/g, (match, hashes, text) => {
         const level = hashes.length;
         return `<h${level}>${text.trim()}</h${level}>`;
       });
-      // If still contains markdown patterns, try full conversion
-      if (/#####|##\s+|^\*\s+/.test(originalBody)) {
+      // If still contains markdown patterns, try full conversion. Strip any
+      // pre-existing <p> wrapper tags back to plain line breaks first, so
+      // markdownToHtml (which expects raw markdown) doesn't mistake a
+      // leftover closing </p> for part of a list item's text.
+      if (/#####|##\s+|^\*\s+|^\d+\.\s+|<https?:/m.test(originalBody)) {
+        originalBody = originalBody.replace(/<\/?p>/g, '\n\n');
         originalBody = markdownToHtml(originalBody);
       }
       const updatedContent = content.replace(
