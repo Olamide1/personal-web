@@ -169,7 +169,7 @@
     contact: { start: POSE.far, rest: POSE.rest, labels: ['You', 'Me'], pointer: true, idle: true, iris: true, hair: 0.38, spacing: 3.2 },
     lost:    { start: [-230, 230, 0.2], rest: [-230, 230, 0.2], labels: ['You', 'This page'], idle: true, hair: 0.38, spacing: 3.2 },
     banner:  { start: POSE.rest, rest: POSE.rest, zoom: 2.7, focusX: 541, focusY: 232, idle: true, hair: 0.34, spacing: 2.6 },
-    wall:    { start: [-16, 16, 0.5], inverse: true, iris: true, bloomAt: [0.55, 1], ink: CREAM, paper: NAVY, hair: 0.3, spacing: 3.8 }
+    wall:    { start: [-16, 16, 0.5], inverse: true, iris: true, bloomAt: [0.55, 1], ink: CREAM, paper: NAVY, hair: 0.3, spacing: 3.0 }
   };
 
   var arts = {};

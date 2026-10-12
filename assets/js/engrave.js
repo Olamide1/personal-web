@@ -73,7 +73,8 @@
     if (sA < 0.004) return 0;
     sH = ly.H[i] * w00 + ly.H[i + 1] * w10 + ly.H[i + SW] * w01 + ly.H[i + SW + 1] * w11;
     var LL = useInv ? ly.Li : ly.L, lv = (LL[i] * w00 + LL[i + 1] * w10 + LL[i + SW] * w01 + LL[i + SW + 1] * w11) * tone;
-    return lv > 1 ? 1 : lv;
+    if (useInv) lv = 0.5 + (lv - 0.46) * 1.7;                      /* reversed engraving: more contrast so fingers separate crisply */
+    return lv > 1 ? 1 : lv < 0 ? 0 : lv;
   }
 
   function sky(ax, ay, glow) {

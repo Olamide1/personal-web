@@ -447,8 +447,8 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 
 /* ---------- finale: the same hands, reversed, touching ---------- */
 .wall { position: relative; background: var(--ink); color: var(--paper); margin-top: 3.5rem; overflow: hidden; }
-.wall .art { margin: 0; height: clamp(230px, 28vw, 380px); background: var(--ink); box-shadow: none; }
-.wall .art::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(180deg, transparent, var(--ink)); pointer-events: none; }
+.wall .art { margin: 0; height: clamp(250px, 31vw, 420px); background: var(--ink); box-shadow: none; }
+.wall .art::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 36px; background: linear-gradient(180deg, transparent, var(--ink)); pointer-events: none; }
 .wall .inner { padding: 8px 24px 76px; text-align: center; position: relative; }
 .wall h2 { max-width: 19em; margin: 0 auto 14px; font-size: clamp(1.9rem, 4vw, 2.7rem); color: var(--paper); }
 .wall h2::after { display: none; }
