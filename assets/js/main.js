@@ -19,6 +19,8 @@
     medal2: { size: 120, layers: band(10, .86, .1, .05, .3, 20, 140, GREEN, .55).concat(band(5, .76, .08, .05, .5, 14, 140, INK, .5)).concat(band(14, .5, .1, .06, .35, 14, 140, GREEN, .5)) },
     medal3: { size: 120, layers: band(6, .62, .2, .1, .45, 20, 140, OCHRE, .6).concat(band(20, .93, .04, .025, .4, 12, 280, RED, .5)).concat(band(9, .4, .1, .06, .3, 14, 120, OCHRE, .55)) },
     medal4: { size: 120, layers: band(8, .7, .22, .12, .4, 22, 160, LILAC, .55).concat(band(18, .9, .06, .03, .4, 12, 240, GREEN, .5)).concat(band(4, .46, .12, .08, .5, 12, 120, LILAC, .55)) },
+    medal5: { size: 120, layers: band(9, .66, .2, .1, .35, 22, 150, OCHRE, .55).concat(band(14, .88, .06, .04, .3, 14, 200, GREEN, .5)).concat(band(5, .44, .12, .07, .45, 12, 120, INK, .5)) },
+    medal6: { size: 120, layers: band(7, .72, .18, .1, .3, 24, 150, RED, .5).concat(band(16, .9, .05, .03, .4, 12, 240, LILAC, .5)).concat(band(6, .42, .12, .07, .4, 14, 120, OCHRE, .55)) },
     seal:   { size: 220, layers: band(10, .56, .16, .08, .26, 24, 160, INK, .5).concat(band(7, .42, .08, .05, .4, 14, 140, RED, .55)) },
     dial:   { size: 120, layers: band(9, .62, .24, .1, .3, 22, 150, INK, .5).concat(band(6, .36, .1, .07, .45, 12, 120, RED, .55)) }
   };
