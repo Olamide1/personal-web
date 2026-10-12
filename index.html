@@ -27,7 +27,7 @@
     // First visit of a session gets the opening; reduced-motion visitors skip it
     try { if (!sessionStorage.getItem('introSeen') && !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) document.documentElement.classList.add('intro-on'); } catch (e) {}
   </script>
-  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/base.css?v=5d89f7fa">
   <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Lamide's Blog">
   </head>
 <body>
@@ -156,12 +156,12 @@
   </footer>
   <div id="starfield"></div>
 
-  <script src="/assets/js/engrave.js" defer></script>
-  <script src="/assets/js/art.js" defer></script>
-  <script src="/assets/js/main.js" defer></script>
-  <script src="/assets/js/scenes.js" defer></script>
-  <script src="/assets/js/chrome.js" defer></script>
-  <script src="/assets/js/blog-index.js" defer></script>
+  <script src="/assets/js/engrave.js?v=5d89f7fa" defer></script>
+  <script src="/assets/js/art.js?v=5d89f7fa" defer></script>
+  <script src="/assets/js/main.js?v=5d89f7fa" defer></script>
+  <script src="/assets/js/scenes.js?v=5d89f7fa" defer></script>
+  <script src="/assets/js/chrome.js?v=5d89f7fa" defer></script>
+  <script src="/assets/js/blog-index.js?v=5d89f7fa" defer></script>
   <script>
     // Lazy load Netlify Identity only when needed (CMS/admin pages)
     if (window.location.pathname.includes('/admin')) {
