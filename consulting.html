@@ -20,7 +20,6 @@
 <!--
   BEFORE YOU PUBLISH:
   0. Canonical, social preview and structured data now point at https://olamide.name.ng/consulting (served via a rewrite in netlify.toml).
-  1. Search for "cal.com/YOUR-HANDLE" (several places) and put in your real Cal.com or Calendly link.
   2. Search for "theolaakomolafe@gmail.com" and swap in an address on your own domain if you have one.
 
   HOW THIS PAGE IS MADE (for you, not visitors)
@@ -201,6 +200,7 @@
   .note ul.keep li { margin-bottom: 12px; color: #2A3678; font-size: 1.08rem; line-height: 1.45; }
   .note ul.keep li strong { color: var(--ink-deep); }
   .note .pledge { font-style: italic; font-size: 1.12rem; color: var(--ink-deep); margin: 0 0 22px; }
+  .note .pledge + .fineprint { font-style: italic; font-size: .98rem; color: #4A5490; max-width: 34em; margin: -10px auto 22px; }
   .team-note { max-width: 36rem; margin: 34px auto 0; text-align: center; color: #3A4690; font-size: 1.08rem; }
 
   /* ---------- two plates ---------- */
@@ -212,17 +212,6 @@
   ul.dots { list-style: none; padding: 0; margin: 0 0 14px; }
   ul.dots li { position: relative; padding-left: 28px; margin-bottom: 10px; }
   ul.dots li::before { content: ""; position: absolute; left: 0; top: .5em; width: 15px; height: 15px; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--ink); background: radial-gradient(circle, var(--ink) 0 2px, transparent 2.5px), repeating-radial-gradient(circle, transparent 0 2px, var(--ink-soft) 2px 2.6px); }
-
-  /* ---------- sprint ---------- */
-  .sprint { display: grid; gap: 34px; grid-template-columns: 1fr; align-items: center; padding: 42px clamp(24px, 4vw, 52px); }
-  @media (min-width: 900px) { .sprint { grid-template-columns: 1fr 250px; } }
-  .sprint h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 14px; }
-  .sprint p { max-width: 42em; }
-  .denom { position: relative; text-align: center; padding: 32px 14px; border: 1px solid var(--ink); box-shadow: inset 0 0 0 4px var(--paper), inset 0 0 0 5px var(--ink); background: var(--paper-2); }
-  .denom small { display: block; font-style: italic; font-size: 1rem; color: #3A4690; }
-  .denom b { display: block; font: 700 2.1rem/1.15 var(--display); }
-  .denom .den { position: absolute; font: 700 .62rem/1 var(--caps); letter-spacing: .1em; color: var(--ink); }
-  .denom .den.a { top: 12px; left: 14px; } .denom .den.b { top: 12px; right: 14px; } .denom .den.c { bottom: 12px; left: 14px; } .denom .den.d { bottom: 12px; right: 14px; }
 
   /* ---------- about: the seal ---------- */
   .about { display: grid; gap: 48px; grid-template-columns: 1fr; align-items: center; justify-items: center; }
@@ -353,7 +342,7 @@
     </nav>
     <div class="hdr-actions">
       <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="plan"><span class="mb-icon" aria-hidden="true"></span>Contents</button>
-      <a class="btn btn-sm" href="https://cal.com/YOUR-HANDLE/20min">Book a call</a>
+      <a class="btn btn-sm" href="https://cal.com/lamide-akomolafe/30min">Book a call</a>
     </div>
   </div>
   <div class="braid thin hdr-braid" aria-hidden="true"></div>
@@ -391,7 +380,7 @@
         <h1>Find where your applicants disappear during KYC, and what fixing each leak is worth.</h1>
         <p class="lede">A fixed-scope, five-day teardown of your onboarding funnel for fintechs, run by a product manager who has owned onboarding and KYC at a digital bank.</p>
         <div class="cta-row">
-          <a class="btn js-close" href="https://cal.com/YOUR-HANDLE/20min">Book a 20-minute call</a>
+          <a class="btn js-close" href="https://cal.com/lamide-akomolafe/30min">Book a 30-minute call</a>
           <a class="btn btn-ghost" href="#teardown">See what the teardown covers</a>
         </div>
 
@@ -465,8 +454,9 @@
             <li><strong>Every fix sized in outcomes.</strong> Verified customers gained and acquisition cost recovered, so your team knows what to build first.</li>
             <li><strong>A 30-day plan.</strong> Run by your team, walked through with you in a 60-minute readout.</li>
           </ul>
-          <p class="pledge">Three fixable causes, or you don't pay.</p>
-          <a class="btn js-close" href="https://cal.com/YOUR-HANDLE/20min">Book a 20-minute call</a>
+          <p class="pledge">Fixed fee: €3,600 to €5,000, depending on the number of flows and markets. Three fixable causes, or you don't pay.</p>
+          <p class="fineprint">A cause counts when your own data backs it and I can put an estimated impact on it. The five days start when usable data arrives, and if it never does, we stop and you owe nothing.</p>
+          <a class="btn js-close" href="https://cal.com/lamide-akomolafe/30min">Book a 30-minute call</a>
         </div>
       </div>
       <p class="team-note">If your product team is already working on this, I work with them. I bring the time to go through the logs, and an outside view from a flow I have owned.</p>
@@ -494,24 +484,8 @@
           <li>Your vendor's rejection and retry codes.</li>
           <li>A 30-minute call at the start and the readout at the end.</li>
         </ul>
-        <p style="margin-bottom:0">I sign an NDA first. I never need access to customer identities.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== AGENT SPRINT ===== -->
-  <section class="block" style="padding-top:0">
-    <div class="wrap">
-      <div class="plate sprint" id="sprint">
-        <span class="corner tl rosette" data-rosette="mini" aria-hidden="true"></span><span class="corner tr rosette" data-rosette="mini" aria-hidden="true"></span>
-        <span class="corner bl rosette" data-rosette="mini" aria-hidden="true"></span><span class="corner br rosette" data-rosette="mini" aria-hidden="true"></span>
-        <div>
-          <h2>Also: agent evaluation sprint</h2>
-          <p>Your AI agent works in the demo and you can't tell when to trust it. In two weeks I build an evaluation set from your real cases, set thresholds for accept, review and reject, design the human review queue, and give you a go or no-go with numbers.</p>
-          <p>Proof of method: I published an open benchmark and a small model for auditing AI agent payments, <a href="https://huggingface.co/theakomolafe/eleri-1.5b">eleri-1.5b on Hugging Face</a>.</p>
-          <a class="btn btn-ghost" href="https://cal.com/YOUR-HANDLE/20min">Ask about the sprint</a>
-        </div>
-        <div class="denom"><span class="den a" aria-hidden="true">II</span><span class="den b" aria-hidden="true">II</span><span class="den c" aria-hidden="true">II</span><span class="den d" aria-hidden="true">II</span><small>in</small><b>Two weeks</b><small>a go or no-go, with numbers</small></div>
+        <p>I sign an NDA first. I receive only aggregated counts by step, device and country, plus vendor result codes. No names, documents, images or customer-level records. Files are kept encrypted on one machine, used only for your teardown, and deleted within 30 days of the readout, with written confirmation.</p>
+        <p style="margin-bottom:0">Happy to sign your DPA if your security team asks for one.</p>
       </div>
     </div>
   </section>
@@ -523,7 +497,7 @@
       <div>
         <h2>Who you'd be working with</h2>
         <p>I'm a senior product manager with more than eight years across fintech, SaaS and health tech, based in Lisbon and working with teams in Europe, the UK and Africa.</p>
-        <p>At Carbon, a digital bank in Nigeria, I was the product manager for onboarding and KYC. Two of the biggest losses in the funnel, OTP delivery and selfie capture, only showed up when I went through the logs myself. Before that I worked on activation at Landbot, and on product at EdenLife and EligiusHealth.</p>
+        <p>At Carbon, a digital bank in Nigeria, I was the product manager for onboarding and KYC. Two of the biggest losses in the funnel, OTP delivery and selfie capture, only showed up when I went through the logs myself. Fixing them, along with much clearer onboarding guides, improved onboarding completion by 25% and cut KYC-related support requests by about 43%. Before that I worked on activation at Landbot, and on product at EdenLife and EligiusHealth.</p>
         <p><a href="https://olamide.name.ng/?utm_source=consulting&amp;utm_medium=about">More of my work and writing</a></p>
       </div>
     </div>
@@ -536,8 +510,8 @@
   <div class="wrap inner">
     <div class="braid" aria-hidden="true"></div>
     <h2>Tell me your funnel's biggest drop. I'll tell you where I'd look first.</h2>
-    <p>Twenty minutes, no slides. If it isn't a fit, I'll say so.</p>
-    <a class="btn js-close-final" href="https://cal.com/YOUR-HANDLE/20min">Book a 20-minute call</a>
+    <p>Thirty minutes, no slides. If it isn't a fit, I'll say so.</p>
+    <a class="btn js-close-final" href="https://cal.com/lamide-akomolafe/30min">Book a 30-minute call</a>
     <p style="margin:26px auto 0;font-size:1.02rem">Prefer email? <a class="mail" href="mailto:theolaakomolafe@gmail.com">theolaakomolafe@gmail.com</a></p>
   </div>
 </section>
@@ -794,7 +768,7 @@
   }
 
   /* ================= navigation: spine, nav links, contents sheet ================= */
-  var SCENES = [["top", "Opening"], ["leaks", "Where applicants leave"], ["teardown", "Five days"], ["deliverables", "What you keep"], ["who", "Who it's for"], ["need", "What I need"], ["sprint", "Agent sprint"], ["about", "About"], ["book", "Book a call"]];
+  var SCENES = [["top", "Opening"], ["leaks", "Where applicants leave"], ["teardown", "Five days"], ["deliverables", "What you keep"], ["who", "Who it's for"], ["need", "What I need"], ["about", "About"], ["book", "Book a call"]];
   var ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
   var NAVMAP = { leaks: [1], teardown: [2], deliverables: [3], who: [4, 5, 6], about: [7] };
   function buildNav() {
