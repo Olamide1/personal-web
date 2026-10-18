@@ -258,6 +258,9 @@
   @media (max-width: 520px) { .hdr-actions .btn-sm { display: none; } }
 
   /* the spine: nine scenes, alternating large and small, like the ceiling's centre line */
+  .to-top { position: fixed; right: 16px; bottom: 16px; z-index: 45; width: 44px; height: 44px; display: grid; place-items: center; background: var(--paper); color: var(--ink-deep); border: 1px solid var(--ink); border-radius: 2px; box-shadow: inset 0 0 0 3px var(--paper), inset 0 0 0 4px var(--ink); cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s, transform .25s, visibility .25s; }
+  .to-top.show { opacity: 1; visibility: visible; transform: none; }
+  .to-top svg { width: 16px; height: 16px; }
   .spine { position: fixed; right: 16px; top: 50%; transform: translateY(-50%); z-index: 40; display: none; }
   @media (min-width: 1240px) { .spine { display: block; } }
   .spine ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
@@ -514,6 +517,8 @@
     </div>
   </section>
 </main>
+
+<button class="to-top" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 13V3M3 7.5L8 3l5 4.5"/></svg></button>
 
 <!-- ===== FINALE ===== -->
 <section class="wall dark" id="book">
@@ -866,6 +871,14 @@
       fio.observe(document.getElementById("finalArt"));
     } else { fin.to([14, -14, 1], 0); }
   });
+  var toTop = document.getElementById("toTop");
+  if (toTop) {
+    var topTick = false;
+    var toggleTop = function () { topTick = false; toTop.classList.toggle("show", window.scrollY > 900); };
+    window.addEventListener("scroll", function () { if (!topTick) { topTick = true; requestAnimationFrame(toggleTop); } }, { passive: true });
+    toTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); });
+    toggleTop();
+  }
   setTimeout(function () { fillRosettes(); buildSeal(); }, 40);
 })();
 </script>
