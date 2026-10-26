@@ -24,6 +24,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/base.css?v=43ac2375">
+  <link rel="stylesheet" href="/assets/css/fx.css?v=1">
 </head>
 <body data-pigment="ochre">
   <header class="top">
@@ -38,6 +39,7 @@
         <a href="/contact.html">Contact</a>
       </nav>
       <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="planSheet"><span class="mb-icon" aria-hidden="true"></span><span class="l-d">Plan</span><span class="l-m">Menu</span></button>
+      <button class="snd-btn" id="sndBtn" type="button" aria-pressed="true" aria-label="Sound" title="Sound on or off"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><g class="on-w"><path d="M15.5 9.2a4 4 0 0 1 0 5.6"/><path d="M18 6.8a7.5 7.5 0 0 1 0 10.4"/></g><g class="off-x"><path d="M16 9.5l5 5M21 9.5l-5 5"/></g></svg></button>
     </div>
     <div class="braid thin hdr-braid" aria-hidden="true"></div>
   </header>
@@ -48,20 +50,19 @@
       <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.8;">AI-focused work, automation tools and products I'm building.</p>
       
       <div class="art banner is-loading" data-scene="sol" data-animate data-fold><canvas role="img" aria-label="An engraving of the sun, the moon and young plants, after Michelangelo"></canvas></div>
-      <!-- Schedulely -->
-      <div class="card project" id="schedulely">
-        <div class="medal" data-rosette="medal1" aria-hidden="true"><i></i><b>I</b></div>
-        <h2>Schedulely</h2>
-        <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>AI social slideshow generator and manager for creators.</strong></p>
-        <p>Schedulely helps content creators automatically generate, schedule, and manage social media content in slideshow format. Built with AI to understand context and optimize for engagement.</p>
+      <!-- Faylo -->
+      <div class="card project" id="faylo">
+        <div class="medal" data-rosette="medal5" aria-hidden="true"><i></i><b>I</b></div>
+        <h2>Faylo</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>Travel eSIM data plans for Africa. Land connected. Every time.</strong></p>
+        <p>Faylo sells eSIM data plans for trips to and around Africa, covering 43 countries. No account or flight booking needed: check your phone supports eSIM, pay by card, and get your QR code by email in seconds, in time to set up before boarding. Built for diaspora travellers heading home, people moving between countries, and first-time eSIM users, with human support on WhatsApp.</p>
         <div style="margin-top: 1.5rem;">
-          <span class="tag">AI</span>
-          <span class="tag">Content Creation</span>
-          <span class="tag">Automation</span>
+          <span class="tag">Travel</span>
+          <span class="tag">eSIM</span>
+          <span class="tag">E-commerce</span>
         </div>
         <div style="margin-top: 1.5rem;">
-          <a href="https://www.schedulely.app" target="_blank" rel="noopener" class="link-gap">Live Site →</a>
-          <a href="/blog/posts/schedulely-case-study.html">Case Note →</a>
+          <a href="https://faylo.xyz" target="_blank" rel="noopener" class="link-gap">Live Site →</a>
         </div>
       </div>
 
@@ -82,9 +83,26 @@
         </div>
       </div>
 
+      <!-- Schedulely -->
+      <div class="card project" id="schedulely">
+        <div class="medal" data-rosette="medal1" aria-hidden="true"><i></i><b>III</b></div>
+        <h2>Schedulely</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>AI social slideshow generator and manager for creators.</strong></p>
+        <p>Schedulely helps content creators automatically generate, schedule, and manage social media content in slideshow format. Built with AI to understand context and optimize for engagement.</p>
+        <div style="margin-top: 1.5rem;">
+          <span class="tag">AI</span>
+          <span class="tag">Content Creation</span>
+          <span class="tag">Automation</span>
+        </div>
+        <div style="margin-top: 1.5rem;">
+          <a href="https://www.schedulely.app" target="_blank" rel="noopener" class="link-gap">Live Site →</a>
+          <a href="/blog/posts/schedulely-case-study.html">Case Note →</a>
+        </div>
+      </div>
+
       <!-- AI Customer Support -->
       <div class="card project" id="ai-support">
-        <div class="medal" data-rosette="medal3" aria-hidden="true"><i></i><b>III</b></div>
+        <div class="medal" data-rosette="medal3" aria-hidden="true"><i></i><b>IV</b></div>
         <h2>AI Customer Support</h2>
         <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>Human-in-loop AI support agent with suggestions and integrations.</strong></p>
         <p>An intelligent customer support system that combines AI automation with human oversight. Provides real-time suggestions to support agents, handles routine queries automatically, and integrates with major support platforms.</p>
@@ -101,7 +119,7 @@
 
       <!-- Agents for PM Research -->
       <div class="card project" id="pm-agents">
-        <div class="medal" data-rosette="medal4" aria-hidden="true"><i></i><b>IV</b></div>
+        <div class="medal" data-rosette="medal4" aria-hidden="true"><i></i><b>V</b></div>
         <h2>Agents for PM Research</h2>
         <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>Internal experiments automating qualitative + quantitative research.</strong></p>
         <p>AI agents that help product managers conduct user research, analyze feedback, run surveys, and generate insights. Currently in internal testing, exploring ways to automate the research workflow without losing the human touch.</p>
@@ -112,22 +130,6 @@
         </div>
         <div style="margin-top: 1.5rem;">
           <span style="opacity: 0.7;">Available on request for selected teams</span>
-        </div>
-      </div>
-
-      <!-- Faylo -->
-      <div class="card project" id="faylo">
-        <div class="medal" data-rosette="medal5" aria-hidden="true"><i></i><b>V</b></div>
-        <h2>Faylo</h2>
-        <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>Travel eSIM data plans for Africa. Land connected. Every time.</strong></p>
-        <p>Faylo sells eSIM data plans for trips to and around Africa, covering 43 countries. No account or flight booking needed: check your phone supports eSIM, pay by card, and get your QR code by email in seconds, in time to set up before boarding. Built for diaspora travellers heading home, people moving between countries, and first-time eSIM users, with human support on WhatsApp.</p>
-        <div style="margin-top: 1.5rem;">
-          <span class="tag">Travel</span>
-          <span class="tag">eSIM</span>
-          <span class="tag">E-commerce</span>
-        </div>
-        <div style="margin-top: 1.5rem;">
-          <a href="https://faylo.xyz" target="_blank" rel="noopener" class="link-gap">Live Site →</a>
         </div>
       </div>
 
@@ -168,5 +170,6 @@
   <script src="/assets/js/main.js?v=43ac2375" defer></script>
   <script src="/assets/js/scenes.js?v=43ac2375" defer></script>
   <script src="/assets/js/chrome.js?v=43ac2375" defer></script>
+  <script src="/assets/js/fx.js?v=1" defer></script>
 </body>
 </html>

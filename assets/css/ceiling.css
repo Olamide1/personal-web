@@ -1,0 +1,82 @@
+/* The ceiling, to wander (see ceiling.js). Only transforms move, so the drift costs next to nothing. */
+.ceil {
+  position: fixed; inset: 0; z-index: 320; overflow: hidden; color: var(--paper, #EBE4D0); cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none;
+  background:
+    radial-gradient(900px 520px at 50% 46%, rgba(246, 222, 149, .16), transparent 70%),
+    radial-gradient(1400px 900px at 50% 0%, #22349A 0%, #121E66 55%, #0A1240 100%);
+  clip-path: circle(0 at var(--ox, 50%) var(--oy, 50%));
+  transition: clip-path .9s cubic-bezier(.7, 0, .2, 1);
+}
+.ceil[hidden] { display: none; }
+.ceil.open { clip-path: circle(160vmax at var(--ox, 50%) var(--oy, 50%)); }
+.ceil.grab { cursor: grabbing; }
+html.ceil-open { overflow: hidden; }
+.ceil :focus-visible { outline-color: var(--gold-1, #F6DE95); }
+
+/* a vault of gold dust, in two depths, drifting slower than the panels */
+.ceil-sky { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.ceil-sky i { position: absolute; top: 0; bottom: 0; left: 0; width: calc(100% + 260px); }
+.ceil-sky i:nth-child(1) { background: radial-gradient(circle, rgba(246, 222, 149, .55) 0 1.2px, transparent 1.7px) 0 0 / 180px 150px; opacity: .5; }
+.ceil-sky i:nth-child(2) { background: radial-gradient(circle, rgba(246, 222, 149, .35) 0 1px, transparent 1.4px) 60px 40px / 260px 220px; opacity: .6; }
+
+/* gold bands above and below, like the painted cornice */
+.ceil-band { position: absolute; left: 0; right: 0; height: 22px; pointer-events: none; opacity: .75;
+  background: var(--braid) repeat-x center / 60px 18px; filter: invert(1) sepia(.5) saturate(1.4) brightness(1.1); }
+.ceil-band.t { top: 74px; } .ceil-band.b { bottom: 70px; }
+
+.ceil-head { position: absolute; z-index: 5; left: 0; right: 0; top: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 24px; }
+.ceil-kicker { display: block; font: 500 .7rem/1 var(--caps); letter-spacing: .4em; color: var(--gold-1); margin-bottom: 8px; }
+.ceil-head p { margin: 0; font-size: .98rem; font-style: italic; color: #CBD0E8; }
+.ceil-close, .ceil-step {
+  min-height: 44px; padding: 8px 18px; cursor: pointer; font: 700 .72rem/1 var(--caps); letter-spacing: .18em; text-transform: uppercase;
+  color: var(--paper); background: rgba(10, 18, 64, .5); border: 1px solid rgba(246, 222, 149, .8); border-radius: 2px;
+}
+.ceil-close:hover, .ceil-step:hover { background: rgba(246, 222, 149, .16); color: var(--gold-1); }
+
+/* the world: the camera is this element's translate */
+.ceil-world { position: absolute; left: 0; top: 0; bottom: 176px; will-change: transform; }
+.ceil-strip { position: relative; list-style: none; margin: 0; padding: 0; height: 100%; display: flex; align-items: center; gap: 0; --ph: min(47vh, 410px); }
+.ceil.open .ceil-strip { animation: ceil-in 1.4s .25s cubic-bezier(.2, .8, .2, 1) both; }
+@keyframes ceil-in { from { opacity: 0; transform: scale(.82); } to { opacity: 1; transform: none; } }
+
+.ceil-panel { position: relative; flex: none; margin: 0; transition: opacity .5s ease, filter .5s ease; opacity: .78; filter: saturate(.75) brightness(.88); }
+.ceil-panel.lg { width: calc(var(--ph) * 1.4); height: var(--ph); }
+.ceil-panel.sm { width: calc(var(--ph) * .92); height: calc(var(--ph) * .72); }
+.ceil-panel.focus { opacity: 1; filter: none; }
+/* every page, named and readable, under its panel */
+.ceil-label { position: absolute; left: 50%; top: calc(100% + 20px); transform: translateX(-50%); white-space: nowrap; pointer-events: none; text-align: center;
+  font: 700 clamp(.95rem, 1.9vw, 1.2rem)/1 var(--caps); letter-spacing: .22em; padding-left: .22em; text-transform: uppercase; color: var(--paper); text-shadow: 0 2px 10px rgba(5, 9, 36, .9); transition: color .4s, transform .4s; }
+.ceil-label b { display: block; margin-bottom: 7px; font-size: .64rem; letter-spacing: .34em; color: var(--gold-2); }
+.ceil-panel.focus .ceil-label { color: var(--gold-1); transform: translateX(-50%) scale(1.12); }
+.ceil-panel a { position: relative; display: block; width: 100%; height: 100%; background: var(--paper); border-radius: 2px;
+  box-shadow: 0 0 0 1px var(--gold-edge), 0 0 0 6px var(--gold-2), 0 0 0 7px var(--gold-edge), 0 30px 50px -22px rgba(0, 0, 0, .8); }
+.ceil-panel.focus a { box-shadow: 0 0 0 1px var(--gold-edge), 0 0 0 6px var(--gold-1), 0 0 0 7px var(--gold-edge), 0 0 0 14px rgba(246, 222, 149, .25), 0 0 60px 8px rgba(246, 222, 149, .35), 0 30px 50px -22px rgba(0, 0, 0, .8); }
+.ceil-panel canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; -webkit-user-drag: none; pointer-events: none; }
+.ceil-panel.is-loading a::before { content: ""; position: absolute; inset: 0; z-index: 1; background: repeating-linear-gradient(180deg, rgba(26, 47, 143, .38) 0 1px, transparent 1px 5px); animation: pulse 1.4s ease-in-out infinite; }
+
+/* between the panels: a gold lozenge on a thin pilaster */
+.ceil-gem { position: relative; flex: none; width: clamp(52px, 8vw, 96px); height: 62%; margin: 0; }
+.ceil-gem::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, transparent, rgba(246, 222, 149, .7) 20%, rgba(246, 222, 149, .7) 80%, transparent); }
+.ceil-gem::after { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; transform: rotate(45deg); background: var(--gold-1); box-shadow: 0 0 0 3px #121E66, 0 0 0 4px var(--gold-2), 0 0 18px rgba(246, 222, 149, .6); }
+
+/* what is in the middle, named */
+.ceil-cap { position: absolute; left: 50%; bottom: 102px; transform: translateX(-50%); width: min(92vw, 640px); text-align: center; pointer-events: none; }
+.ceil-cap b { display: block; font: 700 .72rem/1 var(--caps); letter-spacing: .34em; padding-left: .34em; color: var(--gold-1); margin-bottom: 8px; }
+.ceil-cap span { display: block; font: italic 1.2rem/1.25 var(--display); }
+.ceil-cap em { display: block; margin-top: 4px; font-size: 1rem; font-style: italic; color: #B8C0E8; }
+.ceil-step { position: absolute; z-index: 5; bottom: 22px; min-width: 56px; font-size: 1rem; letter-spacing: 0; }
+.ceil-step.prev { left: 24px; } .ceil-step.next { right: 24px; }
+
+@media (max-width: 640px) {
+  .ceil-head { padding: 12px 16px; } .ceil-head p { font-size: .88rem; }
+  .ceil-band.t { top: 84px; }
+  .ceil-strip { --ph: min(46vh, 360px); }
+  .ceil-world { bottom: 196px; }
+  .ceil-cap { bottom: 98px; } .ceil-cap span { font-size: 1.05rem; }
+  .ceil-step.prev { left: 16px; } .ceil-step.next { right: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ceil, .ceil-panel { transition: none; }
+  .ceil.open .ceil-strip { animation: none; }
+  .ceil-panel.is-loading a::before { animation: none; }
+}

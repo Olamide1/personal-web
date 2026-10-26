@@ -103,11 +103,16 @@
     useInv = !!o.inverse;
     ctx.fillStyle = o.paper; ctx.fillRect(0, 0, cw, chh); ctx.fillStyle = typeof o.ink === "function" ? o.ink(ctx, cw, chh) : o.ink;   /* ink may be a gradient factory: iris printing */
     var mp = map(cw, chh, o.focusY, o.focusX, o.zoom), sc = mp.sc, offx = mp.ox, offy = mp.oy;
-    var sp = Math.round((o.spacing || 3.6) * dpr) / dpr, hair = o.hair || 0.4, step = 2.5, relief = (o.relief === undefined ? 0.09 : o.relief) * sc, amp = 1.4, lam = 72;
+    var fx = o.fx, sp = Math.round((o.spacing || 3.6) * dpr) / dpr, hair = o.hair || 0.4, step = 2.5, relief = (o.relief === undefined ? 0.09 : o.relief) * sc, amp = 1.4, lam = 72;
     for (var yl = sp * 0.5; yl < chh; yl += sp) {
       var top = [], bot = [], phase = yl * 0.006 + 0.55 * Math.sin(yl * 1.7);
       for (var x = 0; x <= cw + step; x += step) {
-        var yc = yl + amp * Math.sin((2 * Math.PI * x) / lam + phase), ax = (x - offx) / sc, ay = (yc - offy) / sc;
+        var yc = yl + amp * Math.sin((2 * Math.PI * x) / lam + phase);
+        if (fx) {                                                  // the ink answers the pointer: lines part around it, and rings travel outward from a touch
+          if (fx.hs > 0.01) { var hx = x - fx.hx, hy = yl - fx.hy, hd = hx * hx + hy * hy; if (hd < 22500) yc += hy * 0.6 * fx.hs * Math.exp(-hd / 3000); }
+          for (var q = 0; q < fx.rip.length; q++) { var rp = fx.rip[q], qx = x - rp.x, qy = yl - rp.y, qr = Math.sqrt(qx * qx + qy * qy) - rp.r; if (qr > -70 && qr < 70) yc += rp.a * Math.sin(qr * 0.22) * Math.exp(-qr * qr / 1100); }
+        }
+        var ax = (x - offx) / sc, ay = (yc - offy) / sc;
         var lo = sampleLayer(hands.left, ax - o.dxL, ay), a = sA, hh = sH;
         var lo2 = sampleLayer(hands.right, ax - o.dxR, ay);
         if (sA > a) { lo = lo2; a = sA; hh = sH; }

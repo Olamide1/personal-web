@@ -67,8 +67,20 @@
       stops.forEach(function (st) { g.addColorStop(Math.max(0, Math.min(1, st[0])), st[1] === base ? base : blend(base, st[1], b)); });
       return g;
     }
+    // the ink answers the pointer (see Engrave.render): lines part around it, and a touch sends rings outward
+    var inkFx = { hx: 0, hy: 0, hs: 0, tgt: 0, rip: [] }, inkOn = !!cfg.idle && !reduce;
+    function inkState() {
+      var now = performance.now(), k = inkFx;
+      k.hs += (k.tgt - k.hs) * 0.2;
+      for (var i = k.rip.length - 1; i >= 0; i--) {
+        var rp = k.rip[i], age = (now - rp.t) / 1000;
+        if (age > 2.4) { k.rip.splice(i, 1); continue; }
+        rp.r = age * 240; rp.a = 9 * Math.exp(-age * 1.5);
+      }
+      return (k.hs > 0.01 || k.rip.length) ? k : null;
+    }
     function opts() {
-      return { focusY: cfg.focusY || 215, focusX: cfg.focusX || 500, zoom: zoom(),
+      return { fx: inkOn ? inkState() : null, focusY: cfg.focusY || 215, focusX: cfg.focusX || 500, zoom: zoom(),
         ink: ink, paper: cfg.paper || PAPER, inverse: !!cfg.inverse,
         hair: cfg.hair || 0.38, spacing: cfg.spacing || 3.2,
         dxL: s.l + breath, dxR: s.r - breath, glow: s.g };
@@ -143,6 +155,13 @@
     } else { root.classList.add('drawn'); if (cfg.onVisible) { var f0 = cfg.onVisible; cfg.onVisible = null; f0(api); } }
 
     var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(render, 120); });
+
+    if (inkOn) {
+      var local = function (e) { var r = canvas.getBoundingClientRect(); inkFx.hx = e.clientX - r.left; inkFx.hy = e.clientY - r.top; };
+      root.addEventListener('pointermove', function (e) { local(e); if (e.pointerType === 'mouse') inkFx.tgt = 1; });
+      root.addEventListener('pointerleave', function () { inkFx.tgt = 0; });
+      root.addEventListener('pointerdown', function (e) { local(e); inkFx.rip.push({ x: inkFx.hx, y: inkFx.hy, t: performance.now(), r: 0, a: 9 }); if (inkFx.rip.length > 4) inkFx.rip.shift(); });
+    }
 
     if (cfg.pointer) {
       var pend = false, px = 0;

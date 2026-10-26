@@ -1,0 +1,122 @@
+/* The chapel: sound toggle, candle light, depth, arrival card, the touch of the fingertips.
+   Only transforms and opacity are animated, so none of it repaints. fx.js adds the elements. */
+
+/* ---------- sound toggle (sits next to the Plan button) ---------- */
+.snd-btn {
+  display: inline-flex; align-items: center; justify-content: center; flex: none; width: 44px; height: 44px; margin-left: -10px;
+  color: var(--ink); background: transparent; border: 1px solid var(--ink-blue); border-radius: 2px; cursor: pointer;
+  visibility: hidden;                                         /* holds its place so nothing jumps; fx.js reveals it */
+}
+html.fx-on .snd-btn { visibility: visible; }
+.snd-btn:hover { background: var(--ink); color: var(--paper); }
+.snd-btn svg { width: 22px; height: 22px; display: block; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.snd-btn .on-w, .snd-btn[aria-pressed="true"] .off-x { display: none; }
+.snd-btn[aria-pressed="true"] .on-w { display: inline; }
+.snd-btn .off-x { display: inline; }
+.snd-btn.wait::after {                                        /* "sound will begin on your first click" */
+  content: ""; position: absolute; inset: -1px; border: 1px solid var(--gold-2); border-radius: 2px; pointer-events: none;
+  animation: fx-wait 2.4s ease-out infinite;
+}
+.snd-btn { position: relative; }
+@keyframes fx-wait { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(1.5); opacity: 0; } }
+@media (max-width: 400px) { .snd-btn { width: 40px; margin-left: -14px; } header.top .wrap { gap: 10px; } }
+
+/* ---------- light: a warm vignette, two shafts from the high windows, and a candle that follows you ---------- */
+.fx-vignette { position: fixed; inset: 0; z-index: 54; pointer-events: none; background: radial-gradient(ellipse at 50% 38%, transparent 58%, rgba(70, 48, 12, .09) 100%); }
+.fx-beams { position: fixed; inset: 0; z-index: 54; pointer-events: none; overflow: hidden; }
+.fx-beams i {
+  position: absolute; top: -12vh; width: 26vw; height: 150vh; transform-origin: top center;
+  background: linear-gradient(180deg, rgba(255, 224, 150, .17), rgba(255, 224, 150, 0) 78%);
+  animation: fx-beam 15s ease-in-out infinite alternate;
+}
+.fx-beams i:nth-child(1) { left: 8vw; transform: rotate(-19deg); }
+.fx-beams i:nth-child(2) { left: 52vw; width: 18vw; transform: rotate(-19deg); animation-duration: 21s; animation-delay: -7s; }
+@keyframes fx-beam { from { opacity: .35; } to { opacity: 1; } }
+
+.fx-candle { position: fixed; left: 0; top: 0; z-index: 55; width: 0; height: 0; pointer-events: none; opacity: 0; transition: opacity .7s ease; will-change: transform; }
+.fx-candle.on { opacity: 1; }
+.fx-candle i {
+  position: absolute; left: -380px; top: -380px; width: 760px; height: 760px; border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 213, 118, .30) 0, rgba(255, 204, 104, .14) 26%, rgba(255, 198, 96, 0) 62%);
+  animation: fx-flicker 3.4s ease-in-out infinite;
+}
+@keyframes fx-flicker { 0%, 100% { transform: scale(1); opacity: .92; } 22% { transform: scale(1.03); opacity: 1; } 47% { transform: scale(.97); opacity: .86; } 71% { transform: scale(1.02); opacity: .97; } }
+
+/* ---------- depth: a holographic strip crossing the plate, like the foil on a banknote ---------- */
+.fx-sheen { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+.fx-sheen i {
+  position: absolute; top: 0; bottom: 0; left: -75%; width: 250%;
+  background: linear-gradient(112deg, transparent 38%, rgba(246, 222, 149, .26) 46%, rgba(150, 224, 205, .16) 50%, rgba(201, 166, 224, .14) 54%, transparent 62%);
+}
+.plate[data-corners] > .serials, .plate[data-corners] > .frieze, .plate[data-corners] > h1, .plate[data-corners] > .art,
+.plate[data-corners] > p, .plate[data-corners] > .cta-row, .plate[data-corners] > .micro-wrap { will-change: translate; }
+
+/* ---------- moving through the chapel: the room you leave swells past and dims as the next one opens ---------- */
+::view-transition-old(root) { animation: .85s cubic-bezier(.7, 0, .2, 1) both fx-pass; }
+@keyframes fx-pass { to { transform: scale(1.07); filter: brightness(.72); } }
+
+/* the card that names the room you have entered */
+.fx-card {
+  position: fixed; left: 50%; bottom: 28px; z-index: 450; max-width: calc(100% - 32px); padding: 12px 22px 12px; text-align: center; pointer-events: none;
+  color: var(--ink); background: var(--paper); border: 1px solid var(--ink-blue);
+  box-shadow: 0 0 0 3px var(--paper), 0 0 0 4px var(--gold-3), 0 14px 26px -14px rgba(15, 28, 92, .6);
+  transform: translate(-50%, 24px); opacity: 0; animation: fx-card 3.4s .35s cubic-bezier(.2, .8, .2, 1) both;
+}
+.fx-card b { display: block; font: 700 .72rem/1 var(--caps); letter-spacing: .3em; padding-left: .3em; color: var(--accent); }
+.fx-card span { display: block; margin-top: 6px; font: italic 1rem/1.2 var(--display); }
+@keyframes fx-card { 0% { transform: translate(-50%, 24px); opacity: 0; } 14%, 78% { transform: translate(-50%, 0); opacity: 1; } 100% { transform: translate(-50%, -8px); opacity: 0; } }
+
+/* ---------- the touch: gold light spreads from the fingertips across the whole page ---------- */
+.fx-egg { position: fixed; inset: 0; z-index: 900; pointer-events: none; overflow: hidden; }
+.fx-egg i { position: absolute; left: var(--x); top: var(--y); display: block; }
+.fx-flash {
+  width: 240px; height: 240px; margin: -120px 0 0 -120px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 238, 190, .95) 0, rgba(255, 213, 118, .55) 30%, rgba(255, 200, 100, 0) 70%);
+  animation: fx-flash 1.9s cubic-bezier(.2, .7, .2, 1) both;
+}
+@keyframes fx-flash { 0% { transform: scale(.2); opacity: 1; } 60% { opacity: .55; } 100% { transform: scale(14); opacity: 0; } }
+.fx-ring { width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; border: 1.5px solid var(--gold-2); animation: fx-ring 1.8s cubic-bezier(.2, .6, .3, 1) both; }
+@keyframes fx-ring { 0% { transform: scale(.2); opacity: 1; } 100% { transform: scale(24); opacity: 0; } }
+.fx-mote {
+  width: var(--s); height: var(--s); margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2); background: var(--gold-1); border: 1px solid var(--gold-edge);
+  transform: rotate(45deg); animation: fx-mote 2.4s cubic-bezier(.15, .7, .3, 1) both;
+}
+@keyframes fx-mote { 0% { transform: translate(0, 0) rotate(45deg) scale(.4); opacity: 1; } 70% { opacity: 1; } 100% { transform: translate(var(--dx), var(--dy)) rotate(405deg) scale(1); opacity: 0; } }
+.fx-line {
+  position: absolute; left: 50%; top: calc(var(--y) + 74px); transform: translateX(-50%); white-space: nowrap; text-shadow: 0 0 18px rgba(255, 224, 150, .9);
+  font: italic 700 clamp(1.4rem, 4vw, 2.1rem)/1 var(--display); color: var(--ink); animation: fx-line 3.2s .5s ease both;
+}
+.fx-egg.still .fx-line { animation: none; }
+@keyframes fx-line { 0% { opacity: 0; letter-spacing: .3em; } 25%, 70% { opacity: 1; letter-spacing: .04em; } 100% { opacity: 0; letter-spacing: .04em; } }
+
+/* ---------- entries to the ceiling ---------- */
+.plan-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+.plan-wander {
+  min-height: 44px; padding: 8px 18px; cursor: pointer; font: 700 .72rem/1 var(--caps); letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ink); background: var(--gold-1); border: 1px solid var(--gold-edge); border-radius: 2px;
+}
+.plan-wander:hover { background: var(--gold-2); }
+.plan-wander-row { text-align: center; margin: .6rem 0 0; }
+
+/* ---------- drawn as you scroll (CSS scroll-driven animation: runs off the main thread, nothing to download) ---------- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    main .ascii-divider::before, main .braid, .container h2::after, .post-content h2::after {
+      animation: fx-draw linear both; animation-timeline: view(); animation-range: entry 5% entry 95%;
+    }
+    h2 .section-num { display: inline-block; animation: fx-num linear both; animation-timeline: view(); animation-range: entry 0% entry 80%; }
+    .art.banner { overflow: hidden; }
+    .art.banner canvas { animation: fx-drift linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
+  }
+}
+@keyframes fx-draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes fx-num { from { opacity: 0; transform: translateX(-14px); } to { opacity: 1; transform: none; } }
+@keyframes fx-drift { from { transform: translateY(-5%) scale(1.1); } to { transform: translateY(5%) scale(1.1); } }
+
+/* ---------- stand down for anyone who has asked for less, and for print ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .snd-btn.wait::after, .fx-beams i, .fx-candle i { animation: none; }
+  ::view-transition-old(root) { animation: none; }
+}
+@media (forced-colors: active) { .fx-vignette, .fx-beams, .fx-candle, .fx-sheen { display: none; } }
+@media print { .fx-vignette, .fx-beams, .fx-candle, .fx-sheen, .fx-card, .fx-egg, .snd-btn { display: none; } }

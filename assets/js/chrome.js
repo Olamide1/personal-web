@@ -58,7 +58,7 @@
     var cur = currentId();
     sheet.innerHTML =
       '<div class="plan-wrap">' +
-      '<div class="plan-head"><div><span class="plan-kicker">The ceiling plan</span><h2 id="planTitle">Nine scenes, nine pages</h2></div><button class="plan-close" type="button">Close</button></div>' +
+      '<div class="plan-head"><div><span class="plan-kicker">The ceiling plan</span><h2 id="planTitle">Nine scenes, nine pages</h2></div><div class="plan-actions"><button class="plan-wander" type="button" data-wander>Wander the ceiling</button><button class="plan-close" type="button">Close</button></div></div>' +
       '<ol class="plan-grid">' + SC().map(function (s, i) { return tile(s, i, cur); }).join('') + '</ol>' +
       '<p class="plan-foot">After the nine Genesis panels of Michelangelo’s Sistine ceiling, 1508–1512, engraved here in the manner of a banknote.</p>' +
       '</div>';
