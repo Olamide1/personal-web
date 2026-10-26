@@ -1,0 +1,15 @@
+/* Engraved plates on posts (see plates.js). */
+.post-plate { height: clamp(120px, 17vw, 190px); margin: 0 0 1.8rem; }
+.post-rooms { margin-top: 3.2rem; }
+.rooms-h { margin: 0 0 1rem; font-size: 1.15rem; letter-spacing: .24em; text-transform: uppercase; font-family: var(--caps); font-weight: 700; }
+.rooms-h::after { display: none; }
+.rooms-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.room { display: flex; flex-direction: column; gap: 4px; padding: 14px 14px 16px; text-decoration: none; color: var(--ink); transition: transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s; }
+.room:hover, .room:focus-visible { transform: translateY(-3px); text-decoration: none; }
+.room:visited { color: var(--ink); }
+.art.mini { height: 112px; margin: 0 0 .8rem; box-shadow: 0 0 0 1px var(--ink-blue), 0 0 0 3px var(--paper), 0 0 0 4px var(--ink-blue); }
+.room-k { font: 700 .66rem/1 var(--caps); letter-spacing: .26em; text-transform: uppercase; color: var(--accent); }
+.room-t { font: 700 1.2rem/1.2 var(--display); }
+.room-d { font-size: .92rem; color: var(--ink-muted); font-style: italic; }
+html.post-done .read-progress { box-shadow: 0 0 12px 2px rgba(246, 222, 149, .9); transition: box-shadow .8s ease; }
+@media (max-width: 640px) { .rooms-grid { grid-template-columns: 1fr; } }

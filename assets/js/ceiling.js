@@ -49,7 +49,7 @@
     // drag (mouse, pen or finger), with a little momentum
     root.addEventListener('pointerdown', function (e) {
       if (e.button || (e.target.closest && e.target.closest('button'))) return;
-      drag = { x0: e.clientX, cam: x, lx: e.clientX, lt: performance.now() }; moved = 0; vx = 0; target = null; stopAuto();
+      drag = { x0: e.clientX, cam: x, lx: e.clientX, lt: performance.now(), from: focusIdx }; moved = 0; vx = 0; target = null; stopAuto();
       try { root.setPointerCapture(e.pointerId); } catch (_) {}
       root.classList.add('grab');
     });
@@ -61,7 +61,17 @@
       vx = vx * 0.6 + (-(e.clientX - drag.lx) / dt * 1000) * 0.4; drag.lx = e.clientX; drag.lt = now;
       kick();
     });
-    function up() { if (!drag) return; drag = null; root.classList.remove('grab'); setTimeout(function () { moved = 0; }, 0); kick(); }
+    function up() {
+      if (!drag) return;
+      var swiped = moved > 6, from = drag.from, delta = x - drag.cam; drag = null; root.classList.remove('grab'); setTimeout(function () { moved = 0; }, 0);
+      if (swiped) {                                             // a swipe lands on a panel: the one your flick was heading for
+        var proj = x + vx * 0.22, best = 0, bd = 1e9;
+        panels.forEach(function (p, i) { var d = Math.abs(centreOf(i) - proj); if (d < bd) { bd = d; best = i; } });
+        if (best === from && Math.abs(delta) > 40) best = clamp(from + (delta > 0 ? 1 : -1), 0, panels.length - 1);   // any clear swipe moves on
+        vx = 0; go(best);
+      }
+      kick();
+    }
     root.addEventListener('pointerup', up); root.addEventListener('pointercancel', up);
     root.addEventListener('wheel', function (e) {
       e.preventDefault(); stopAuto(); target = null;
@@ -115,7 +125,7 @@
       var was = focusIdx; focusIdx = best;
       panels.forEach(function (p, i) { p.classList.toggle('focus', i === best); });
       var s = list[best]; cap.b.textContent = 'Scena ' + s.roman; cap.s.textContent = s.latin; cap.e.textContent = s.en;
-      if (was !== -1 && was !== best) Chapel('note', best);
+      if (was !== -1 && was !== best) { Chapel('note', best); Chapel('buzz'); }
     }
   }
 

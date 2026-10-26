@@ -16,6 +16,10 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Lamide — Product manager building AI agents and automation">
   <meta name="twitter:description" content="Strong opinions. Flexible with good evidence.">
+  <meta property="og:image" content="https://olamide.name.ng/assets/img/og/home.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="https://olamide.name.ng/assets/img/og/home.jpg">
   
   <link rel="icon" type="image/jpeg" href="/assets/img/icon.jpg">
   <link rel="apple-touch-icon" href="/assets/img/icon.jpg">
@@ -25,7 +29,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
   <script>
     // First visit of a session gets the opening; reduced-motion visitors skip it
-    try { if ((!sessionStorage.getItem('introSeen') || /[?&]intro\b/.test(location.search)) && !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) document.documentElement.classList.add('intro-on'); } catch (e) {}
+    try { if ((!(sessionStorage.getItem('introSeen') || localStorage.getItem('introDone')) || /[?&]intro\b/.test(location.search)) && !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) document.documentElement.classList.add('intro-on'); } catch (e) {}
   </script>
   <link rel="stylesheet" href="/assets/css/base.css?v=43ac2375">
   <link rel="stylesheet" href="/assets/css/fx.css?v=1">

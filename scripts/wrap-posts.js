@@ -202,7 +202,13 @@ function wrapPost(metadata, body, slug) {
   html = html.replace(/<title>.*?<\/title>/, `<title>${metadata.title} — Lamide</title>`);
   html = html.replace(/<meta name="description" content=".*?"\/>/, 
     `<meta name="description" content="${metadata.summary || ''}" />`);
-  
+
+  // Share image: this post's own engraved card if scripts/make-og.js has printed one, otherwise the site's default
+  const ogFile = path.join(__dirname, '../assets/img/og', slug + '.jpg');
+  html = fs.existsSync(ogFile)
+    ? html.replace(/og\/welcome-to-the-blog\.jpg/g, `og/${slug}.jpg`)
+    : html.replace(/img\/og\/welcome-to-the-blog\.jpg/g, 'img/og.png');
+
   return html;
 }
 

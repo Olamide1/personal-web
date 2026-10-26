@@ -238,7 +238,7 @@
     function finish() {
       if (over) return; over = true;
       timers.forEach(clearTimeout);
-      try { sessionStorage.setItem('introSeen', '1'); } catch (e) {}
+      try { sessionStorage.setItem('introSeen', '1'); localStorage.setItem('introDone', '1'); } catch (e) {}
       el.classList.add('lift');
       document.dispatchEvent(new Event('introdone'));
       setTimeout(function () { html.classList.remove('intro-on'); el.remove(); }, 1100);

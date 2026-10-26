@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <title>Share card</title>
+  <!-- Printed by scripts/make-og.js into assets/img/og/*.jpg. Not linked from anywhere.
+       ?scene=<scene id> | ?plate=<text to engrave>  &title=...  &kicker=...  &sub=... -->
+  <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <style>
+    html, body { width: 1200px; height: 630px; margin: 0; overflow: hidden; }
+    .og { position: relative; width: 1200px; height: 630px; }
+    .og .frame { position: absolute; inset: 16px; border: 2px solid var(--ink-blue); box-shadow: inset 0 0 0 6px var(--paper), inset 0 0 0 7px var(--ink-blue); }
+    .og .art { position: absolute; inset: 34px; margin: 0; height: auto; box-shadow: 0 0 0 1px var(--ink-blue); }
+    .og .art canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .og .plate-og { position: absolute; left: 64px; bottom: 64px; max-width: 720px; padding: 26px 34px 20px; background: var(--paper); border: 1px solid var(--ink-blue);
+      box-shadow: inset 0 0 0 5px var(--paper), inset 0 0 0 6px var(--ink-blue), 0 22px 30px -22px rgba(15, 28, 92, .6); }
+    .og .kicker { font: 700 15px/1 var(--caps); letter-spacing: .2em; white-space: nowrap; color: var(--accent); text-transform: uppercase; }
+    .og h1 { margin: 12px 0 8px; font: 700 66px/1.04 var(--display); color: var(--ink); letter-spacing: -.01em; }
+    .og .sub { margin: 0; font: italic 27px/1.3 var(--display); color: var(--ink-text); }
+    .og .micro { margin-top: 16px; font: 500 12px/1 var(--caps); letter-spacing: .34em; color: var(--ink-blue); opacity: .8; white-space: nowrap; }
+    .og .brand { position: absolute; right: 64px; top: 58px; display: flex; align-items: center; gap: 12px; padding: 10px 18px 10px 12px; background: var(--paper); border: 1px solid var(--ink-blue); font: 700 20px/1 var(--caps); letter-spacing: .16em; color: var(--ink); }
+    .og .brand .emblem { width: 36px; height: 36px; }
+    .og .serial { position: absolute; left: 64px; top: 60px; padding: 6px 12px; background: var(--paper); font: 700 15px/1 var(--caps); letter-spacing: .18em; color: var(--accent); border: 1px solid var(--ink-blue); }
+  </style>
+</head>
+<body>
+  <div class="og">
+    <div class="art drawn"><canvas></canvas></div>
+    <div class="frame"></div>
+    <div class="serial" id="serial"></div>
+    <div class="brand"><span class="emblem rosette" data-rosette="emblem" aria-hidden="true"></span>LAMIDE</div>
+    <div class="plate-og">
+      <div class="kicker" id="kicker"></div>
+      <h1 id="title"></h1>
+      <p class="sub" id="sub"></p>
+      <div class="micro">LAMIDE AKOMOLAFE &middot; PRODUCT &middot; AI &middot; AUTOMATION</div>
+    </div>
+  </div>
+  <script src="/assets/js/engrave.js"></script>
+  <script src="/assets/js/scenes.js"></script>
+  <script src="/assets/js/plates.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script>
+    (function () {
+      var q = new URLSearchParams(location.search), title = q.get('title') || 'Lamide';
+      document.getElementById('title').textContent = title;
+      document.getElementById('kicker').textContent = q.get('kicker') || '';
+      document.getElementById('sub').textContent = q.get('sub') || '';
+      if (!q.get('sub')) document.getElementById('sub').remove();
+      if (title.length > 26) document.getElementById('title').style.fontSize = (title.length > 44 ? 44 : 54) + 'px';
+      var n = 0; for (var i = 0; i < title.length; i++) n = (n * 31 + title.charCodeAt(i)) % 900000;
+      document.getElementById('serial').textContent = 'No. ' + String(100000 + n).replace(/(\d{3})(\d{3})/, '$1 $2');
+      var canvas = document.querySelector('.art canvas');
+      function ready() { window.__ogReady = true; }
+      function go() {
+        var id = q.get('scene') || Plates.scene(q.get('plate') || title);
+        if (id === 'adam') Scenes.draw(canvas, id, { spacing: 3.4, zoom: 1.12, done: ready });
+        else { Scenes.draw(canvas, id, { spacing: 3.2 }); ready(); }
+      }
+      (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function () { setTimeout(go, 200); });
+    })();
+  </script>
+</body>
+</html>

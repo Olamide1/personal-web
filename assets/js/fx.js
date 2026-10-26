@@ -110,17 +110,20 @@
     f.type = 'bandpass'; f.Q.value = 0.9;
     f.frequency.setValueAtTime(up ? 300 : 3000, t);
     f.frequency.exponentialRampToValueAtTime(up ? 3000 : 300, t + dur);
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(peak, t + dur * 0.55);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    var swell = new Float32Array(48);                                      // a smooth rise and fall, wide enough to be felt as one movement
+    for (var i = 0; i < 48; i++) swell[i] = peak * 3 * Math.pow(Math.sin(Math.PI * (i / 47) * 0.92 + 0.04), 2);   // (band-passed noise is quiet, so it is scaled up)
+    g.gain.setValueCurveAtTime(swell, t, dur);
     s.connect(f); f.connect(g); route(g, 0.6);
     s.start(t, Math.random()); s.stop(t + dur + 0.05);
   }
   function thud(peak) {
     if (!live()) return;
     var t = ctx.currentTime, o = ctx.createOscillator(), g = ctx.createGain();
-    o.frequency.setValueAtTime(240, t); o.frequency.exponentialRampToValueAtTime(75, t + 0.35);
+    o.frequency.setValueAtTime(320, t); o.frequency.exponentialRampToValueAtTime(110, t + 0.35);
     env(g, t, 0.008, peak, 0.5);
+    var o2 = ctx.createOscillator(), g2 = ctx.createGain();   // an octave up, so there is something to hear on a laptop
+    o2.frequency.setValueAtTime(640, t); o2.frequency.exponentialRampToValueAtTime(230, t + 0.3);
+    env(g2, t, 0.008, peak * 0.5, 0.35); o2.connect(g2); route(g2, 0.3); o2.start(t); o2.stop(t + 0.4);
     var k = noise(false), kf = ctx.createBiquadFilter(), kg = ctx.createGain();   // the knock of wood on stone
     kf.type = 'lowpass'; kf.frequency.value = 1400; env(kg, t, 0.002, peak * 0.8, 0.09);
     k.connect(kf); kf.connect(kg); route(kg, 0.3); k.start(t, Math.random()); k.stop(t + 0.1);
@@ -142,7 +145,7 @@
     var t = ctx.currentTime, s = noise(true), f = ctx.createBiquadFilter(), g = ctx.createGain();
     f.type = 'bandpass'; f.frequency.value = 3200; f.Q.value = 1.4;
     g.gain.setValueAtTime(0.0001, t);
-    for (var x = 0; x < dur; x += 0.045) g.gain.linearRampToValueAtTime(0.0001 + Math.random() * 0.09 * Math.sin(Math.PI * x / dur), t + x);
+    for (var x = 0; x < dur; x += 0.045) g.gain.linearRampToValueAtTime(0.0001 + Math.random() * 0.14 * Math.sin(Math.PI * x / dur), t + x);
     g.gain.linearRampToValueAtTime(0.0001, t + dur);
     s.connect(f); f.connect(g); route(g, 0.2); s.start(t, Math.random()); s.stop(t + dur + 0.05);
   }
@@ -214,8 +217,7 @@
     if (master) { if (carried) master.gain.setValueAtTime(VOL, ctx.currentTime); else master.gain.setTargetAtTime(VOL, ctx.currentTime, 0.3); }
     ambient(carried);
     if (arrived) {                                              // you came through a door: a swell, then the room's note
-      whoosh(false, 0.9, 0.12);
-      bell((ROOT[scene()[0]] || 98) * 4, 0.12, 1.2);
+      cue('arrive');
     }
   }
   function unlock() {
@@ -274,7 +276,7 @@
     doc.addEventListener('pointerover', function (e) {
       if (e.pointerType !== 'mouse') return;
       var t = e.target.closest && e.target.closest('a[href], button');
-      if (!t || t === hovered) return; hovered = t; tick(0.06);
+      if (!t || t === hovered) return; hovered = t; cue('hover');
     });
     doc.addEventListener('pointerout', function (e) { if (hovered && !hovered.contains(e.relatedTarget)) hovered = null; });
 
@@ -283,8 +285,7 @@
       if (!a || a.id === 'sndBtn') return;
       if (a.id === 'menuBtn') {
         setTimeout(function () {                              // the plan has just opened or closed
-          if (a.getAttribute('aria-expanded') === 'true') { bell(392, 0.14, 1); whoosh(true, 0.8, 0.12); }
-          else { whoosh(false, 0.6, 0.09); }
+          cue(a.getAttribute('aria-expanded') === 'true' ? 'plan' : 'planclose');
         }, 0);
         return;
       }
@@ -293,10 +294,10 @@
         !(a.pathname === location.pathname && a.search === location.search) && !/\.(xml|json|pdf)$/i.test(a.pathname)) {
         session.set('fxArrive', '1');                         // the next page greets you at the door
         handoff();
-        whoosh(true, 0.7, 0.16); setTimeout(function () { thud(0.45); }, 90);
+        cue('door');
         return;
       }
-      tick(0.11);
+      cue('click');
     });
 
     // the hands are engraved as they come into view
@@ -314,8 +315,8 @@
     // the opening: fingertips touch, then the curtain lifts
     var intro = doc.getElementById('intro');
     if (intro) new MutationObserver(function () {
-      if (intro.classList.contains('touched') && !intro._t) { intro._t = 1; eggSound(true); }
-      if (intro.classList.contains('lift') && !intro._l) { intro._l = 1; whoosh(true, 1, 0.14); }
+      if (intro.classList.contains('touched') && !intro._t) { intro._t = 1; cue('eggsmall'); }
+      if (intro.classList.contains('lift') && !intro._l) { intro._l = 1; cue('lift'); }
     }).observe(intro, { attributes: true, attributeFilter: ['class'] });
 
     // sections arriving, one soft note each
@@ -399,12 +400,24 @@
       if (e.pointerType !== 'mouse') return;
       nx = (e.clientX / win.innerWidth - 0.5) * 2; ny = (e.clientY / win.innerHeight - 0.5) * 2; kick();
     }, { passive: true });
-    // phones: tilting the device moves the layers (where the browser allows it without asking)
-    if (!fine && win.DeviceOrientationEvent && typeof win.DeviceOrientationEvent.requestPermission !== 'function') {
+    // phones: tilting the device moves the layers
+    function listen() {
       win.addEventListener('deviceorientation', function (e) {
         if (e.gamma == null) return;
         nx = clamp(e.gamma / 28, -1, 1); ny = clamp(((e.beta || 55) - 55) / 28, -1, 1); kick();
       }, { passive: true });
+    }
+    var DOE = win.DeviceOrientationEvent;
+    if (!fine && DOE) {
+      if (typeof DOE.requestPermission !== 'function') listen();        // Android and others: no question to ask
+      else {                                                            // iPhone: Safari wants a tap first, so offer one
+        var chip = make('button', 'fx-tilt', plates[0].el);
+        chip.removeAttribute('aria-hidden'); chip.type = 'button'; chip.textContent = 'Tilt';
+        chip.setAttribute('aria-label', 'Let this page move when you tilt your phone');
+        chip.addEventListener('click', function () {
+          DOE.requestPermission().then(function (r) { if (r === 'granted') listen(); chip.remove(); }, function () { chip.remove(); });
+        });
+      }
     }
     scrolled();
   }
@@ -420,6 +433,36 @@
     setTimeout(function () { card.remove(); }, 4200);
   }
 
+  /* ================= memory: a small welcome when you come back ================= */
+  // Kept only in this browser (localStorage); nothing is sent anywhere. fxLast = the last page seen and the last post read.
+  var previous = null;
+  function remember() {
+    try { previous = JSON.parse(store.get('fxLast') || 'null'); } catch (e) { previous = null; }
+    var titleEl = doc.querySelector('.post-header .post-title');
+    var here = { t: Date.now(), path: location.pathname, read: previous && previous.read || null };
+    if (titleEl) here.read = { path: location.pathname, title: titleEl.textContent.replace(/NEW$/, '').trim() };
+    store.set('fxLast', JSON.stringify(here));
+  }
+  function welcome() {
+    if (!previous || arrived || session.get('fxWelcomed') || Date.now() - previous.t < 30 * 60 * 1000) return;
+    session.set('fxWelcomed', '1');
+    var days = Math.floor((Date.now() - previous.t) / 864e5), r = previous.read;
+    var line = days < 1 ? 'Good to see you again.' : days === 1 ? 'It has been a day.' : 'It has been ' + days + ' days.';
+    var card = make('div', 'fx-welcome', doc.body);
+    card.removeAttribute('aria-hidden'); card.setAttribute('role', 'status');
+    card.innerHTML = '<b>Welcome back</b><span>' + line + '</span>' +
+      (r && r.path !== location.pathname ? '<a href="' + r.path.replace(/"/g, '') + '">Pick up where you left off: <em></em></a>' : '') +
+      '<button type="button" aria-label="Dismiss">&times;</button>';
+    if (r) { var em = card.querySelector('em'); if (em) em.textContent = r.title; }
+    var gone = false, t = setTimeout(close, 12000);
+    function close() { if (gone) return; gone = true; clearTimeout(t); card.classList.add('bye'); setTimeout(function () { card.remove(); }, 600); doc.removeEventListener('keydown', onKey); }
+    function onKey(e) { if (e.key === 'Escape') close(); }
+    card.querySelector('button').addEventListener('click', close);
+    doc.addEventListener('keydown', onKey);
+    ['pointerenter', 'focusin'].forEach(function (ev) { card.addEventListener(ev, function () { clearTimeout(t); }); });
+    setTimeout(function () { if (win.Chapel) win.Chapel.play('bell', 523); }, 500);
+  }
+
   /* ================= the easter egg: the fingertips touch ================= */
   var LINES = ['Et fiat lux.', 'Digitus Dei.', 'Again?', 'Scintilla.'];
   var lastEgg = 0;
@@ -427,13 +470,13 @@
     if (!live()) return;
     var base = 220;
     [[1, 0], [1.5, 0.09], [2.5, 0.18], [3, 0.27], [4, 0.36]].forEach(function (n, i) {
-      setTimeout(function () { bell(base * n[0], small ? 0.1 : 0.17 - i * 0.012, small ? 0.8 : 1.4); }, n[1] * 1000);
+      setTimeout(function () { bell(base * n[0], small ? 0.08 : 0.14 - i * 0.01, small ? 0.8 : 1.4); }, n[1] * 1000);
     });
     if (!small) {
-      whoosh(true, 1.3, 0.14);
+      whoosh(true, 1.3, 0.06);
       var t = ctx.currentTime, o = ctx.createOscillator(), g = ctx.createGain();   // a low swell under it
       o.frequency.value = 165; g.gain.setValueAtTime(0.0001, t);
-      g.gain.exponentialRampToValueAtTime(0.3, t + 1.2); g.gain.exponentialRampToValueAtTime(0.0001, t + 3.4);
+      g.gain.exponentialRampToValueAtTime(0.22, t + 1.2); g.gain.exponentialRampToValueAtTime(0.0001, t + 3.4);
       o.connect(g); route(g, 0.8); o.start(t); o.stop(t + 3.5);
     }
   }
@@ -493,17 +536,57 @@
     pull('/assets/css/signature.css?v=1', '/assets/js/signature.js?v=1', function () {});
   }
 
+  function postPlates() {                                    // an engraved plate and a "next room" on every post (plates.js)
+    if (lite || !doc.querySelector('.post-header')) return;
+    pull('/assets/css/plates.css?v=1', '/assets/js/plates.js?v=1', function () {});
+  }
+
+  // a small tap you can feel, on phones that can (it follows the Sound switch: muted means quiet in the hand too)
+  var haptic = null;
+  function buzz() {
+    if (!wantSound || reduce) return;
+    try {
+      if (navigator.vibrate) { navigator.vibrate(7); return; }
+      if (!haptic) {                                          // iOS Safari: toggling a switch control gives a light tap
+        haptic = doc.createElement('label'); haptic.setAttribute('aria-hidden', 'true'); haptic.style.cssText = 'position:fixed;left:-99px;top:0;opacity:0;pointer-events:none';
+        var i = doc.createElement('input'); i.type = 'checkbox'; i.setAttribute('switch', ''); haptic.appendChild(i); doc.body.appendChild(haptic);
+      }
+      haptic.click();
+    } catch (e) {}
+  }
+
+  // every cue the site makes, in one place, so the whole mix can be tuned together
+  function cue(name, a) {
+    switch (name) {
+      case 'hover': return tick(0.075);
+      case 'click': case 'tick': return tick(0.14);
+      case 'door': whoosh(true, 0.7, 0.06); return setTimeout(function () { thud(0.24); }, 90);
+      case 'arrive': whoosh(false, 0.9, 0.05); return bell((ROOT[scene()[0]] || 98) * 4, 0.1, 1.2);
+      case 'plan': bell(392, 0.12, 1); return whoosh(true, 0.8, 0.05);
+      case 'planclose': return whoosh(false, 0.6, 0.05);
+      case 'lift': return whoosh(true, 1, 0.06);
+      case 'eggsmall': return eggSound(true);
+      case 'egg': return eggSound(false);
+      case 'scratch': return scratch(1.4);
+      case 'chime': return chime();
+      case 'note': return bell(392 * Math.pow(2, [0, 2, 4, 7, 9, 12, 14, 16, 19][(a || 0) % 9] / 12), 0.07, 0.7);
+      case 'whoosh': return whoosh(a !== false, 0.9, 0.05);
+      case 'bell': return bell(a || 440, 0.08, 1);
+      case 'thud': return thud(0.4);
+      case 'end':                                             // the end of a post: a chord settles
+        [[261.6, 0], [329.6, 0.12], [392, 0.24], [523.3, 0.4]].forEach(function (n) { setTimeout(function () { bell(n[0], 0.07, 1.2); }, n[1] * 1000); });
+        return whoosh(false, 1.1, 0.02);
+    }
+  }
+
   // what the other scripts may ask of the sound
   win.Chapel = {
     sound: function (on) { setSound(!!on); },
     live: live,
     play: function (name, a) {
+      if (name === 'buzz') return buzz();
       if (!live()) return;
-      if (name === 'note') bell(196 * Math.pow(2, [0, 2, 4, 7, 9, 12, 14, 16, 19][(a || 0) % 9] / 12), 0.07, 0.7);
-      else if (name === 'whoosh') whoosh(a !== false, 0.9, 0.1);
-      else if (name === 'tick') tick(0.08);
-      else if (name === 'bell') bell(a || 440, 0.08, 1);
-      else if (name === 'thud') thud(0.4);
+      cue(name, a);
     },
     wander: wander
   };
@@ -513,12 +596,14 @@
     mountToggle();
     wireSounds();
     wireEgg();
-    var go = function () { candle(); parallax(); signature(); };
+    var go = function () { candle(); parallax(); signature(); postPlates(); };
     if (win.requestIdleCallback) win.requestIdleCallback(go, { timeout: 1200 }); else setTimeout(go, 200);
 
     function shown() {
+      remember();                                             // only once the page is actually shown, not while it is prerendered
       arriveState();
       arrival();
+      welcome();
       if (wantSound && AC) {
         arm();
         // came here from a page that already made sound: try to carry on straight away (browsers that allow it)

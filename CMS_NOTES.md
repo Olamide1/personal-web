@@ -48,3 +48,14 @@ Files created by Decap CMS will have this structure:
 - Body content (HTML from markdown widget)
 
 To make them work as standalone pages, wrap them in the full page template found in `welcome-to-the-blog.html`.
+
+## Share images (the preview shown when a link is shared)
+
+Every page and post has an engraved 1200x630 card in `assets/img/og/<slug>.jpg`. A new CMS post gets the site default
+(`assets/img/og.png`) until its card is printed. To print them (needs a browser; see the header of `scripts/make-og.js`):
+
+    npm i --no-save playwright-core
+    node local-404-server.js &
+    CHROME_PATH="/path/to/chrome" node scripts/make-og.js
+
+Commit the new images, then run `node scripts/wrap-posts.js` (or just deploy) so the post points at its own card.
